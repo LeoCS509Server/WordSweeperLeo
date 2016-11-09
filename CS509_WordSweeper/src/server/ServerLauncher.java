@@ -11,6 +11,8 @@ public class ServerLauncher {
 
 	/** Execute the Server using the default port. */
 	public static void main(String[] args) {
+		
+		System.out.println("hello");
 		// FIRST thing to do is register the protocol being used. There will be a single class protocol
 		// that will be defined and which everyone will use. For now, demonstrate with skeleton protocol.
 		if (!Message.configure("wordsweeper.xsd")) {
