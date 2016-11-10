@@ -9,7 +9,6 @@ import util.Location;
 
 public class Player {
 	
-	public static final int SIZE = 4;
 	
 	private String Name;
 	private String idNum;
