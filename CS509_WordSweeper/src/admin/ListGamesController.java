@@ -1,4 +1,4 @@
-package server.controller;
+package admin;
 
 import xml.Message;
 import server.model.Model;
