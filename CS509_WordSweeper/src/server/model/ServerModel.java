@@ -8,6 +8,9 @@ public class ServerModel {
 	public void joinGame() {
 		numPlayers++;
 	}
+	public void exitGame() {
+		numPlayers--;
+	}
 	public void setstrArray(int i, int j, String str)
 	{
 		strArray[i][j] = str;

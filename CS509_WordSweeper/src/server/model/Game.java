@@ -28,6 +28,9 @@ public class Game {
 		this.board = new Board();
 		this.isLocked = false;
 	}
+	public Game(){
+	
+	}
 
 	public Game(String gameID, Player managingUser, String password) {
 		super();
@@ -41,6 +44,10 @@ public class Game {
 	
 	public void addPlayer(Player player){
 		Players.add(player);
+	}
+	
+	public String getGameID(){
+		return GameID;
 	}
 
 	public void removePlayer(Player player){
