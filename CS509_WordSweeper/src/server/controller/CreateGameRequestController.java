@@ -7,7 +7,7 @@ import server.ClientState;
 import server.IProtocolHandler;
 import server.model.ServerModel;
 import xml.Message;
-
+import server.model.Game;
 import java.util.Random;
 
 /**
@@ -15,11 +15,12 @@ import java.util.Random;
  * as an updateResponse message and send it back to the client.
  */
 public class CreateGameRequestController implements IProtocolHandler {
-
+	Game game;
 	ServerModel model;
 	
-	public CreateGameRequestController (ServerModel model) {
+	public CreateGameRequestController (ServerModel model, Game game) {
 		this.model = model;
+		this.game = game;
 	}
 	
 	public Message process(ClientState client, Message request) {
@@ -64,7 +65,7 @@ public class CreateGameRequestController implements IProtocolHandler {
 		}
 		// Construct message reflecting state
 		String xmlString = Message.responseHeader(request.id()) +
-				"<boardResponse gameId='hg12jhd' managingUser='" + pname + "' bonus='7,7' contents='" + content + "'>" +
+				"<boardResponse gameId='"+ game.getGameID() +"' managingUser='" + pname + "' bonus='7,7' contents='" + content + "'>" +
 			      "<player name='" + pname + "' score='0' position='"+ x +","+ y +"' board='"+ player_content +"'/>" +
 			  "</boardResponse>" +
 			"</response>";

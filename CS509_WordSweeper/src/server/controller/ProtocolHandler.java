@@ -4,6 +4,7 @@ import org.w3c.dom.Node;
 import server.ClientState;
 import server.IShutdownHandler;
 import server.model.ServerModel;
+import server.model.Game;
 import xml.*;
 
 /**
@@ -21,9 +22,11 @@ import xml.*;
 public class ProtocolHandler implements IShutdownHandler {
 	
 	ServerModel model;
+	Game game;
 	
-	public ProtocolHandler (ServerModel model) {
+	public ProtocolHandler (ServerModel model, Game game) {
 		this.model = model;
+		this.game = game;
 	}
 	
 	@Override
@@ -33,9 +36,17 @@ public class ProtocolHandler implements IShutdownHandler {
 		
 		System.out.println (request);
 		if (type.equals ("createGameRequest")) {
-			return new CreateGameRequestController(model).process(st, request); 
+			return new CreateGameRequestController(model,game).process(st, request); 
 		} else if (type.equals ("joinGameRequest")) {
-			return new JoinGameRequestController(model).process(st, request);
+			return new JoinGameRequestController(model,game).process(st, request);
+		} else if (type.equals("exitGameRequest")) {
+			return new ExitGameRequestController(model,game).process(st, request);
+		} else if (type.equals("lockGameRequest")) {
+			return new LockGameRequestController(model,game).process(st, request);
+		} else if (type.equals("findWordRequest")) {
+			return new FindWordRequestController(model,game).process(st, request);
+		} else if (type.equals("resetGameRequest")) {
+			return new ResetGameRequestController(model,game).process(st, request);
 		}
 		
 		// unknown? no idea what to do
