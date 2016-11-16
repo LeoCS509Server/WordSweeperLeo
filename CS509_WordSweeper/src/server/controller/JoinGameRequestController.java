@@ -5,6 +5,7 @@ import java.util.Random;
 import server.ClientState;
 import server.IProtocolHandler;
 import server.Server;
+import server.model.Game;
 import server.model.ServerModel;
 import xml.Message;
 
@@ -15,9 +16,10 @@ import xml.Message;
 public class JoinGameRequestController implements IProtocolHandler {
 
 	ServerModel model;
-	
-	public JoinGameRequestController (ServerModel model) {
+	Game game;
+	public JoinGameRequestController (ServerModel model, Game game) {
 		this.model = model;
+		this.game = game;
 	}
 	
 	public Message process(ClientState client, Message request) {

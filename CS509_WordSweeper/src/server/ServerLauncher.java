@@ -4,6 +4,7 @@ import java.io.*;
 import server.Server;
 import server.controller.ProtocolHandler;
 import server.model.ServerModel;
+import server.model.Game;
 import xml.Message;
 
 /** Code to launch Server  from the command line. */
@@ -20,9 +21,10 @@ public class ServerLauncher {
 		
 		// Server-side model contains everything you need on the server.
 		ServerModel serverModel = new ServerModel();
+		Game game = new Game();
 		
 		// Start server and have ProtocolHandler be responsible for all XML messages.
-		Server server = new Server(new ProtocolHandler(serverModel), 11425);
+		Server server = new Server(new ProtocolHandler(serverModel, game), 11425);
 	
 		try {
 			server.bind();
