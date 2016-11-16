@@ -18,7 +18,7 @@ public class Game {
 	Player managingUser;
 	boolean isLocked;
 	String password;
-	
+	//need an attribute bonus
 	
 	public Game(String GameID, Player managingUser ) {
 		super();
@@ -50,7 +50,7 @@ public class Game {
 			this.Players.remove(player);
 			this.setManagingUser(this.Players);
 		}else{
-			this.Players.remove(player); //这里没想好，怎么关游戏
+			this.Players.remove(player); //
 		}
 	}
 	
@@ -143,7 +143,20 @@ public class Game {
 		return p.getPlayerLocation();
 	}
 
+	/** return game id*/
+	public String getGameId(){
+		return GameID;
+	}
 	
+	/** return the number of players*/
+	public int getNumPlayers(){
+		return Players.size();
+	}
+	
+	/**return all the players in a game*/
+	public ArrayList<Player> getPlayers(){
+		return Players;
+	}
 }
 	
 	

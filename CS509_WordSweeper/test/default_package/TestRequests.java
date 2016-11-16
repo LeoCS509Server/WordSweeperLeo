@@ -1,5 +1,9 @@
 package default_package;
 import xml.Message;
+
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+
 import junit.framework.TestCase;
 
 
@@ -92,6 +96,22 @@ public class TestRequests extends TestCase {
 				  "</findWordRequest>" +
 				"</request>");
 		System.out.println(m.toString());
+		
+
+		// note you can retrieve information from the request...
+		Node findR = m.contents.getFirstChild();
+		NamedNodeMap map = findR.getAttributes();
+		
+		System.out.println("game id is:" + map.getNamedItem("gameId").getNodeValue());
+		
+		Node cell = findR.getFirstChild();
+		while (cell != null) {
+			NamedNodeMap cellAtts = cell.getAttributes();
+			System.out.println("Cell is :" + cellAtts.getNamedItem("position").getNodeValue());
+			
+			cell = cell.getNextSibling();
+		}
+		
 	}
 	
 	/**
