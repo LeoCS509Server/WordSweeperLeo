@@ -50,6 +50,10 @@ public class Game {
 		return GameID;
 	}
 
+	public int getBonus(){
+		return 1;                  //need bonus
+	}
+	
 	public void removePlayer(Player player){
 		if(this.Players.size()>1&&(player!=managingUser)){
 			this.Players.remove(player);
