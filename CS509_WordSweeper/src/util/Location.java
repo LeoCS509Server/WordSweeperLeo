@@ -31,6 +31,8 @@ public class Location {
 		this.row = row;
 	}
 	
+
+	
 	
 	
 	

@@ -17,6 +17,8 @@ public class Model {
 		games.add(g);
 	}
 	
+	
+	
 	/** return all the games*/
 	public ArrayList<Game> getGames(){
 		return games;
@@ -27,4 +29,6 @@ public class Model {
 		return selectedGame;
 	}
 	
+	
+	// find(gameid)
 }

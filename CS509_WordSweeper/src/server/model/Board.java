@@ -11,9 +11,10 @@ public class Board {
 	
 	int size;
 	Hashtable<Location, Cell> table; 
+	Cell Bonus;
 	
-	public Board() {
-		super();
+	Board() {
+	
 		size = 7;
 		for(int c = 1; c<=size;c++){
 			for(int r =1; r<=size; r++){
@@ -23,8 +24,6 @@ public class Board {
 				table.put(loc, cell);	
 			}
 		}
-        
-    
 	}
 	
 	public Board(int size) {
@@ -44,6 +43,8 @@ public class Board {
 	}
 	
 	
+	
+	
 	public void resetBoard(){
 		Board board = new Board();	
 	}
@@ -56,11 +57,13 @@ public class Board {
 		return table.get(l).letter;
 	}
 	
-	public void BonusCell(){
+	public Location BonusCell(){
 		int c = (int) (Math.random()*size)+1;
 		int r = (int) (Math.random()*size)+1;
-		table.get(new Location(c,r).hashCode()).setSeleted();	
+		table.get(new Location(c,r).hashCode()).setSeleted();
+		return new Location(c, r);
 	} 
+	
 	
 	public void removeWord(List<Cell> Cells){
 		for(Cell c : Cells){

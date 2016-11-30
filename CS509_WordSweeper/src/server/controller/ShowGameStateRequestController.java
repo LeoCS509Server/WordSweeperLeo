@@ -25,7 +25,7 @@ public class ShowGameStateRequestController {
 		Game selectedGame = model.getSelected();
 		String gameId = selectedGame.getGameId();
 		int size = selectedGame.checkBoardSize();
-		String managingUser = selectedGame.getManagingUser();
+		String managingUser = selectedGame.getManageUsername();
 		Board board = selectedGame.getBoard();
 		String content = BoardContent(board);
 		String bonus = "'7,7'";

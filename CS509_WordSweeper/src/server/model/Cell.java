@@ -12,9 +12,6 @@ public class Cell {
 	String letter;
 	Boolean seleted; //Selected: true, otherwise: off
 	
-	
-	
-	
 	public Cell(Location location) {
 		super();
 		this.location = location;

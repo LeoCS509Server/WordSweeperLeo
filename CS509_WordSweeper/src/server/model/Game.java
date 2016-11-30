@@ -1,6 +1,7 @@
 package server.model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -15,53 +16,72 @@ public class Game {
 	String GameID;
 	ArrayList<Player> Players;
 	Board board;
-	Player managingUser;
 	boolean isLocked;
 	String password;
-	//need an attribute bonus
+	boolean isActived;
+
 	
-	public Game(String GameID, Player managingUser ) {
-		super();
-		GameID = GameID;
+
+	
+	public static String setGameID(){
+		Calendar c = Calendar.getInstance();
+		int hour = c.get(Calendar.HOUR_OF_DAY); 
+		int minute = c.get(Calendar.MINUTE); 
+		int second = c.get(Calendar.SECOND); 
+		String s=String.valueOf(hour) + String.valueOf(minute) + String.valueOf(second);
+		return s;
+	}
+	
+	public static Location randomLocation(int size){
+		int x =(int) (Math.random()*(size-3)+1);
+		int y =(int) (Math.random()*(size-3)+1);
+		return new Location(x,y);
+	}
+	
+	public Game(String UserID) {
+		GameID = setGameID();
+		Location loc = randomLocation(board.getSize());
+		Player managingUser = new Player(UserID, loc);
+		managingUser.setManagingUser();
 		Players.add(managingUser);
-		this.managingUser = managingUser;
 		this.board = new Board();
 		this.isLocked = false;
-	}
-	public Game(){
-	
-	}
-
-	public Game(String gameID, Player managingUser, String password) {
-		super();
-		GameID = gameID;
-		Players.add(managingUser);
-		this.managingUser = managingUser;
-		this.board = new Board();
-		this.isLocked = true;
-		this.password = password;
+		boolean isActived = true;
 	}
 	
-	public void addPlayer(Player player){
-		Players.add(player);
+	
+	public void addPlayer(String id){
+		Location loc = randomLocation(board.getSize());
+		Player p = new Player(id, loc); 
+		Players.add(p);
 	}
 	
 	public String getGameID(){
 		return GameID;
 	}
-
-	public int getBonus(){
-		return 1;                  //need bonus
+	
+	public String getManageUsername(){
+		String Username = "";
+		for(Player p : Players){
+			if(p.isManagingUser())
+				Username = p.getName();
+		}
+		return Username;
 	}
 	
+	
+
+	
+	
 	public void removePlayer(Player player){
-		if(this.Players.size()>1&&(player!=managingUser)){
+		if(this.Players.size()>1&&(!player.isManagingUser())){
 			this.Players.remove(player);
-		}else if(this.Players.size()>1 &&(player==managingUser)){
+		}else if(this.Players.size()>1 &&(player.isManagingUser())){
 			this.Players.remove(player);
 			this.setManagingUser(this.Players);
 		}else{
-			this.Players.remove(player); //
+			this.Players.remove(player); 
+			this.isActived = false;
 		}
 	}
 	
@@ -89,12 +109,9 @@ public class Game {
 		//int i = (int)Math.random()*Players.size();
 		Random r =new Random();
 		int i = r.nextInt(Players.size())+1;
-		this.managingUser=Players.get(i);
+		Players.get(i).setManagingUser();;
 	}
 	
-	public String getManagingUser(){
-		return managingUser.getName();
-	}
 	
 	public boolean checkisLocked(){
 		return isLocked; 

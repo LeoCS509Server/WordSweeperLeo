@@ -11,10 +11,11 @@ public class Player {
 	
 	
 	private String Name;
-	private String idNum;
+	//private String idNum;
 	private int Score;
 	//private Color color;
 	private Location location;
+	private boolean isManagingUser;
 	
 	
 //	public Color randomColor(){
@@ -26,11 +27,6 @@ public class Player {
 //		return randomcolor.brighter();
 //	}
 	
-	public Location randomLocation(){
-		int x =(int) (Math.random()*4+1);// 4 改成board size -3
-		int y =(int) (Math.random()*4+1);
-		return new Location(x,y);
-	}
 	
 	public void setPlayerLocation(Location loc){
 		this.location = loc;
@@ -41,12 +37,12 @@ public class Player {
 		return this.location;
 	}
 	
-	public Player(String name, String idNum) {
+	public Player(String name, Location loc) {
 		super();
 		Name = name;
-		this.idNum = idNum;
-		Score = 0;
-		this.location = randomLocation();
+		this.Score = 0;
+		this.location = loc;
+		this.isManagingUser = false;
 	}
 
 	public String getName(){
@@ -63,6 +59,14 @@ public class Player {
 	
 	public void resetScore(){
 		this.Score = 0;
+	}
+	
+	public void setManagingUser(){
+		this.isManagingUser = true;
+	}
+	
+	public boolean isManagingUser(){
+		return isManagingUser;
 	}
 	
 	public List<Location> getCellsLocation(){
