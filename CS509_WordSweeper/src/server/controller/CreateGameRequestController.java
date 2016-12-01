@@ -5,7 +5,7 @@ import org.w3c.dom.Node;
 
 import server.ClientState;
 import server.IProtocolHandler;
-import server.model.ServerModel;
+import server.model.Model;
 import xml.Message;
 import server.model.Game;
 import java.util.Random;
@@ -30,6 +30,6 @@ public class CreateGameRequestController implements IProtocolHandler {
 		
 		
 		// send this response back to the client which sent us the request.
-		return new Message ();
+		return new Message ("");
 	}
 }

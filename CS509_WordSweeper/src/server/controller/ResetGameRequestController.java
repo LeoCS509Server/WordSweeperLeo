@@ -2,14 +2,14 @@ package server.controller;
 
 import server.ClientState;
 import server.model.Game;
-import server.model.ServerModel;
+import server.model.Model;
 import xml.Message;
 
 public class ResetGameRequestController {
 
-	ServerModel model;
+	Model model;
 	Game game;
-	public ResetGameRequestController (ServerModel model, Game game) {
+	public ResetGameRequestController (Model model, Game game) {
 		this.model = model;
 		this.game = game;
 	}

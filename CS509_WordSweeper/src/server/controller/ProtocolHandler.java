@@ -3,7 +3,7 @@ import org.w3c.dom.Node;
 
 import server.ClientState;
 import server.IShutdownHandler;
-import server.model.ServerModel;
+import server.model.Model;
 import server.model.Game;
 import xml.*;
 
@@ -21,10 +21,10 @@ import xml.*;
  */
 public class ProtocolHandler implements IShutdownHandler {
 	
-	ServerModel model;
+	Model model;
 	Game game;
 	
-	public ProtocolHandler (ServerModel model, Game game) {
+	public ProtocolHandler (Model model, Game game) {
 		this.model = model;
 		this.game = game;
 	}

@@ -1,12 +1,12 @@
 package server.controller;
 import server.ClientState;
 
-import server.model.ServerModel;
+import server.model.Model;
 import server.model.Game;
 import xml.Message;
 public class ExitGameRequestController {
 
-	ServerModel model;
+	Model model;
 	Game game;
 	public ExitGameRequestController (ServerModel model, Game game) {
 		this.model = model;

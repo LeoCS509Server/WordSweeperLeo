@@ -6,7 +6,7 @@ import server.ClientState;
 import server.IProtocolHandler;
 import server.Server;
 import server.model.Game;
-import server.model.ServerModel;
+import server.model.Model;
 import xml.Message;
 
 /**
@@ -15,9 +15,9 @@ import xml.Message;
  */
 public class JoinGameRequestController implements IProtocolHandler {
 
-	ServerModel model;
+	Model model;
 	Game game;
-	public JoinGameRequestController (ServerModel model, Game game) {
+	public JoinGameRequestController (Model model, Game game) {
 		this.model = model;
 		this.game = game;
 	}

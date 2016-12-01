@@ -14,7 +14,8 @@ public class ShowGameStateResponseController extends ControllerChain {
 
 	public LeoAdminGUI app;
 	public Model model;
-	
+	String content;
+	//ArrayList<String> playerContent;
 	/**
 	 *deal with the showGameStateResponse from server and upgrade the GUI 
 	 */
@@ -26,16 +27,16 @@ public class ShowGameStateResponseController extends ControllerChain {
 	
 	public boolean process(Message response) {
 		String type = response.contents.getFirstChild().getLocalName();
-		if (!type.equals ("showGameStateResponse")) {
+		if (!type.equals ("boardResponse")) {
 			return next.process(response);
 		}
 		
-		String content = "";
+		//String content = "";
 		ArrayList<String> playerContent = new ArrayList<String>();
 	
 		Node showGameStateResponse = response.contents.getFirstChild();
 		NamedNodeMap showGame = showGameStateResponse.getAttributes();
-		content = showGame.getNamedItem("content").getNodeValue();
+		content = showGame.getNamedItem("contents").getNodeValue();
 		Node player = showGameStateResponse.getFirstChild();
 		while ( player != null){
 			NamedNodeMap playerMap = player.getAttributes();

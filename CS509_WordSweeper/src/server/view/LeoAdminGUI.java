@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import admin.MockServerAccess;
 import client.ServerAccess;
 import server.model.Model;
 
@@ -82,6 +83,10 @@ public class LeoAdminGUI extends JFrame {
 	/** Get the server access object. */
 	public ServerAccess getServerAccess() {
 		return serverAccess;
+	}
+	public void setServerAccess(ServerAccess access) {
+		this.serverAccess = access;
+		
 	}
 	
 }
