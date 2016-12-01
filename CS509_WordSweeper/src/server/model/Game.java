@@ -12,7 +12,6 @@ import util.WordTable;
 
 public class Game {
 	
-	static LinkedList<Game> games;
 	String GameID;
 	ArrayList<Player> Players;
 	Board board;

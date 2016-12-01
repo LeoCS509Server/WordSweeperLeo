@@ -17,7 +17,16 @@ public class Model {
 		games.add(g);
 	}
 	
-	
+	public Game getGame(String gameid)
+	{
+		int i=0;
+		while(gameid != games.get(i).getGameID())
+		{
+			i++;
+			
+		}
+		return games.get(i);
+	}
 	
 	/** return all the games*/
 	public ArrayList<Game> getGames(){

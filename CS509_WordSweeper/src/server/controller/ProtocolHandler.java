@@ -24,9 +24,8 @@ public class ProtocolHandler implements IShutdownHandler {
 	Model model;
 	Game game;
 	
-	public ProtocolHandler (Model model, Game game) {
+	public ProtocolHandler (Model model) {
 		this.model = model;
-		this.game = game;
 	}
 	
 	@Override
@@ -36,17 +35,17 @@ public class ProtocolHandler implements IShutdownHandler {
 		
 		System.out.println (request);
 		if (type.equals ("createGameRequest")) {
-			return new CreateGameRequestController(model,game).process(st, request); 
+			return new CreateGameRequestController(model).process(st, request); 
 		} else if (type.equals ("joinGameRequest")) {
-			return new JoinGameRequestController(model,game).process(st, request);
+			return new JoinGameRequestController(model).process(st, request);
 		} else if (type.equals("exitGameRequest")) {
-			return new ExitGameRequestController(model,game).process(st, request);
+			return new ExitGameRequestController(model).process(st, request);
 		} else if (type.equals("lockGameRequest")) {
-			return new LockGameRequestController(model,game).process(st, request);
+			return new LockGameRequestController(model).process(st, request);
 		} else if (type.equals("findWordRequest")) {
-			return new FindWordRequestController(model,game).process(st, request);
+			return new FindWordRequestController(model).process(st, request);
 		} else if (type.equals("resetGameRequest")) {
-			return new ResetGameRequestController(model,game).process(st, request);
+			return new ResetGameRequestController(model).process(st, request);
 		}
 		
 		// unknown? no idea what to do
