@@ -21,6 +21,12 @@ public class Location {
 		return row;
 	}
 
+	public int[] getLocation(){
+		int[] s = new int[2];
+		s[0]= this.column;
+		s[1] = this.row;
+		return s;
+	}
 
 	public void setColumn(int column) {
 		this.column = column;
