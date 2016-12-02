@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.AbstractListModel;
 import javax.swing.JButton;
@@ -17,8 +18,7 @@ import javax.swing.JScrollPane;
 
 
 import admin.*;
-import admin.adminmodel.Board;
-import admin.adminmodel.Player;
+import admin.adminmodel.Game; 
 
 
 public class DrawLine {  
@@ -118,23 +118,23 @@ class DrawSee<globalboard> extends JFrame {
     }
     
     class MyListModel extends AbstractListModel<String>{
-    	private String[] contents={"1","2"};
+    	private ArrayList contents=Game.playerid;
     	@Override
     	public String getElementAt(int x){
-    		if (x<contents.length)
-    			return contents[x++];
+    		if (x<contents.size())
+    			return (String) contents.get(x++);
     		else
     			return null;
     	}
     	@Override
     	public int getSize(){
-    		return contents.length;
+    		return contents.size();
     	}
     }
     
     public void paintComponents(Graphics g) {
      
-            rw=Board.size*40;
+            rw=Game.size*40;
            
            
             // set line color
@@ -144,21 +144,21 @@ class DrawSee<globalboard> extends JFrame {
             g.drawRect(sx, sy, rw, rw);
             
             
-            for(int i = 0; i < Board.size; i ++) {
+            for(int i = 0; i < Game.size; i ++) {
                 // draw inner square
-                for(int j=0;j<Board.size;j++){
+                for(int j=0;j<Game.size;j++){
                 g.drawRect(sx + (i * w), sy + (j * w), w, w);}
             }   
                 // fill the square
-            for(int i=0;i< Player.playerlocation.length;i++){
+            for(int i=0;i< Game.playerlocation.size();i++){
             	Color Color = new Color(220+(int)(Math.random()*35),220+(int)(Math.random()*35),220+(int)(Math.random()*35));
     			g.setColor(Color);
-    			g.fillRect((sx+(Player.playerlocation[i]/10)*40),(sy+(Player.playerlocation[i]%10)*40), 160, 160);
+    			g.fillRect((sx+((int)Game.playerlocation.get(i)/10)*40),(sy+((int)Game.playerlocation.get(i)%10)*40), 160, 160);
             }
           
     
-            for(int i = 0; i <=Board.size; i ++){
-                for(int j = 0; j < Board.size; j ++) {
+            for(int i = 0; i <=Game.size; i ++){
+                for(int j = 0; j < Game.size; j ++) {
                     drawString(g, j, i);                    
                 }
             }
@@ -169,7 +169,7 @@ class DrawSee<globalboard> extends JFrame {
     private void drawString(Graphics g, int x, int y) {
     	             g.setColor(Color.BLACK);
     	             g.setFont(new Font("Arial", 0, 25)); 
-    	             g.drawString(Board.globalboard[x][y] + "", sx + (y  * w) + 5, sy + ((x + 1) * w) - 5);
+    	             g.drawString(Game.globalboard[x][y] + "", sx + (y  * w) + 5, sy + ((x + 1) * w) - 5);
     	      
     	     }
     	 
