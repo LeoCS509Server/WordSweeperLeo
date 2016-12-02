@@ -1,4 +1,4 @@
-package adminmodel;
+package admin.adminmodel;
 
 public class Player {
 

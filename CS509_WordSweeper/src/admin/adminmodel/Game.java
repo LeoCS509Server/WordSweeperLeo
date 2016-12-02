@@ -1,4 +1,4 @@
-package adminmodel;
+package admin.adminmodel;
 
 import server.model.Board;
 

@@ -1,4 +1,4 @@
-package admin;
+package admin.admincontroller;
 
 import xml.Message;
 import server.model.Model;

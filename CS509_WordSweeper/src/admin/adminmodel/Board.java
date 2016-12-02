@@ -1,4 +1,4 @@
-package adminmodel;
+package admin.adminmodel;
 
 import java.util.Hashtable;
 import java.util.List;

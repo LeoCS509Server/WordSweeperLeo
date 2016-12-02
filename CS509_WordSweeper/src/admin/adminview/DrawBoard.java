@@ -1,4 +1,4 @@
-package adminview;
+package admin.adminview;
 
 import java.awt.Color;
 import java.awt.Graphics;

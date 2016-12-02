@@ -1,7 +1,7 @@
-package admin;
+package admin.admincontroller;
 
 
-import admin.ControllerChain;
+
 import xml.Message;
 
 public abstract class ControllerChain implements IAdminClientController {

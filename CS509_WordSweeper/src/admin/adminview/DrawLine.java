@@ -1,4 +1,4 @@
-package adminview;
+package admin.adminview;
 
 import java.awt.Choice;
 import java.awt.Color;
@@ -16,7 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 
-import adminmodel.*;
+import admin.*;
+import admin.adminmodel.Board;
+import admin.adminmodel.Player;
 
 
 public class DrawLine {  

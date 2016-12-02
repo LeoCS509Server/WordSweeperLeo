@@ -1,4 +1,4 @@
-package adminview;
+package admin.adminview;
 
 
 

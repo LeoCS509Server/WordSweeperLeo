@@ -1,4 +1,4 @@
-package admin;
+package admin.admincontroller;
 
 import server.model.Model;
 import server.view.LeoAdminGUI;
