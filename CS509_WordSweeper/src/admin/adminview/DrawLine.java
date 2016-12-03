@@ -16,19 +16,24 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-
-import admin.*;
 import admin.adminmodel.Game; 
 
 
 public class DrawLine {  
 	
     public static void main(String[] args) {   
-        new DrawSee("Admin");
+    	 DrawSee drawsee =DrawSee.getGUI();
     }   
 }   
 
-class DrawSee<globalboard> extends JFrame {
+class DrawSee extends JFrame {
+	private static class DrawseeHolder{
+		private static final DrawSee gui=new DrawSee("Admin");
+	}
+	
+	public static DrawSee getGUI(){
+		return DrawseeHolder.gui;
+	}
 	
 	
     private static final int sx = 300;//x coordinate of square
@@ -42,7 +47,7 @@ class DrawSee<globalboard> extends JFrame {
     
     private Color rectColor = new Color(0xf5f5f5);
     
-    public DrawSee(String name) {
+    private DrawSee(String name) {
     	super(name);
         Container p = getContentPane();
         setBounds(400, 100, 700, 500);
@@ -69,10 +74,7 @@ class DrawSee<globalboard> extends JFrame {
 		gameChoice.setBounds(45,55, 100, 30);
 		getContentPane().add(gameChoice);
 		
-		gameChoice.add("Apple");
-		gameChoice.add("Grapes");
-		gameChoice.add("Mango");
-		gameChoice.add("Peer");
+		
 		
 		
 		JButton button2 = new JButton("Select");
@@ -81,11 +83,18 @@ class DrawSee<globalboard> extends JFrame {
 		button2.addActionListener(new selectAction());
 
 		JScrollPane scrollPane2 = new JScrollPane();
-		scrollPane2.setBounds(50, 100, 200, 350);
+		scrollPane2.setBounds(50, 100, 90, 350);
 		getContentPane().add(scrollPane2);
 		
 		JList<String> playerlist = new JList<>(new MyListModel());
 		scrollPane2.setViewportView(playerlist);
+		
+		JScrollPane scrollPane3 = new JScrollPane();
+		scrollPane3.setBounds(150, 100, 90, 350);
+		getContentPane().add(scrollPane3);
+		
+		JList<String> scorelist = new JList<>(new MyListModel2());
+		scrollPane3.setViewportView(scorelist);
 
         try {           
             Thread.sleep(500);
@@ -98,7 +107,7 @@ class DrawSee<globalboard> extends JFrame {
         
         // draw
         paintComponents(jg);
-      
+        gameComponents(gameChoice);
         
     }
     
@@ -113,7 +122,9 @@ class DrawSee<globalboard> extends JFrame {
 	class refreshAction implements ActionListener{
     	@Override
     	 public void actionPerformed(ActionEvent e) {
-    	           ///
+    		
+    		
+    	    DrawSee drawsee =DrawSee.getGUI();///
     	    }
     }
     
@@ -132,40 +143,59 @@ class DrawSee<globalboard> extends JFrame {
     	}
     }
     
-    public void paintComponents(Graphics g) {
-     
-            rw=Game.size*40;
-           
-           
-            // set line color
-            g.setColor(Color.BLACK);
-            
-            // draw outer square
-            g.drawRect(sx, sy, rw, rw);
-            
-            
-            for(int i = 0; i < Game.size; i ++) {
-                // draw inner square
-                for(int j=0;j<Game.size;j++){
-                g.drawRect(sx + (i * w), sy + (j * w), w, w);}
-            }   
-                // fill the square
-            for(int i=0;i< Game.playerlocation.size();i++){
-            	Color Color = new Color(220+(int)(Math.random()*35),220+(int)(Math.random()*35),220+(int)(Math.random()*35));
-    			g.setColor(Color);
-    			g.fillRect((sx+((int)Game.playerlocation.get(i)/10)*40),(sy+((int)Game.playerlocation.get(i)%10)*40), 160, 160);
-            }
-          
-    
-            for(int i = 0; i <=Game.size; i ++){
-                for(int j = 0; j < Game.size; j ++) {
-                    drawString(g, j, i);                    
-                }
-            }
-      
+    class MyListModel2 extends AbstractListModel<String>{
+    	private ArrayList contents2=Game.score;
+    	@Override
+    	public String getElementAt(int x){
+    		if (x<contents2.size())
+    			return (String) contents2.get(x++);
+    		else
+    			return null;
+    	}
+    	@Override
+    	public int getSize(){
+    		return contents2.size();
+    	}
     }
     
     
+   public void gameComponents(Choice gamechoice){
+	    gamechoice.add(Game.getgameid());
+	    
+   }
+    
+    public void paintComponents(Graphics g) {
+        
+        rw=Game.size*40;
+       
+       
+        // set line color
+        g.setColor(Color.BLACK);
+        
+        // draw outer square
+        g.drawRect(sx, sy, rw, rw);
+        
+        
+        for(int i = 0; i < Game.size; i ++) {
+            // draw inner square
+            for(int j=0;j<Game.size;j++){
+            g.drawRect(sx + (i * w), sy + (j * w), w, w);}
+        }   
+            // fill the square
+        for(int i=0;i< Game.playerlocation.size();i++){
+        	Color Color = new Color(220+(int)(Math.random()*35),220+(int)(Math.random()*35),220+(int)(Math.random()*35));
+			g.setColor(Color);
+			g.fillRect((sx+((int)Game.playerlocation.get(i)/10)*40),(sy+((int)Game.playerlocation.get(i)%10)*40), 160, 160);
+        }
+      
+
+        for(int i = 0; i <=Game.size; i ++){
+            for(int j = 0; j < Game.size; j ++) {
+                drawString(g, j, i);                    
+            }
+        }
+  
+}
     private void drawString(Graphics g, int x, int y) {
     	             g.setColor(Color.BLACK);
     	             g.setFont(new Font("Arial", 0, 25)); 

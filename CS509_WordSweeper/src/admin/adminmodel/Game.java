@@ -7,7 +7,7 @@ import server.model.Board;
 public class Game {
 
 	
-	String gameid;
+	static String gameid;
 	public static String[][] globalboard;
 	public static int size;
 	int k=0;
@@ -42,5 +42,9 @@ public class Game {
 		}
 	
 	
+	}
+
+	public static String getgameid(){
+		return gameid;
 	}	
 }
