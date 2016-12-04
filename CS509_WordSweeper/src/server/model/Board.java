@@ -16,10 +16,12 @@ public class Board {
 	Board() {
 	
 		size = 7;
+		table = new Hashtable<Location, Cell>();
 		for(int c = 1; c<=size;c++){
 			for(int r =1; r<=size; r++){
                 Location loc = new Location(c,r);
-                Cell cell = new Cell(loc);
+		
+		Cell cell = new Cell(loc);
 				cell.getLetter();
 				table.put(loc, cell);	
 			}
@@ -28,6 +30,7 @@ public class Board {
 	
 	public Board(int size) {
 		super();
+		table = new Hashtable<Location, Cell>();
 		for(int c = 1; c<=size;c++){
 			for(int r =1; r<=size; r++){
 				Location loc = new Location(c,r);
