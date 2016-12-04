@@ -16,6 +16,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import admin.adminmodel.AdminModel;
 import admin.adminmodel.Game; 
 
 
@@ -44,7 +45,7 @@ class DrawSee extends JFrame {
     private Graphics jg;
     
     
-    
+  
     private Color rectColor = new Color(0xf5f5f5);
     
     private DrawSee(String name) {
@@ -106,7 +107,7 @@ class DrawSee extends JFrame {
         jg =  this.getGraphics();
         
         // draw
-        paintComponents(jg);
+        //paintComponents(jg);
         gameComponents(gameChoice);
         
     }
@@ -114,7 +115,14 @@ class DrawSee extends JFrame {
     class selectAction implements ActionListener{
     	@Override
    	 public void actionPerformed(ActionEvent e) {
-   	      paintComponents(jg);     ///
+    		
+    	Choice gameChoice = new Choice();
+    	gameChoice.setBounds(45,55, 100, 30);
+    	getContentPane().add(gameChoice);
+    	
+    	Game g = new Game();
+    	g =	AdminModel.getGame(gameChoice.getItem(gameChoice.getSelectedIndex()));   	
+   	    paintComponents(jg,g);     ///
    	    }
     }
     
@@ -122,14 +130,21 @@ class DrawSee extends JFrame {
 	class refreshAction implements ActionListener{
     	@Override
     	 public void actionPerformed(ActionEvent e) {
-    		
-    		
-    	    DrawSee drawsee =DrawSee.getGUI();///
+    		  		
+    	    //DrawSee drawsee =DrawSee.getGUI();///
+    	    DrawSee.getGUI();///
     	    }
     }
     
     class MyListModel extends AbstractListModel<String>{
-    	private ArrayList contents=Game.getPlayerid();
+    	
+    	
+    	private ArrayList<String> contents;
+    	
+    	public MyListModel(Game g){ //不确定是不是传game
+    		contents =g.getPlayerid();
+    	}
+    	 	
     	@Override
     	public String getElementAt(int x){
     		if (x<contents.size())
@@ -144,14 +159,22 @@ class DrawSee extends JFrame {
     }
     
     class MyListModel2 extends AbstractListModel<String>{
-    	private ArrayList contents2=Game.getScore();
+    	
+    	private ArrayList<Integer> contents2;
+    	
+    	public MyListModel2(Game g){//不确定是不是传game
+    		contents2 =g.getScore();
+    		}
+    		
+    	
     	@Override
     	public String getElementAt(int x){
     		if (x<contents2.size())
-    			return (String) contents2.get(x++);
+    			return contents2.get(x++).toString();
     		else
     			return null;
     	}
+    	
     	@Override
     	public int getSize(){
     		return contents2.size();
@@ -160,14 +183,15 @@ class DrawSee extends JFrame {
     
     
    public void gameComponents(Choice gamechoice){
-	   String gameid=Game.getGameid();
-	    gamechoice.add(gameid);
-	    
+	   ArrayList<Game> a = AdminModel.gamelist;
+	   for(Game g:a){
+		   gamechoice.add(g.getGameid());	   
+	   }	        
    }
     
-    public void paintComponents(Graphics g) {
+    public void paintComponents(Graphics g,Game game) {
     	
-        int size=Game.getSize();
+        int size=game.getSize();
         rw=size*40;
        
        
@@ -185,7 +209,7 @@ class DrawSee extends JFrame {
         }   
             // fill the square
         
-        ArrayList playerlocation=Game.getPlayerlocation();
+        ArrayList<Integer> playerlocation=game.getPlayerlocation();
         for(int i=0;i< playerlocation.size();i++){
         	Color Color = new Color(220+(int)(Math.random()*35),220+(int)(Math.random()*35),220+(int)(Math.random()*35));
 			g.setColor(Color);
@@ -195,13 +219,13 @@ class DrawSee extends JFrame {
 
         for(int i = 0; i <=size; i ++){
             for(int j = 0; j < size; j ++) {
-                drawString(g, j, i);                    
+                drawString(g, j, i, game);                    
             }
         }
   
 }
-    private void drawString(Graphics g, int x, int y) {
-    				String[][] globalboard=Game.getGlobalboard();
+    private void drawString(Graphics g, int x, int y, Game game) {
+    				String[][] globalboard=game.getGlobalboard();
     	             g.setColor(Color.BLACK);
     	             g.setFont(new Font("Arial", 0, 25)); 
     	             g.drawString(globalboard[x][y] + "", sx + (y  * w) + 5, sy + ((x + 1) * w) - 5);
