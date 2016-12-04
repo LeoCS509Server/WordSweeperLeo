@@ -4,12 +4,19 @@ import java.util.*;
 /** top level object of entiy objects*/
 public class Model {
 
+
 	ArrayList<Game> games = new ArrayList<Game>();
 	Game selectedGame = null;		
 	
 	/** select certain game to show its state*/
-	public void selectGame (Game g){
-		selectedGame = g;
+	public void selectGame (String id){
+		int i=0;
+		while(id != games.get(i).getGameID())
+		{
+			i++;
+			
+		}
+		selectedGame = games.get(i);
 	}
 	
 	/** add new game to arraylist*/
@@ -47,6 +54,24 @@ public class Model {
 		}
 		games.remove(i);
 		
+	}
+	public boolean isPasswordCorrect(String GameID, String password){
+		for(Game g: games){
+			if(g.getGameID() == GameID && g.getPassword() == password){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void refreshGameList(){
+		ArrayList<Game> NewGameList = new ArrayList<>();
+		for(Game g: games){
+			if(g.isActived){
+				NewGameList.add(g);			
+			}
+		}
+		this.games = NewGameList;	
 	}
 	
 	// find(gameid)
