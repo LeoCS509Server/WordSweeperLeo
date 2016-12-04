@@ -50,12 +50,13 @@ public class Board {
 	
 	
 	
-	public void resetBoard(){
-		Board board = new Board();	
+	public Board resetBoard(){
+		return new Board();	
+		
 	}
 	
-	public void resetBoard(int size){
-		Board board = new Board(size);	
+	public Board resetBoard(int size){
+		return new Board(size);	
 	}
 	
 	public String getCellContains(Location l){
