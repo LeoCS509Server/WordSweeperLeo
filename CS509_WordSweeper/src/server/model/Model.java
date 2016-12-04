@@ -48,6 +48,14 @@ public class Model {
 		games.remove(i);
 		
 	}
+	public boolean isPasswordCorrect(String GameID, String password){
+		for(Game g: games){
+			if(g.getGameID() == GameID && g.getPassword() == password){
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	// find(gameid)
 }
