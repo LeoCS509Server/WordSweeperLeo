@@ -2,7 +2,9 @@ package admin.admincontroller;
 
 import xml.Message;
 import admin.adminmodel.AdminModel;
-import admin.adminview.AdminApplication;
+
+
+import admin.adminview.DrawSee;
 
 
 /**
@@ -10,11 +12,11 @@ import admin.adminview.AdminApplication;
  */
 public class ListGamesController {
 
-	AdminApplication app;
+	DrawSee app;
 	AdminModel model;
 
-	public ListGamesController(AdminApplication app, AdminModel model) {
-		this.app = app;
+	public ListGamesController(DrawSee drawSee, AdminModel model) {
+		this.app = drawSee;
 		this.model = model;
 	}
 
