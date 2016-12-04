@@ -78,7 +78,7 @@ public class Board {
 			c.removeLetter();
 		}	
 	}
-	//waiting for further change 
+	//waiting for further change   
 	public void refreshBoard(){
 		for(int c = 1; c<=size;c++){
 			int count = 0;
