@@ -1,32 +1,19 @@
 package admin.adminmodel;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 
 
 public class AdminModel {
-	ArrayList<Game> gamelist= new ArrayList<Game>();
-	Game game;
+	public static ArrayList<Game> gamelist= new ArrayList<Game>();
 	
 	
-	
-	
-	
-	public void refresh(Game GameID){  ///////
-		gamelist.add(GameID);	
+	public static Game getGame(String GameID){
+		for(Game g: gamelist){
+			if(g.gameid == GameID){
+				return g;
+			}			
+		}
+		return null;		
 	}
 	
-	
-	
-	
-	
-	public Game getGame(){
-		return game;
-	}
-	
-
-
-	
-
-   
 }
