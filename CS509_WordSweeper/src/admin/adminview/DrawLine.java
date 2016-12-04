@@ -43,7 +43,7 @@ class DrawSee extends JFrame {
     int rw;
     
     private Graphics jg;
-    
+    Game g = new Game();
     
   
     private Color rectColor = new Color(0xf5f5f5);
@@ -120,7 +120,7 @@ class DrawSee extends JFrame {
     	gameChoice.setBounds(45,55, 100, 30);
     	getContentPane().add(gameChoice);
     	
-    	Game g = new Game();
+    	
     	g =	AdminModel.getGame(gameChoice.getItem(gameChoice.getSelectedIndex()));   	
    	    paintComponents(jg,g);     ///
    	    }
@@ -139,11 +139,11 @@ class DrawSee extends JFrame {
     class MyListModel extends AbstractListModel<String>{
     	
     	
-    	private ArrayList<String> contents;
+    	private ArrayList<String> contents=g.getPlayerid();
     	
-    	public MyListModel(Game g){ //不确定是不是传game
-    		contents =g.getPlayerid();
-    	}
+    	
+    		
+    
     	 	
     	@Override
     	public String getElementAt(int x){
@@ -160,11 +160,11 @@ class DrawSee extends JFrame {
     
     class MyListModel2 extends AbstractListModel<String>{
     	
-    	private ArrayList<Integer> contents2;
+    	private ArrayList<Integer> contents2=g.getScore();
     	
-    	public MyListModel2(Game g){//不确定是不是传game
-    		contents2 =g.getScore();
-    		}
+//    	public MyListModel2(Game g){//不确定是不是传game
+//    		contents2 =g.getScore();
+//    		}
     		
     	
     	@Override
