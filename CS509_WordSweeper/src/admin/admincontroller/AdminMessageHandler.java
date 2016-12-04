@@ -1,12 +1,13 @@
 package admin.admincontroller;
 
 import admin.adminview.AdminApplication;
+import admin.adminview.DrawSee;
 import client.IMessageHandler;
 import xml.Message;
 
 public class AdminMessageHandler implements IMessageHandler{
 
-	AdminApplication app;
+	DrawSee app;
 	
 	// by default is the empty handler...
 	ControllerChain chain = new EmptyHandler();
@@ -19,8 +20,8 @@ public class AdminMessageHandler implements IMessageHandler{
 		chain = handler;
 	}
 	
-	public AdminMessageHandler(AdminApplication app) {
-		this.app = app;
+	public AdminMessageHandler(DrawSee app2) {
+		this.app = app2;
 	}
 	
 	
