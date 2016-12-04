@@ -42,6 +42,7 @@ public class Game {
 		Location loc = randomLocation(board.getSize());
 		Player managingUser = new Player(UserID, loc);
 		managingUser.setManagingUser();
+		Players = new ArrayList<Player>();
 		Players.add(managingUser);
 		this.board = new Board();
 		this.isLocked = false;
