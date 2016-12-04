@@ -15,19 +15,22 @@ import java.util.Random;
  * as an updateResponse message and send it back to the client.
  */
 public class CreateGameRequestController implements IProtocolHandler {
-	Game game;
+	Model model;
 
 	
-	public CreateGameRequestController (Game game) {
+	public CreateGameRequestController (Model model) {
 	
-		this.game = game;
+		this.model = model;
 	}
 	
 	public Message process(ClientState client, Message request) {
-		
+		Node exitRequest = request.contents.getFirstChild();
+		NamedNodeMap map = exitRequest.getAttributes();
+		String ID = map.getNamedItem("gameId").getNodeValue();
+		Game game = model.getGame(ID);
 
 		// Construct message reflecting state
-		
+	
 		
 		// send this response back to the client which sent us the request.
 		return new Message ("");
