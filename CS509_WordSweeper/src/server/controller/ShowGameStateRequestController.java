@@ -2,6 +2,9 @@ package server.controller;
 
 import java.util.ArrayList;
 
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+
 import server.ClientState;
 import server.model.Board;
 import server.model.Game;
@@ -12,22 +15,34 @@ import xml.Message;
 /**
  * deal with the showgamestate request in server side 
  */
-public class ShowGameStateRequestController {
+public class ShowGameStateRequestController extends ControllerChain {
 
 	Model model;
+	String content;
 	
 	public ShowGameStateRequestController(Model model){
 		this.model = model;
 	}
-	
+	@Override 
 	public Message process(ClientState client, Message request){
+		String type = request.contents.getFirstChild().getLocalName();
+		if (!type.equals ("showGameStateRequest")) {
+			return next.process(client,request);
+		}
+		
+		//select certain game 
+		Node showGameStateRequest = request.contents.getFirstChild();
+		NamedNodeMap showGame = showGameStateRequest.getAttributes();
+		String id = showGame.getNamedItem("gameId").getNodeValue();
+		model.selectGame(id);
+		
 		//get needed information
 		Game selectedGame = model.getSelected();
 		String gameId = selectedGame.getGameId();
 		int size = selectedGame.checkBoardSize();
 		String managingUser = selectedGame.getManageUsername();
 		Board board = selectedGame.getBoard();
-		String content = BoardContent(board);
+		content = BoardContent(board);
 		String bonus = "'7,7'";
 		ArrayList<Player> players = selectedGame.getPlayers();
 		String playerInfo = "";
@@ -66,4 +81,6 @@ public class ShowGameStateRequestController {
 		int score = p.getScore();
 		return "<player name='"+name+"' position='"+position+"' board='"+board+"' score='"+score+"'/>";
 	}
+
+
 }
