@@ -37,7 +37,17 @@ public class Model {
 	public Game getSelected(){
 		return selectedGame;
 	}
-	
+	/**remove game from list*/
+	public void removeGame(String id){
+		int i=0;
+		while(id != games.get(i).getGameID())
+		{
+			i++;
+			
+		}
+		games.remove(i);
+		
+	}
 	
 	// find(gameid)
 }
