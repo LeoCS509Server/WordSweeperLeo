@@ -5,7 +5,7 @@ import admin.admincontroller.ListGamesController;
 import admin.admincontroller.ListGamesResponseController;
 import admin.admincontroller.ShowGameStateResponseController;
 import admin.adminmodel.AdminModel;
-import admin.adminview.AdminApplication;
+import admin.adminview.DrawSee;
 import client.ServerAccess;
 import xml.Message;
 
@@ -32,7 +32,7 @@ public class AdminLauncher {
 		
 		// Initialize the client application and its corresponding model
 		AdminModel model = new AdminModel();
-		AdminApplication app = new AdminApplication(model);
+		DrawSee app = new DrawSee(model);
 				
 		// set up the chain of responsibility
 		AdminMessageHandler handler = new AdminMessageHandler(app);
