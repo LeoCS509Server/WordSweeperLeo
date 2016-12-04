@@ -1,7 +1,7 @@
 package admin.admincontroller;
 
 import admin.adminmodel.AdminModel;
-import admin.adminview.AdminApplication;
+import admin.adminview.DrawSee;
 import xml.Message;
 /**
  * admin client send a request of showgamestate to server
@@ -9,10 +9,10 @@ import xml.Message;
 
 public class ShowGameStateController {
 
-	AdminApplication app;
+	DrawSee app;
 	AdminModel model;
 
-	public ShowGameStateController(AdminApplication app, AdminModel model) {
+	public ShowGameStateController(DrawSee app, AdminModel model) {
 		this.app = app;
 		this.model = model;
 	}
