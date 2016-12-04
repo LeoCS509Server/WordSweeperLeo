@@ -57,5 +57,15 @@ public class Model {
 		return false;
 	}
 	
+	public void refreshGameList(){
+		ArrayList<Game> NewGameList = new ArrayList<>();
+		for(Game g: games){
+			if(g.isActived){
+				NewGameList.add(g);			
+			}
+		}
+		this.games = NewGameList;	
+	}
+	
 	// find(gameid)
 }
