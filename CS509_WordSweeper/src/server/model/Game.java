@@ -51,10 +51,25 @@ public class Game {
 	
 	
 	public void addPlayer(String id){
-		Location loc = randomLocation(board.getSize());
-		Player p = new Player(id, loc); 
-		Players.add(p);
+		
+		if(Players.size()>8){
+			int size = (int) Math.sqrt(16*(Players.size()+1)/3);
+			Board board = new Board(size);
+			Location loc = randomLocation(board.getSize());
+			Player p = new Player(id, loc); 
+			Players.add(p);
+			for(int i = 0; i<Players.size()-1; i++){
+				Players.get(i).resetScore();
+				Location loc1 = randomLocation(board.getSize());
+				Players.get(i).setPlayerLocation(loc1);			
+			}			
+		}else{	
+			Location loc = randomLocation(board.getSize());
+			Player p = new Player(id, loc); 
+			Players.add(p);
+		}
 	}
+	
 	
 	public String getGameID(){
 		return GameID;
