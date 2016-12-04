@@ -8,30 +8,30 @@ public class Game {
 
 	
 	static String gameid;
-	public static String[][] globalboard;
-	public static int size;
+	static String[][] globalboard;
+	static int size;
 	int k=0;
 	
 	
-	public static ArrayList playerlocation= new ArrayList();
-	public static ArrayList playerid= new ArrayList();
-	public static ArrayList score= new ArrayList();
+	 static ArrayList playerlocation= new ArrayList();
+	 static ArrayList playerid= new ArrayList();
+	 static ArrayList score= new ArrayList();
 	
 
 	
-	public void getPlayerlocation(String string){
+	public void setPlayerlocation(String string){
 		this.playerlocation.add(Integer.parseInt(string));
 	}
 	
-	public void getplayerid(String id){
+	public void setPlayerid(String id){
 		this.playerid.add(id);
 	}
 	
-	public void getscore(int score){
+	public void setScore(int score){
 		this.score.add(score);
 	}
 	
-	public void getBoard(String string,int size){
+	public void setBoard(String string,int size){
 		this.size=size;
 		globalboard=new String[size][size];
 		for(int i=0;i<size;i++){
@@ -43,8 +43,28 @@ public class Game {
 	
 	
 	}
+	
+	public static ArrayList getPlayerlocation(){
+		return playerlocation;
+	}
+	
+	public static ArrayList getPlayerid(){
+		return playerid;
+	}
+	
+	public static ArrayList getScore(){
+		return score;
+	}
+	
+	public static int getSize(){
+		return size;
+	}
+	
+	public static String[][] getGlobalboard(){
+		return globalboard;
+	}
 
-	public static String getgameid(){
+	public static String getGameid(){
 		return gameid;
 	}	
 }

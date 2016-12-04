@@ -129,7 +129,7 @@ class DrawSee extends JFrame {
     }
     
     class MyListModel extends AbstractListModel<String>{
-    	private ArrayList contents=Game.playerid;
+    	private ArrayList contents=Game.getPlayerid();
     	@Override
     	public String getElementAt(int x){
     		if (x<contents.size())
@@ -144,7 +144,7 @@ class DrawSee extends JFrame {
     }
     
     class MyListModel2 extends AbstractListModel<String>{
-    	private ArrayList contents2=Game.score;
+    	private ArrayList contents2=Game.getScore();
     	@Override
     	public String getElementAt(int x){
     		if (x<contents2.size())
@@ -160,13 +160,15 @@ class DrawSee extends JFrame {
     
     
    public void gameComponents(Choice gamechoice){
-	    gamechoice.add(Game.getgameid());
+	   String gameid=Game.getGameid();
+	    gamechoice.add(gameid);
 	    
    }
     
     public void paintComponents(Graphics g) {
-        
-        rw=Game.size*40;
+    	
+        int size=Game.getSize();
+        rw=size*40;
        
        
         // set line color
@@ -176,30 +178,33 @@ class DrawSee extends JFrame {
         g.drawRect(sx, sy, rw, rw);
         
         
-        for(int i = 0; i < Game.size; i ++) {
+        for(int i = 0; i < size; i ++) {
             // draw inner square
-            for(int j=0;j<Game.size;j++){
+            for(int j=0;j<size;j++){
             g.drawRect(sx + (i * w), sy + (j * w), w, w);}
         }   
             // fill the square
-        for(int i=0;i< Game.playerlocation.size();i++){
+        
+        ArrayList playerlocation=Game.getPlayerlocation();
+        for(int i=0;i< playerlocation.size();i++){
         	Color Color = new Color(220+(int)(Math.random()*35),220+(int)(Math.random()*35),220+(int)(Math.random()*35));
 			g.setColor(Color);
-			g.fillRect((sx+((int)Game.playerlocation.get(i)/10)*40),(sy+((int)Game.playerlocation.get(i)%10)*40), 160, 160);
+			g.fillRect((sx+((int)playerlocation.get(i)/10)*40),(sy+((int)playerlocation.get(i)%10)*40), 160, 160);
         }
       
 
-        for(int i = 0; i <=Game.size; i ++){
-            for(int j = 0; j < Game.size; j ++) {
+        for(int i = 0; i <=size; i ++){
+            for(int j = 0; j < size; j ++) {
                 drawString(g, j, i);                    
             }
         }
   
 }
     private void drawString(Graphics g, int x, int y) {
+    				String[][] globalboard=Game.getGlobalboard();
     	             g.setColor(Color.BLACK);
     	             g.setFont(new Font("Arial", 0, 25)); 
-    	             g.drawString(Game.globalboard[x][y] + "", sx + (y  * w) + 5, sy + ((x + 1) * w) - 5);
+    	             g.drawString(globalboard[x][y] + "", sx + (y  * w) + 5, sy + ((x + 1) * w) - 5);
     	      
     	     }
     	 
