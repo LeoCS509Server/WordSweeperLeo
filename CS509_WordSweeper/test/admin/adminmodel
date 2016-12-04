@@ -1,0 +1,74 @@
+public class GameTest extends TestCase {
+	
+	Game g =new Game();
+	
+	public void setUp(){
+		
+		g.gameid = "1";
+		String[][] x ={{"a","b","c","b","e"},{"a","b","c","b","e"},{"a","b","c","b","e"},{"a","b","c","b","e"}};
+		g.globalboard =x;
+		g.size =5;
+		g.k=0;
+		ArrayList<String> p= new ArrayList<>();
+		p.add("Tom");
+		p.add("Sam");
+		g.playerid = p;
+		
+		ArrayList<Integer> s= new ArrayList<>();
+		s.add(200);
+		s.add(100);
+		g.score = s;
+		ArrayList<Integer> pl= new ArrayList<>();
+		pl.add(11);
+		pl.add(0);
+		g.playerlocation = pl;
+		
+	}
+
+	public void testSetPlayerlocation() {
+		fail("Not yet implemented");
+	
+		
+
+	}
+
+	public void testSetPlayerid() {
+		fail("Not yet implemented");
+	}
+
+	public void testSetScore() {
+		fail("Not yet implemented");
+	}
+
+	public void testSetBoard() {
+		fail("Not yet implemented");
+	}
+
+	public void testGetPlayerlocation() {
+		fail("Not yet implemented");
+	}
+
+	public void testGetPlayerid() {
+		fail("Not yet implemented");
+	}
+
+	public void testGetScore() {
+		ArrayList<Integer> s= new ArrayList<>();
+		s.add(200);
+		s.add(100);
+		assertEquals(s, g.getScore());
+	}
+
+	public void testGetSize() {
+				
+		assertEquals(5, g.getSize());
+		
+	}
+
+	public void testGetGlobalboard() {
+		fail("Not yet implemented");
+	}
+
+	public void testGetGameid() {
+		fail("Not yet implemented");
+	}
