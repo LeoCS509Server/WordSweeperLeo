@@ -16,20 +16,22 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import admin.admincontroller.ListGamesController;
+import admin.admincontroller.ShowGameStateController;
 import admin.adminmodel.AdminModel;
-import admin.adminmodel.Game; 
+import admin.adminmodel.Game;
+import client.ServerAccess;
+import client.view.Application; 
 
 
-public class DrawLine {  
+ 
+	  
+  
+
+public class DrawSee extends JFrame {
 	
-    public static void main(String[] args) {   
-    	 DrawSee drawsee =DrawSee.getGUI();
-    }   
-}   
-
-class DrawSee extends JFrame {
 	private static class DrawseeHolder{
-		private static final DrawSee gui=new DrawSee("Admin");
+		private static final DrawSee gui=new DrawSee(model);
 	}
 	
 	public static DrawSee getGUI(){
@@ -42,14 +44,27 @@ class DrawSee extends JFrame {
     private static final int w = 40;
     int rw;
     
+    JScrollPane scrollPane;
+	JPanel panel;
+	JButton button;
+	JButton button2;
+	Choice gameChoice;
+	JScrollPane scrollPane2;
+	JScrollPane scrollPane3;
+	JList<String> scorelist;
+	JList<String> playerlist;
+    static AdminModel model; 
+	
     private Graphics jg;
     Game g = new Game();
-    
+   
   
     private Color rectColor = new Color(0xf5f5f5);
+	private ServerAccess serverAccess;
     
-    private DrawSee(String name) {
-    	super(name);
+    public DrawSee(AdminModel model) {
+    	//super(name);
+    	this.model = model;
         Container p = getContentPane();
         setBounds(400, 100, 700, 500);
         setVisible(true);
@@ -115,7 +130,8 @@ class DrawSee extends JFrame {
     class selectAction implements ActionListener{
     	@Override
    	 public void actionPerformed(ActionEvent e) {
-    		
+    	
+    	new ShowGameStateController(DrawSee.this, model).process(gameChoice.getItem(gameChoice.getSelectedIndex()));
     	Choice gameChoice = new Choice();
     	gameChoice.setBounds(45,55, 100, 30);
     	getContentPane().add(gameChoice);
@@ -130,7 +146,7 @@ class DrawSee extends JFrame {
 	class refreshAction implements ActionListener{
     	@Override
     	 public void actionPerformed(ActionEvent e) {
-    		  		
+			new ListGamesController(DrawSee.this, model).process();
     	    //DrawSee drawsee =DrawSee.getGUI();///
     	    DrawSee.getGUI();///
     	    }
@@ -231,6 +247,17 @@ class DrawSee extends JFrame {
     	             g.drawString(globalboard[x][y] + "", sx + (y  * w) + 5, sy + ((x + 1) * w) - 5);
     	      
     	     }
+
+	/** Record the means to communicate with server. */
+	public void setServerAccess(ServerAccess access) {
+		this.serverAccess = access;
+	}
+	
+	/** Get the server access object. */
+	public ServerAccess getServerAccess() {
+		return serverAccess;
+	}
+	
     	 
     
 }
