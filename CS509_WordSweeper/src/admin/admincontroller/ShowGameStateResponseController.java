@@ -6,20 +6,20 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 import admin.adminmodel.AdminModel;
-import admin.adminview.AdminApplication;
+import admin.adminview.DrawSee;
 import xml.Message;
 
 
 public class ShowGameStateResponseController extends ControllerChain {
 
-	public AdminApplication app;
+	public DrawSee app;
 	public AdminModel model;
 	String content;
 	//ArrayList<String> playerContent;
 	/**
 	 *deal with the showGameStateResponse from server and upgrade the GUI 
 	 */
-	public ShowGameStateResponseController(AdminApplication a, AdminModel m) {
+	public ShowGameStateResponseController(DrawSee a, AdminModel m) {
 		super();
 		this.app = a;
 		this.model = m;
