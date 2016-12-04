@@ -2,20 +2,19 @@ package admin.adminmodel;
 
 import java.util.ArrayList;
 
-import server.model.Board;
 
 public class Game {
 
 	
-	static String gameid;
-	static String[][] globalboard;
-	static int size;
+	String gameid;
+	String[][] globalboard;
+	int size;
 	int k=0;
 	
 	
-	 static ArrayList playerlocation= new ArrayList();
-	 static ArrayList playerid= new ArrayList();
-	 static ArrayList score= new ArrayList();
+	 ArrayList<Integer> playerlocation= new ArrayList<>();
+	 ArrayList<String> playerid= new ArrayList<>();
+	 ArrayList<Integer> score= new ArrayList<>();
 	
 
 	
@@ -44,27 +43,27 @@ public class Game {
 	
 	}
 	
-	public static ArrayList getPlayerlocation(){
+	public ArrayList<Integer> getPlayerlocation(){
 		return playerlocation;
 	}
 	
-	public static ArrayList getPlayerid(){
+	public ArrayList<String> getPlayerid(){
 		return playerid;
 	}
 	
-	public static ArrayList getScore(){
+	public ArrayList<Integer> getScore(){
 		return score;
 	}
 	
-	public static int getSize(){
+	public int getSize(){
 		return size;
 	}
 	
-	public static String[][] getGlobalboard(){
+	public String[][] getGlobalboard(){
 		return globalboard;
 	}
 
-	public static String getGameid(){
+	public String getGameid(){
 		return gameid;
 	}	
 }
