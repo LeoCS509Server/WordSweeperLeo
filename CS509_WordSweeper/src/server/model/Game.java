@@ -204,6 +204,15 @@ public class Game {
 			}
 		return p.getPlayerLocation();
 	}
+	
+	public Player getPlayer(String Playerid){
+		for(Player p: Players){
+			if(p.getName() == Playerid){
+				return p;
+			}
+		}
+		return null;
+	}
 
 	/** return game id*/
 	public String getGameId(){
