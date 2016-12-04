@@ -1,11 +1,11 @@
-package admin;
+package admin.admincontroller;
 
 import java.util.ArrayList;
 
 import admin.MockServerAccess;
-import admin.ShowGameStateController;
-import server.model.Model;
-import server.view.LeoAdminGUI;
+import admin.admincontroller.ShowGameStateController;
+import admin.adminmodel.AdminModel;
+import admin.adminview.AdminApplication;
 import junit.framework.TestCase;
 import xml.Message;
 
@@ -14,11 +14,11 @@ public class ShowGameStateControllerTest extends TestCase {
 	// Mock server object that extends (and overrides) ServerAccess for its purposes
 	MockServerAccess mockServer;
 	
-	// client to connect
-	LeoAdminGUI client;
+	// admin to connect
+	AdminApplication admin;
 	
 	// model being maintained by client.
-	Model model;
+	AdminModel model;
 	
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -28,9 +28,9 @@ public class ShowGameStateControllerTest extends TestCase {
 		}
 		
 		// prepare client and connect to server.
-		model = new Model();
-		client = new LeoAdminGUI (model);
-		client.setVisible(true);
+		model = new AdminModel();
+		admin = new AdminApplication (model);
+		admin.setVisible(true);
 		
 		// Create mockServer to simulate server, and install 'obvious' handler
 		// that simply dumps to the screen the responses.
@@ -38,7 +38,7 @@ public class ShowGameStateControllerTest extends TestCase {
 		
 		// as far as the client is concerned, it gets a real object with which
 		// to communicate.
-		client.setServerAccess(mockServer);
+		admin.setServerAccess(mockServer);
 	}
 
 	protected void tearDown() throws Exception {
@@ -46,7 +46,8 @@ public class ShowGameStateControllerTest extends TestCase {
 	}
 
 	public void testProcess() {
-		 new ShowGameStateController(client, model).process();
+		String id  = "anyGame";
+		 new ShowGameStateController(admin, model).process(id);
 		 
 		 // validate from mockServer
 		 

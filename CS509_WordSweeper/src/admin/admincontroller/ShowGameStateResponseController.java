@@ -5,21 +5,21 @@ import java.util.ArrayList;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-import server.model.Model;
-import server.view.LeoAdminGUI;
+import admin.adminmodel.AdminModel;
+import admin.adminview.AdminApplication;
 import xml.Message;
 
 
 public class ShowGameStateResponseController extends ControllerChain {
 
-	public LeoAdminGUI app;
-	public Model model;
+	public AdminApplication app;
+	public AdminModel model;
 	String content;
 	//ArrayList<String> playerContent;
 	/**
 	 *deal with the showGameStateResponse from server and upgrade the GUI 
 	 */
-	public ShowGameStateResponseController(LeoAdminGUI a, Model m) {
+	public ShowGameStateResponseController(AdminApplication a, AdminModel m) {
 		super();
 		this.app = a;
 		this.model = m;

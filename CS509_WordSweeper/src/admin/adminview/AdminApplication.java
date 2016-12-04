@@ -4,6 +4,9 @@ package admin.adminview;
 
 import javax.swing.*;
 
+import admin.adminmodel.AdminModel;
+import client.ServerAccess;
+
 import java.applet.Applet;
 import java.awt.*;
 
@@ -12,9 +15,11 @@ public class AdminApplication extends JFrame{
 	private JTextField scorearea;
 	private JTextArea playerarea;
 	private JTextArea gamearea;
+	ServerAccess serverAccess;
+	public final AdminModel model;
 	
-	public AdminApplication(String name){
-		super(name);
+	public AdminApplication(AdminModel m){
+		this.model = m;
 		this.initComponents();
 	}
 	
@@ -97,8 +102,17 @@ public class AdminApplication extends JFrame{
 		public JTextField getscorearea(){
 			return this.scorearea;
 		}
-		
+		/**
 	 	public static void main(String[] args) {
 			new AdminApplication("Admin");
+		}*/
+		public void setServerAccess(ServerAccess access) {
+			this.serverAccess = access;
 		}
+		
+		/** Get the server access object. */
+		public ServerAccess getServerAccess() {
+			return serverAccess;
+		}
+
 }

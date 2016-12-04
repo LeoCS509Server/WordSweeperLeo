@@ -8,9 +8,9 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import admin.adminmodel.AdminModel;
+import admin.adminview.AdminApplication;
 import xml.Message;
-import server.model.Model;
-import server.view.LeoAdminGUI;
 
 
 /**
@@ -19,10 +19,10 @@ import server.view.LeoAdminGUI;
  */
 public class ListGamesResponseController extends ControllerChain {
 
-	public LeoAdminGUI app;
-	public Model model;
+	public AdminApplication app;
+	public AdminModel model;
 	
-	public ListGamesResponseController(LeoAdminGUI a, Model m) {
+	public ListGamesResponseController(AdminApplication a, AdminModel m) {
 		super();
 		this.app = a;
 		this.model = m;

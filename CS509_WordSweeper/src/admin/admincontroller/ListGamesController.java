@@ -1,18 +1,19 @@
 package admin.admincontroller;
 
 import xml.Message;
-import server.model.Model;
-import server.view.LeoAdminGUI;
+import admin.adminmodel.AdminModel;
+import admin.adminview.AdminApplication;
+
 
 /**
  * send a listGame Request to server 
  */
 public class ListGamesController {
 
-	LeoAdminGUI app;
-	Model model;
+	AdminApplication app;
+	AdminModel model;
 
-	public ListGamesController(LeoAdminGUI app, Model model) {
+	public ListGamesController(AdminApplication app, AdminModel model) {
 		this.app = app;
 		this.model = model;
 	}
