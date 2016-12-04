@@ -84,6 +84,25 @@ public class Game {
 		}
 	}
 	
+	public void removePlayer(String playerID){
+		int index = 0;
+		for(int i = 0; i<Players.size(); i++){
+			if(Players.get(i).getName() ==playerID){
+				index = i;
+			}
+		}
+		
+		if(this.Players.size()>1&&(!Players.get(index).isManagingUser())){
+			this.Players.remove(index);
+		}else if(this.Players.size()>1 &&(Players.get(index).isManagingUser())){
+			this.Players.remove(index);
+			this.setManagingUser(this.Players);
+		}else{
+			this.Players.remove(index);
+			this.isActived = false;
+		}
+	}
+	
 	public Board getBoard(){
 		return this.board;
 	}
