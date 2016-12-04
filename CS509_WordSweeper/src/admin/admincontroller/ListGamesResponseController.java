@@ -9,7 +9,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import admin.adminmodel.AdminModel;
-import admin.adminview.AdminApplication;
+
+import admin.adminview.DrawSee;
 import xml.Message;
 
 
@@ -19,10 +20,10 @@ import xml.Message;
  */
 public class ListGamesResponseController extends ControllerChain {
 
-	public AdminApplication app;
+	public DrawSee app;
 	public AdminModel model;
 	
-	public ListGamesResponseController(AdminApplication a, AdminModel m) {
+	public ListGamesResponseController(DrawSee a, AdminModel m) {
 		super();
 		this.app = a;
 		this.model = m;
