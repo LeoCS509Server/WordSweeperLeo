@@ -1,6 +1,7 @@
 package admin.admincontroller;
 
 import admin.adminview.AdminApplication;
+import admin.adminview.DrawSee;
 import client.model.Model;
 import client.view.Application;
 
@@ -17,7 +18,7 @@ public class ListGamesControllerTest extends TestCase {
 	MockServerAccess mockServer;
 	
 	//admin to connect
-	AdminApplication admin;
+	DrawSee admin;
 	
 	// model being maintained by admin.
 	AdminModel model;
@@ -29,7 +30,7 @@ public class ListGamesControllerTest extends TestCase {
 		}
 		// prepare client and connect to server.
 		model = new AdminModel();
-		admin = new AdminApplication (model);
+		admin = new DrawSee (model);
 		admin.setVisible(true);
 		// Create mockServer to simulate server, and install 'obvious' handler
 		// that simply dumps to the screen the responses.
