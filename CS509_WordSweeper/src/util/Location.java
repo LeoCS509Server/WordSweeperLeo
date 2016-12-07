@@ -37,10 +37,22 @@ public class Location {
 		this.row = row;
 	}
 	
-
+	@Override
+	public int hashCode() {
+		return row*12387 + column;
+	}
 	
-	
-	
+	@Override
+	public boolean equals (Object o) {
+		if (o == null) { return false; }
+		
+		if (o instanceof Location) {
+			Location other = (Location) o;
+			return row == other.row && column == other.column;
+		}
+		
+		return false; // nope
+	}
 	
 
 }
