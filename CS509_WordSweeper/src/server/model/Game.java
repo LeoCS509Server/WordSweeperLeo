@@ -228,6 +228,14 @@ public class Game {
 	public ArrayList<Player> getPlayers(){
 		return Players;
 	}
+	
+	public String getPlayerboard(Player p){
+		String s = new String();	
+		for(Location l : p.getCellsLocation()){
+			s += board.getCellContains(l);
+		}
+		return s;		
+	}
 }
 	
 	
