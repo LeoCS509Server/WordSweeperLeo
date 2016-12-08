@@ -16,8 +16,8 @@ public class LockGameRequestController {
 		this.model = model;
 	}
 	public Message process(ClientState client, Message request) {
-		Node exitRequest = request.contents.getFirstChild();
-		NamedNodeMap map = exitRequest.getAttributes();
+		Node lockGameRequest = request.contents.getFirstChild();
+		NamedNodeMap map = lockGameRequest.getAttributes();
 		String ID = map.getNamedItem("gameId").getNodeValue();
 		Game game = model.getGame(ID);
 		game.setLocked();

@@ -18,9 +18,9 @@ public class ExitGameRequestController {
 		Node exitRequest = request.contents.getFirstChild();
 		NamedNodeMap map = exitRequest.getAttributes();
 		String ID = map.getNamedItem("gameId").getNodeValue();
-		
+		String name = map.getNamedItem("name").getNodeValue();
 		Game game = model.getGame(ID);
-		
+		game.removePlayer(name);
 		String xmlString = Message.responseHeader(request.id()) +
 				"<boardResponse gameId='"+ game.getGameID() +"'>" +
 			  "</boardResponse>" +

@@ -10,6 +10,13 @@ public class Location {
 		this.column = column;
 		this.row = row;
 	}
+	
+	public Location(String s){
+		super();
+		this.column =Integer.valueOf(s.substring(0,1)).intValue();
+		this.row =Integer.valueOf(s.substring(2)).intValue();
+		
+	}
 
 
 	public int getColumn() {

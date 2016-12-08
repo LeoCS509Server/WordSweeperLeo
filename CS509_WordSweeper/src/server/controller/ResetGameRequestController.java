@@ -17,8 +17,8 @@ public class ResetGameRequestController {
 		
 	}
 	public Message process(ClientState client, Message request) {
-		Node exitRequest = request.contents.getFirstChild();
-		NamedNodeMap map = exitRequest.getAttributes();
+		Node resetRequest = request.contents.getFirstChild();
+		NamedNodeMap map = resetRequest.getAttributes();
 		String ID = map.getNamedItem("gameId").getNodeValue();
 		Game game = model.getGame(ID);
 		game.resetBoard();

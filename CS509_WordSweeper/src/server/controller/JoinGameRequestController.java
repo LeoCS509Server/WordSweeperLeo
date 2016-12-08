@@ -1,5 +1,6 @@
 package server.controller;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import org.w3c.dom.NamedNodeMap;
@@ -10,6 +11,8 @@ import server.IProtocolHandler;
 import server.Server;
 import server.model.Game;
 import server.model.Model;
+import server.model.Player;
+import util.Location;
 import xml.Message;
 
 /**
@@ -25,23 +28,44 @@ public class JoinGameRequestController implements IProtocolHandler {
 	}
 	
 	public Message process(ClientState client, Message request) {
-		 
-		Node exitRequest = request.contents.getFirstChild();
-		NamedNodeMap map = exitRequest.getAttributes();
+		String xmlString = new String();
+		
+		Node joinGameRequest = request.contents.getFirstChild();
+		NamedNodeMap map = joinGameRequest.getAttributes();
 		String ID = map.getNamedItem("gameId").getNodeValue();
 		String password = map.getNamedItem("password").getNodeValue();
 		String name = map.getNamedItem("name").getNodeValue();
 		
 		Game game = model.getGame(ID);
 		game.addPlayer(name);
-		// Construct message reflecting state
 		
-		String xmlString = Message.responseHeader(request.id()) +
-				"<boardResponse gameId='"+ game.getGameID() +"'>" +
+		String player = new String();
+		ArrayList<Player> Players = game.getPlayers();
+		for (Player p : Players){
+			player = player + "<player name='" + p.getName() + "' lcoation = '"+p.getPlayerLocation().getColumn()+","+ p.getPlayerLocation().getRow() +"' board = '"+ game.getPlayerboard(p) +"' score='" + p.getScore() +"'/>" ;
+		}
+		// Construct message reflecting state
+		 Location location = game.getPlayer(name).getPlayerLocation();
+		if(game.checkisLocked())
+		{
+			xmlString = Message.responseHeader(request.id()) +"<boardResponse gameId='"+ game.getGameID() +"'>" +
+					  "</boardResponse>" +
+					"</response>";
+		}
+		else if(!model.isPasswordCorrect(ID, password)){
+			xmlString = Message.responseHeader(request.id()) +"<boardResponse gameId='"+ game.getGameID() +"'>" +
 			  "</boardResponse>" +
 			"</response>";
-		Message message = new Message (xmlString);
 		
+		}
+		else{
+			
+			 xmlString = Message.responseHeader(request.id()) +
+					"<boardResponse "+ player +" gameId='"+ game.getGameID() +"' managingUser = '"+ game.getManageUsername()+"' bonus = '" +location.getColumn() +","+ location.getRow() +"' >" +
+				  "</boardResponse>" +
+				"</response>";
+		}
+		Message message = new Message (xmlString);
 		// all other players on game (excepting this particular client) need to be told of this
 		// same response. Note this is inefficient and should be replaced by more elegant functioning
 		// hint: rely on your game to store player names...

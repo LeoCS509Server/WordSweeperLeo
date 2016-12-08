@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import server.ClientState;
 import server.model.Cell;
 import server.model.Game;
 import server.model.Model;
+import util.Location;
 import xml.Message;
 
 public class FindWordRequestController {
@@ -17,20 +19,27 @@ public class FindWordRequestController {
 		this.model = model;
 	}
 	public Message process(ClientState client, Message request) {
-		Node exitRequest = request.contents.getFirstChild();
-		NamedNodeMap map = exitRequest.getAttributes();
+		Node findwordRequest = request.contents.getFirstChild();
+		NamedNodeMap map = findwordRequest.getAttributes();
 		String ID = map.getNamedItem("gameId").getNodeValue();
 		String name = map.getNamedItem("name").getNodeValue();
 		String word = map.getNamedItem("word").getNodeValue();
-		
-		Node cellrequest = exitRequest.getFirstChild();
-		NamedNodeMap cellmap = cellrequest.getAttributes();
-		
-		
 		Game game = model.getGame(ID);
 		
+		NodeList list = findwordRequest.getChildNodes();
+		ArrayList<Cell> cells = new ArrayList<Cell>();
+		for (int i = 0; i < list.getLength(); i++) {
+			Node n = list.item(i);
+			String position = n.getAttributes().getNamedItem("letter").getNodeValue();
+			Location l = new Location(position);
+			Cell c = new Cell(l);
+			cells.add(c);
+		}
+		
+		
+		
 		String xmlString = Message.responseHeader(request.id()) +
-				"<boardResponse gameId='"+ game.getGameID() +"' name='"+ name +"' score='"+ game.calculateScore(word,) +"'>" +
+				"<boardResponse gameId='"+ game.getGameID() +"' name='"+ name +"' score='"+ game.calculateScore(word,cells) +"'>" +
 			  "</boardResponse>" +
 			"</response>";
 		// send this response back to the client which sent us the request.
