@@ -5,19 +5,23 @@ import java.util.*;
 public class Model {
 
 
-	ArrayList<Game> games = new ArrayList<Game>();
-	Game selectedGame = null;		
+	ArrayList<Game> games;
+	Game selectedGame;		
+	public Model(){
+		this.selectedGame = null;
+		this.games = new ArrayList<Game>();
+	}
 	
 	/** select certain game to show its state*/
 	public void selectGame (String id){
-		int i=0;
-		while(id != games.get(i).getGameID())
-		{
-			i++;
-			
+
+		for(Game g : games){
+			if(g.getGameID()==id)
+				selectedGame = g;
+			break;
 		}
-		selectedGame = games.get(i);
 	}
+	
 	
 	/** add new game to arraylist*/
 	public void addGame (Game g){

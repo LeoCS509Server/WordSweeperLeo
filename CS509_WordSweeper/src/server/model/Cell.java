@@ -31,7 +31,7 @@ public class Cell {
 	}
 	
 	
-	//如何random生成letter：http://stackoverflow.com/questions/2149914/randomly-generate-letters-according-to-their-frequency-of-use
+	//http://stackoverflow.com/questions/2149914/randomly-generate-letters-according-to-their-frequency-of-use
 	public void setLetter(){
 		this.letter= Letters.chooseLetter();
 	}
@@ -57,6 +57,10 @@ public class Cell {
 		this.seleted = true;
 	}
 	
+	public void changeLocation(int c, int r){
+		this.location.setColumn(c);
+		this.location.setRow(r);
+	}
 
 	
 }
