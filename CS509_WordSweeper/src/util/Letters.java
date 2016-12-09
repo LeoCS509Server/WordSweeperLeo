@@ -33,8 +33,11 @@ public class Letters {
 		Double[] LetterFreSum= new Double[]{12.70, 21.76, 29.93, 37.43, 44.40, 51.15, 57.47, 63.57, 
 				69.56, 73.81, 77.83, 80.62, 83.37, 85.78, 88.14, 90.37, 92.38, 94.36, 96.29, 97.78,
 				98.76, 99.53, 99.68, 99.83, 99.93, 100.0};
+
+		if (randomIndex*100 < 12.70)
+			l = "X";
 		for(int i = 0; i< LetterFreSum.length-1; i++){
-			if(randomIndex*100 >LetterFreSum[i] && (randomIndex*100 <LetterFreSum[i+1])){
+			if(randomIndex*100 >= LetterFreSum[i] && (randomIndex*100 <LetterFreSum[i+1])){
 				l = Letters.letters[i];
 			}
 		}

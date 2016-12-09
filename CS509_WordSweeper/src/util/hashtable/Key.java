@@ -5,9 +5,9 @@ import util.Location;
 public class Key {
 	int row, col;
 	
-	public Key (Location l){ 
-		this.row = l.getRow();
-		this.col = l.getColumn();
+	public Key (int row, int col){ 
+		this.row = row;
+		this.col = col;
 	}
 	
 	@Override
