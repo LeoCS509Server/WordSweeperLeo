@@ -12,7 +12,6 @@ import xml.Message;
 import server.model.Game;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Controller on server to package up the current state of the model
