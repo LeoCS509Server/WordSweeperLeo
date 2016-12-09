@@ -1,7 +1,6 @@
 package server.controller;
 
 import junit.framework.TestCase;
-import static org.junit.Assert.*;
 import server.model.Game;
 import server.model.Model;
 
@@ -10,6 +9,7 @@ public class BoardResponseBuilderTest extends TestCase {
 
 	Model model;
 	Game game;
+	String content;
 	protected void setUp() throws Exception {
 		super.setUp();
 		model = new Model();
@@ -18,7 +18,6 @@ public class BoardResponseBuilderTest extends TestCase {
 		game.addPlayer("bird");
 		model.addGame(game);
 		model.selectGame(game.getGameID());
-		
 	}
 
 	protected void tearDown() throws Exception {
@@ -26,10 +25,20 @@ public class BoardResponseBuilderTest extends TestCase {
 	}
 
 	public void testBuild() {
-
-		String xml = new BoardResponseBuilder(model).build();
+		BoardResponseBuilder builder = new BoardResponseBuilder(model);
+		String xml = builder.build();
+		String ct = builder.BoardContent(game.getBoard());
+		assertEquals(ct,builder.content);
 		System.out.println(xml);
-		
 	}
 
+	public void testBoardContent() {
+		content = new BoardResponseBuilder(model).BoardContent(game.getBoard());
+		int size = game.getBoard().getSize()*game.getBoard().getSize();
+		assertEquals(size,content.length());
+	}
+
+
 }
+
+

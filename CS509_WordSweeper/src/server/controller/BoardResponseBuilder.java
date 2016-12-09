@@ -3,6 +3,7 @@ package server.controller;
 import java.util.ArrayList;
 
 import server.model.Board;
+import server.model.Cell;
 import server.model.Game;
 import server.model.Model;
 import server.model.Player;
@@ -10,9 +11,12 @@ import util.Location;
 
 public class BoardResponseBuilder {
 	Model model;
+	String content;
+	ArrayList<String> bcontent;
 	
 	public BoardResponseBuilder(Model m){
 		this.model = m;
+		this.bcontent = new ArrayList<String>();
 	}
 
 	public String build(){
@@ -22,8 +26,11 @@ public class BoardResponseBuilder {
 		int size = selectedGame.checkBoardSize();
 		String managingUser = selectedGame.getManageUsername();
 		Board board = selectedGame.getBoard();
-		String content = BoardContent(board);
-		String bonus = "'7,7'";
+		content = BoardContent(board);
+		Location bonusCell = board.getBonusCell().getPosition();
+		int bonusr = bonusCell.getRow();
+		int bonusc = bonusCell.getColumn();
+		String bonus = bonusc+","+bonusr;
 		ArrayList<Player> players = selectedGame.getPlayers();
 		String playerInfo = "";
 		for (Player p : players){
@@ -43,24 +50,31 @@ public class BoardResponseBuilder {
 		return xmlString;
 	}
 	/**construct the content of name="content"*/
-	private String BoardContent(Board g){
-		String content = "";
-		for (int i = 1; i <= g.getSize(); i++){
-			for (int j = 1; j <= g.getSize(); j++){
-				Location l = new Location(i,j);
-				content += g.getCellContains(l);
+		String BoardContent(Board b){
+		String boardcontent = "";
+		for (int r = 1; r <= b.getSize(); r++){
+			for (int c = 1; c <= b.getSize(); c++){
+				Location l = new Location(c,r);
+				boardcontent = boardcontent + b.getCellContains(l);
+				bcontent.add(b.getCellContains(l));
 			}
 		}
-		return content;
+		return boardcontent;
 	}
 	/**construct the content of ref="player"*/
-	private String playerContent(Player p, String boardContent, int size){
+		String playerContent(Player p, String boardContent, int size){
 		int row = p.getPlayerLocation().getRow();
 		int column = p.getPlayerLocation().getColumn();
-		int startPoint= row*size+column;
+		int startPoint= (row-1)*size+column-1;
 		String name = p.getName();
-		String position = row + "," + column;
-		String board = boardContent.substring(startPoint, startPoint+17);
+		String position = column + "," + row;
+		String board = "";
+		for(int i = 0; i<4;i++){
+			for(int j = 0; j<4; j++){
+				int s = startPoint+i*size;
+				board = board+bcontent.get(s+j);
+			}
+		}
 		int score = p.getScore();
 		return "<player name='"+name+"' position='"+position+"' board='"+board+"' score='"+score+"'/>";
 	}
