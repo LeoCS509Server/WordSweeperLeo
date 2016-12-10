@@ -1,9 +1,8 @@
 package admin.admincontroller;
 
-import admin.adminview.AdminApplication;
+
 import admin.adminview.DrawSee;
-import client.model.Model;
-import client.view.Application;
+
 
 import java.util.ArrayList;
 

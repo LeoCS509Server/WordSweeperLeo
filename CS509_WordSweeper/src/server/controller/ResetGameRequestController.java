@@ -23,8 +23,8 @@ public class ResetGameRequestController {
 		Game game = model.getGame(ID);
 		game.resetBoard();
 		String xmlString = Message.responseHeader(request.id()) +
-				"<boardResponse gameId='"+ game.getGameID() +"'>" +
-			  "</boardResponse>" +
+				"<resetGameResponse gameId='"+ game.getGameID() +"'>" +
+			  "</resetGameResponse>" +
 			"</response>";
 		// send this response back to the client which sent us the request.
 		return new Message (xmlString);

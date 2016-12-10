@@ -22,8 +22,8 @@ public class LockGameRequestController {
 		Game game = model.getGame(ID);
 		game.setLocked();
 		String xmlString = Message.responseHeader(request.id()) +
-				"<boardResponse gameId='"+ game.getGameID() +"'>" +
-			  "</boardResponse>" +
+				"<lockGameResponse gameId='"+ game.getGameID() +"'>" +
+			  "</lockGameResponse>" +
 			"</response>";
 		// send this response back to the client which sent us the request.
 		return new Message (xmlString);

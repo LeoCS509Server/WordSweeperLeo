@@ -21,7 +21,7 @@ import admin.admincontroller.ShowGameStateController;
 import admin.adminmodel1.AdminModel;
 import admin.adminmodel1.Game;
 import client.ServerAccess;
-import client.view.Application; 
+
 
 
  

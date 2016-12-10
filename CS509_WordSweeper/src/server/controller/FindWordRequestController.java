@@ -39,8 +39,8 @@ public class FindWordRequestController {
 		
 		
 		String xmlString = Message.responseHeader(request.id()) +
-				"<boardResponse gameId='"+ game.getGameID() +"' name='"+ name +"' score='"+ game.calculateScore(word,cells) +"'>" +
-			  "</boardResponse>" +
+				"<findWordResponse gameId='"+ game.getGameID() +"' name='"+ name +"' score='"+ game.calculateScore(word,cells) +"'>" +
+			  "</findWordResponse>" +
 			"</response>";
 		// send this response back to the client which sent us the request.
 		return new Message (xmlString);

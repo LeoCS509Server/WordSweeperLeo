@@ -1,6 +1,6 @@
 package admin.admincontroller;
 
-import admin.adminview.AdminApplication;
+
 import admin.adminview.DrawSee;
 import client.IMessageHandler;
 import xml.Message;

@@ -7,7 +7,7 @@ import javax.swing.*;
 import admin.adminmodel1.AdminModel;
 import client.ServerAccess;
 
-import java.applet.Applet;
+
 import java.awt.*;
 
 public class AdminApplication extends JFrame{

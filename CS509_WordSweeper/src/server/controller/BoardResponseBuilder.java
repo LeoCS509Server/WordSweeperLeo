@@ -3,7 +3,7 @@ package server.controller;
 import java.util.ArrayList;
 
 import server.model.Board;
-import server.model.Cell;
+
 import server.model.Game;
 import server.model.Model;
 import server.model.Player;

@@ -1,6 +1,6 @@
 package server.model;
 
-import java.util.LinkedList;
+
 
 import util.Letters;
 import util.Location;

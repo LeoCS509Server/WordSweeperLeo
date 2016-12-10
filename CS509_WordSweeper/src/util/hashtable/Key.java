@@ -1,6 +1,6 @@
 package util.hashtable;
 
-import util.Location;
+
 
 public class Key {
 	int row, col;

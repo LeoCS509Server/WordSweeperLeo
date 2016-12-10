@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import admin.MockServerAccess;
 import admin.admincontroller.ShowGameStateController;
 import admin.adminmodel1.AdminModel;
-import admin.adminview.AdminApplication;
+
 import admin.adminview.DrawSee;
 import junit.framework.TestCase;
 import xml.Message;

@@ -47,13 +47,13 @@ public class JoinGameRequestController implements IProtocolHandler {
 		 Location location = game.getPlayer(name).getPlayerLocation();
 		if(game.checkisLocked())
 		{
-			xmlString = Message.responseHeader(request.id()) +"<boardResponse gameId='"+ game.getGameID() +"'>" +
-					  "</boardResponse>" +
+			xmlString = Message.responseHeader(request.id()) +"<joinGameResponse gameId='"+ game.getGameID() +"'>" +
+					  "</joinGameResponse>" +
 					"</response>";
 		}
 		else if(!model.isPasswordCorrect(ID, password)){
-			xmlString = Message.responseHeader(request.id()) +"<boardResponse gameId='"+ game.getGameID() +"'>" +
-			  "</boardResponse>" +
+			xmlString = Message.responseHeader(request.id()) +"<joinGameResponse gameId='"+ game.getGameID() +"'>" +
+			  "</joinGameResponse>" +
 			"</response>";
 		
 		}

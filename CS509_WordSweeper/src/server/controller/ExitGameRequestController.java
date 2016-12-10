@@ -22,8 +22,8 @@ public class ExitGameRequestController {
 		Game game = model.getGame(ID);
 		game.removePlayer(name);
 		String xmlString = Message.responseHeader(request.id()) +
-				"<boardResponse gameId='"+ game.getGameID() +"'>" +
-			  "</boardResponse>" +
+				"<exitGameResponse gameId='"+ game.getGameID() +"'>" +
+			  "</exitGameResponse>" +
 			"</response>";
 		// send this response back to the client which sent us the request.
 		return new Message (xmlString);

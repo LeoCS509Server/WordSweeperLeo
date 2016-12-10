@@ -2,7 +2,7 @@ package server.model;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.LinkedList;
+
 import java.util.Random;
 
 import util.Letters;
