@@ -27,6 +27,7 @@ public class Location {
 	public int getRow() {
 		return row;
 	}
+	
 
 	public int[] getLocation(){
 		int[] s = new int[2];

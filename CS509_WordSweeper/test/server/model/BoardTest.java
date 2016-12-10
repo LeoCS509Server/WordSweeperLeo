@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import junit.framework.TestCase;
 import util.Location;
-import util.hashtable.Key;
+import util.Key;
 
 public class BoardTest extends TestCase {
 

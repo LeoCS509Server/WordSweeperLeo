@@ -9,23 +9,16 @@ public class Letters {
 			"C","U","M","W","F","G","Y","P","B","V","K","J","X","Qu","Z"};
 	public static Integer values[] = new Integer[]{1,1,2,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,4,4,5,5,7,7,11,8};
 		
-	public static HashMap<String,Integer> LetterScore;
+	public final static HashMap<String, Integer> LetterScore;
+    static {
+        HashMap<String, Integer> aMap = new HashMap<>();
+        for (int i = 0; i < 26; i++) {
+            aMap.put(letters[i], values[i]);
+        }
+        LetterScore = aMap;
+    }
 	
 	
-	
-	
-	public Letters() {
-		super();
-		
-		String letters[] = new String[]{"E","T","A","O","I","N","S","H","R","D","L",
-				"C","U","M","W","F","G","Y","P","B","V","K","J","X","Qu","Z"};
-
-		Integer values[] = new Integer[]{1,1,2,2,2,2,2,2,2,3,3,3,3,3,3,4,4,4,4,4,5,5,7,7,11,8};
-		
-		for(int i = 0; i < 27; i++ ){
-			LetterScore.put(letters[i], values[i]);
-		}	
-	}
 	
 	public static String chooseLetter(){
 		String l = null;
@@ -35,7 +28,7 @@ public class Letters {
 				98.76, 99.53, 99.68, 99.83, 99.93, 100.0};
 
 		if (randomIndex*100 < 12.70)
-			l = "X";
+			l = "E";
 		for(int i = 0; i< LetterFreSum.length-1; i++){
 			if(randomIndex*100 >= LetterFreSum[i] && (randomIndex*100 <LetterFreSum[i+1])){
 				l = Letters.letters[i];
@@ -44,6 +37,6 @@ public class Letters {
 	    return l;
 	}
 	
-	
+
 }
 	
