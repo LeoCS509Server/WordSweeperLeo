@@ -39,7 +39,7 @@ public class CreateGameRequestController implements IProtocolHandler {
 		String player = new String();
 		ArrayList<Player> Players = game.getPlayers();
 		for (Player p : Players){
-			player = player + "<player name='" + p.getName() + "' lcoation = '"+p.getPlayerLocation().getColumn()+","+ p.getPlayerLocation().getRow() +"' board = '"+ game.getPlayerboard(p) +"' score='" + p.getScore() +"'/>" ;
+			player = player + "<player name='" + p.getName() + "' position = '"+p.getPlayerLocation().getColumn()+","+ p.getPlayerLocation().getRow() +"' board = '"+ game.getPlayerboard(p) +"' score='" + p.getScore() +"'/>" ;
 		}
 		// Construct message reflecting state
 	    Location location = game.getPlayer(name).getPlayerLocation();
