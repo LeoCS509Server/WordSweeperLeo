@@ -1,4 +1,4 @@
-package server.model;
+package server.controller;
 
 import java.util.*;
 /** top level object of entiy objects*/

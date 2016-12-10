@@ -1,4 +1,4 @@
-package server.model;
+package server.controller;
 
 import java.util.ArrayList;
 import java.util.Calendar;
