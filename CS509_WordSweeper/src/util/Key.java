@@ -1,5 +1,4 @@
-package util.hashtable;
-
+package util;
 
 
 public class Key {
