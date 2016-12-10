@@ -1,7 +1,7 @@
 package admin.admincontroller;
 
 import xml.Message;
-import admin.adminmodel.AdminModel;
+import admin.adminmodel1.AdminModel;
 
 
 import admin.adminview.DrawSee;

@@ -4,7 +4,7 @@ package admin.adminview;
 
 import javax.swing.*;
 
-import admin.adminmodel.AdminModel;
+import admin.adminmodel1.AdminModel;
 import client.ServerAccess;
 
 import java.applet.Applet;

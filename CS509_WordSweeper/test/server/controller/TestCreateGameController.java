@@ -6,7 +6,7 @@ import server.MockClient;
 import server.Server;
 import server.controller.CreateGameRequestController;
 import server.controller.JoinGameRequestController;
-import server.model.ServerModel;
+import server.model.Model;
 import server.model.Game;
 import xml.Message;
 import junit.framework.TestCase;
@@ -18,7 +18,7 @@ public class TestCreateGameController extends TestCase {
 	MockClient client1;
 	MockClient client2;
 	
-	ServerModel model;
+	Model model;
 	Game game;
 	
 	protected void setUp() {
@@ -31,7 +31,7 @@ public class TestCreateGameController extends TestCase {
 		client2 = new MockClient();
 		Server.register("c1", client1);
 		Server.register("c2", client2);
-		model = new ServerModel();
+		model = new Model();
 	}
 	
 	protected void tearDown() {
@@ -45,7 +45,7 @@ public class TestCreateGameController extends TestCase {
 		Message request = new Message(xmlString);
 		
 		// get response after processing this request
-		Message response = new CreateGameRequestController(model,game).process(client1, request);
+		Message response = new CreateGameRequestController(model).process(client1, request);
 				
 		// make sure model is well-represented
 		assertTrue (response.success());
@@ -59,7 +59,7 @@ public class TestCreateGameController extends TestCase {
 		request = new Message(xmlString);
 		
 		// get response after processing this request
-		Message joinClient2Response = new JoinGameRequestController(model,game).process(client2, request);
+		Message joinClient2Response = new JoinGameRequestController(model).process(client2, request);
 		Message joinClient1Response = client1.getAndRemoveMessage(); 
 		
 		// get attributes of 'boardResponse' (firstChild) 

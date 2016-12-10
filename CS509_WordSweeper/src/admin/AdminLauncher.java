@@ -1,10 +1,10 @@
 package admin;
 
 import admin.admincontroller.AdminMessageHandler;
-import admin.admincontroller.ListGamesController;
+
 import admin.admincontroller.ListGamesResponseController;
 import admin.admincontroller.ShowGameStateResponseController;
-import admin.adminmodel.AdminModel;
+import admin.adminmodel1.AdminModel;
 import admin.adminview.DrawSee;
 import client.ServerAccess;
 import xml.Message;

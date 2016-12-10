@@ -18,8 +18,8 @@ import javax.swing.JScrollPane;
 
 import admin.admincontroller.ListGamesController;
 import admin.admincontroller.ShowGameStateController;
-import admin.adminmodel.AdminModel;
-import admin.adminmodel.Game;
+import admin.adminmodel1.AdminModel;
+import admin.adminmodel1.Game;
 import client.ServerAccess;
 import client.view.Application; 
 

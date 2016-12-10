@@ -8,7 +8,7 @@ import client.view.Application;
 import java.util.ArrayList;
 
 import admin.MockServerAccess;
-import admin.adminmodel.AdminModel;
+import admin.adminmodel1.AdminModel;
 import junit.framework.TestCase;
 import xml.Message;
 
