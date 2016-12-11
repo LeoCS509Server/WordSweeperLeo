@@ -2,14 +2,11 @@ package admin.admincontroller;
 
 
 
-import java.util.ArrayList;
 
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-
 import admin.adminmodel1.AdminModel;
-
 import admin.adminview.DrawSee;
 import xml.Message;
 
@@ -20,12 +17,12 @@ import xml.Message;
  */
 public class ListGamesResponseController extends ControllerChain {
 
-	public DrawSee app;
+	//public DrawSee app;
 	public AdminModel model;
 	
-	public ListGamesResponseController(DrawSee a, AdminModel m) {
+	public ListGamesResponseController(AdminModel m) {
 		super();
-		this.app = a;
+		//this.app = a;
 		this.model = m;
 	}
 	
@@ -34,21 +31,19 @@ public class ListGamesResponseController extends ControllerChain {
 		if (!type.equals ("listGamesResponse")) {
 			return next.process(response);
 		}
-		
-		ArrayList<String> gamesList = new ArrayList<String>() ;
-		ArrayList<String> playersList = new ArrayList<String>();
-		
+
 		// this refers to the outer node of the Message DOM (in this case, updateResponse).
 		Node listGamesResponse = response.contents.getFirstChild();
 		Node gameBrief = listGamesResponse.getFirstChild();
+		String Info = "";
 		while (gameBrief != null){
 			NamedNodeMap map = gameBrief.getAttributes();
-			String ID = map.getNamedItem("gameId").getNodeValue();
-			gamesList.add(ID);
-			String Num = map.getNamedItem("players").getNodeValue();
-			playersList.add(Num);
+			String ID = map.getNamedItem("gameId").getNodeValue();			
+			int Num = Integer.parseInt(map.getNamedItem("players").getNodeValue());
+			Info = Info+ ID + ","+Num+",";
 			gameBrief = gameBrief.getNextSibling();
 		}
+		model.getIdlist(Info);
 		
 	/**
 	 * call some GUI update functions here	
