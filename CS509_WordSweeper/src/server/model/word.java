@@ -11,6 +11,7 @@ import util.Location;
  * Helper function for checking if a word sent by use is legal.
  * 
  * @author Tongge Zhu
+ *  
  */
 
 public class word {
@@ -41,5 +42,4 @@ public class word {
 		}	
 		return true;
 	}
-
 }
