@@ -23,7 +23,7 @@ public class ListGamesRequestController {
 		String gameBrief = new String("");
 		ArrayList<Game> games = model.getGames();
 		for (Game g : games){
-			String gameID = g.getGameId();
+			String gameID = g.getGameID();
 			int players = g.getNumPlayers();
 			gameBrief = gameBrief + "<gameBrief gameId='" + gameID + "' players='" + players +"'/>" ;
 		}
