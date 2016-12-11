@@ -33,6 +33,7 @@ public class ProtocolHandler implements IShutdownHandler {
 		Node child = request.contents.getFirstChild();
 		String type = child.getLocalName();
 		
+		
 		System.out.println (request);
 		if (type.equals ("createGameRequest")) {
 			return new CreateGameRequestController(model).process(st, request); 

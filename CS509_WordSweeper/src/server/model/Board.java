@@ -1,5 +1,6 @@
 package server.model;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -90,9 +91,12 @@ public class Board {
 	}
 	
 
-	public void removeWord(List<Cell> Cells){
-		for(Cell c : Cells){
-			c.removeLetter();
+	public void removeWord(ArrayList<Location> locations){
+		for(Location l : locations){
+			int col = l.getColumn();
+			int row = l.getRow();
+			Key key = new Key(row,col);
+			table.get(key).removeLetter();
 		}	
 	}
 	/**

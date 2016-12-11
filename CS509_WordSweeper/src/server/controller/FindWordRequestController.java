@@ -7,6 +7,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import server.ClientState;
+import server.Server;
 import server.model.Cell;
 import server.model.Game;
 import server.model.Model;
@@ -25,6 +26,7 @@ public class FindWordRequestController {
 		String name = map.getNamedItem("name").getNodeValue();
 		String word = map.getNamedItem("word").getNodeValue();
 		Game game = model.getGame(ID);
+
 		
 // 		NodeList list = findwordRequest.getChildNodes();
 // 		ArrayList<Cell> cells = new ArrayList<Cell>();
@@ -36,22 +38,47 @@ public class FindWordRequestController {
 // 			cells.add(c);
 // 		}
 		
-		NodeList list = findwordRequest.getChildNodes();
+//		NodeList list = findwordRequest.getChildNodes();
+//		ArrayList<Location> loc = new ArrayList<Location>();
+//		for (int i = 0; i < list.getLength(); i++) {
+//			Node n = list.item(i);
+//			String position = n.getAttributes().getNamedItem("position").getNodeValue();
+//			Location l = new Location(position);
+//			loc.add(l);
+//		}
 		ArrayList<Location> loc = new ArrayList<Location>();
-		for (int i = 0; i < list.getLength(); i++) {
-			Node n = list.item(i);
-			String position = n.getAttributes().getNamedItem("position").getNodeValue();
+		Node pos = findwordRequest.getFirstChild();
+		while (pos != null){
+			NamedNodeMap mappos = pos.getAttributes();
+			String position = mappos.getNamedItem("position").getNodeValue();	
 			Location l = new Location(position);
 			loc.add(l);
+			pos = pos.getNextSibling();
 		}
-		
-		
-		
+		int sc = game.calculateScore(word,loc);
+		if(sc!=0){
+			game.getBoard().removeWord(loc);
+			game.getBoard().refreshBoard();
+		}
+		String score = Integer.toString(sc);
+
+		// send this response back to the client which sent us the request.
 		String xmlString = Message.responseHeader(request.id()) +
-				"<findWordResponse gameId='"+ game.getGameID() +"' name='"+ name +"' score='"+ game.calculateScore(word,loc) +"'>" +
+				"<findWordResponse gameId='"+ ID +"' name='"+ name +"' score='"+ score +"'>" +
 			  "</findWordResponse>" +
 			"</response>";
-		// send this response back to the client which sent us the request.
+		BoardResponseBuilder builder = new BoardResponseBuilder(model);
+		//construct xml response message
+		String xml = Message.responseHeader(request.id())+builder.build();
+		Message message = new Message(xml);
+		for (String id : Server.ids()) {
+			if (!id.equals(client.id())) {
+				Server.getState(id).sendMessage(message);
+			}
+		}
 		return new Message (xmlString);
+		
+		
+
 	}
 }
