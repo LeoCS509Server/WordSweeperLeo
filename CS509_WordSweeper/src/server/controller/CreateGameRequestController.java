@@ -44,8 +44,9 @@ public class CreateGameRequestController implements IProtocolHandler {
 		// Construct message reflecting state
 	    Location location = game.getPlayer(name).getPlayerLocation();
 		String xmlString = Message.responseHeader(request.id()) +
-				"<boardResponse "+ player +" gameId='"+ game.getGameID() +"' managingUser = '"+ game.getManageUsername()+"' bonus = '" +location.getColumn() +","+ location.getRow() +"' >" +
-			  "</boardResponse>" +
+				"<boardResponse  gameId='"+ game.getGameID() +"' managingUser = '"+ game.getManageUsername()+"' bonus = '" +location.getColumn() +","+ location.getRow() +"' >" +
+				player +
+				"</boardResponse>" +
 			"</response>";
 		// send this response back to the client which sent us the request.
 		return new Message (xmlString);

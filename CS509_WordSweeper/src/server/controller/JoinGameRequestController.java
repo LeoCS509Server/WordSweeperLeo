@@ -21,7 +21,6 @@ import xml.Message;
 public class JoinGameRequestController implements IProtocolHandler {
 
 	Model model;
-	Game game;
 	public JoinGameRequestController (Model model) {
 		this.model = model;
 	}
@@ -60,8 +59,9 @@ public class JoinGameRequestController implements IProtocolHandler {
 		else{
 			
 			 xmlString = Message.responseHeader(request.id()) +
-					"<boardResponse "+ player +" gameId='"+ game.getGameID() +"' managingUser = '"+ game.getManageUsername()+"' bonus = '" +location.getColumn() +","+ location.getRow() +"' >" +
-				  "</boardResponse>" +
+					"<boardResponse  gameId='"+ game.getGameID() +"' managingUser = '"+ game.getManageUsername()+"' bonus = '" +location.getColumn() +","+ location.getRow() +"' >" +
+				  player+
+					"</boardResponse>" +
 				"</response>";
 		}
 		Message message = new Message (xmlString);
