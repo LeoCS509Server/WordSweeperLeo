@@ -34,7 +34,7 @@ public class BoardResponseBuilderTest extends TestCase {
 
 	public void testBoardContent() {
 		content = new BoardResponseBuilder(model).BoardContent(game.getBoard());
-		int size = game.getBoard().getSize()*game.getBoard().getSize();
+		int size = game.getBoard().getSize()*game.getBoard().getSize()*2;
 		assertEquals(size,content.length());
 	}
 
