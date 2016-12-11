@@ -8,6 +8,15 @@ import server.model.Game;
 import server.model.Model;
 import xml.Message;
 
+/**
+ * when server receive the resetGameRequest from client, then the server will reset the game 
+ * and send the resetGameResponse to the client.
+ * 
+ * 
+ * The {@link #process()} makes a resetGameResponse in XML format, reset the game and send it
+ * to the client.
+ */
+
 public class ResetGameRequestController {
 
 	Model model;
@@ -16,6 +25,9 @@ public class ResetGameRequestController {
 		this.model = model;
 		
 	}
+	
+	/** Make a resetGameResponse in XML format, reset the game and send it to the client. */
+	
 	public Message process(ClientState client, Message request) {
 		Node resetRequest = request.contents.getFirstChild();
 		NamedNodeMap map = resetRequest.getAttributes();

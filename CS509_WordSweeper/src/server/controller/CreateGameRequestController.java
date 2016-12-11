@@ -14,8 +14,12 @@ import server.model.Game;
 import java.util.ArrayList;
 
 /**
- * Controller on server to package up the current state of the model
- * as an updateResponse message and send it back to the client.
+ * when server receive the createGameRequest from client, then the server will create a game 
+ * and send the boardResponse to the client.
+ * 
+ * 
+ * The {@link #process()} makes a boardResponse in XML format, create a game and send it
+ * to the client.
  */
 public class CreateGameRequestController implements IProtocolHandler {
 	Model model;
@@ -25,7 +29,7 @@ public class CreateGameRequestController implements IProtocolHandler {
 	
 		this.model = model;
 	}
-	
+	/** Make a boardResponse in XML format, create a game and send it to the client. */
 	public Message process(ClientState client, Message request) {
 		Node createGameRequest = request.contents.getFirstChild();
 		NamedNodeMap map = createGameRequest.getAttributes();
@@ -50,7 +54,7 @@ public class CreateGameRequestController implements IProtocolHandler {
 			player = player + "<player name='" + p.getName() + "' position = '"+p.getPlayerLocation().getColumn()+","+ p.getPlayerLocation().getRow() +"' board = '"+ game.getPlayerboard(p) +"' score='" + p.getScore() +"'/>" ;
 		}
 		// Construct message reflecting state
-	    Location location = game.getPlayer(name).getPlayerLocation();
+
 	    String xmlString = Message.responseHeader(request.id()) +
 				"<boardResponse gameId='"+ game.getGameID() +"' managingUser = '"+ game.getManageUsername()+"' bonus = '" +game.getBoard().getBonusCell().getColumn()+","+ game.getBoard().getBonusCell().getRow() +"' >" +
 			  player +
