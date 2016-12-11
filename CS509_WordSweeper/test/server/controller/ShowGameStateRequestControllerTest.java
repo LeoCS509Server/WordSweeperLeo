@@ -22,12 +22,14 @@ public class ShowGameStateRequestControllerTest extends TestCase {
 		}
 		this.client = new MockClient(); 
 		Server.register("c", client);
+		String clientid = client.id();
+
 		this.model = new Model();
-		this.game = new Game("manager");
-		game.addPlayer("ali");
-		game.addPlayer("bird");
+		this.game = new Game("manager",clientid);
+		game.addPlayer("ali",clientid);
+		game.addPlayer("bird",clientid);
 		model.addGame(game);
-		Game game1 = new Game("test1");
+		Game game1 = new Game("test1",clientid);
 		model.addGame(game1);
 		model.selectGame(game.getGameID());
 	}

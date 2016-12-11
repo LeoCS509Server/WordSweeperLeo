@@ -22,8 +22,9 @@ public class FindWordRequestControllerTest extends TestCase {
 		}
 		this.client = new MockClient(); 
 		Server.register("c", client);
+		String cid = client.id();
 		this.model = new Model();
-		this.game = new Game("qaq");
+		this.game = new Game("qaq",cid);
 		model.addGame(game);
 	}
 

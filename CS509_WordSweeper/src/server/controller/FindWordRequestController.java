@@ -11,6 +11,7 @@ import server.Server;
 import server.model.Cell;
 import server.model.Game;
 import server.model.Model;
+import server.model.Player;
 import util.Location;
 import xml.Message;
 
@@ -27,7 +28,7 @@ public class FindWordRequestController {
 		String word = map.getNamedItem("word").getNodeValue();
 		Game game = model.getGame(ID);
 		model.selectGame(ID);
-
+		Player player = game.getPlayer(name);
 		
 
 		ArrayList<Location> loc = new ArrayList<Location>();
@@ -44,11 +45,10 @@ public class FindWordRequestController {
 		model.getGame(ID).getPlayer(name).addScore(sc);
 
 		if(sc!=0){
+			player.addScore(sc);
 			game.getBoard().removeWord(loc);
 			game.getBoard().refreshBoard();
 		}
-		String score = Integer.toString(sc);
-
 		// send this response back to the client which sent us the request.
 		String xmlString = Message.responseHeader(request.id()) +
 				"<findWordResponse gameId='"+ ID +"' name='"+ name +"' score='"+sc+"'>" +
@@ -59,12 +59,16 @@ public class FindWordRequestController {
 		String xml = Message.responseHeader(request.id())+builder.build();
 		Message message = new Message(xml);
 		System.out.println(message);
-		for (String id : Server.ids()) {
-			//if (!id.equals(client.id())) {
-				Server.getState(id).sendMessage(message);
-				System.out.println(message);
-			//}
+		for (Player p : game.getPlayers()) {
+			for (String id : Server.ids()) {
+				if (id.equals(p.getClientId())) {
+					
+						Server.getState(id).sendMessage(message);
+					
+				}
+			}
 		}
+
 		return new Message (xmlString);
 		
 		

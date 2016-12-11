@@ -1,21 +1,30 @@
 package server.controller;
 
 import junit.framework.TestCase;
+import server.MockClient;
+import server.Server;
 import server.model.Game;
 import server.model.Model;
+import xml.Message;
 
 
 public class BoardResponseBuilderTest extends TestCase {
-
+	MockClient client;
 	Model model;
 	Game game;
 	String content;
 	protected void setUp() throws Exception {
 		super.setUp();
+		if (!Message.configure("wordsweeper.xsd")) {
+			fail ("unable to configure protocol");
+		}
+		this.client = new MockClient(); 
+		Server.register("c", client);
+		String cid = client.id();
 		model = new Model();
-		game = new Game("manager");
-		game.addPlayer("ali");
-		game.addPlayer("bird");
+		game = new Game("manager",cid);
+		game.addPlayer("ali",cid);
+		game.addPlayer("bird",cid);
 		model.addGame(game);
 		model.selectGame(game.getGameID());
 	}

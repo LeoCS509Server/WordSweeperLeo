@@ -23,13 +23,14 @@ public class ListGamesRequestControllerTest extends TestCase {
 		}
 		this.client = new MockClient(); 
 		Server.register("c", client);
+		String cid = client.id();
 		this.model = new Model();
-		game1 = new Game("test1");
-		game1.addPlayer("ali");
-		game1.addPlayer("bird");
+		game1 = new Game("test1",cid);
+		game1.addPlayer("ali",cid);
+		game1.addPlayer("bird",cid);
 		model.addGame(game1);
-		game2 = new Game("test2");
-		game2.addPlayer("cath");
+		game2 = new Game("test2",cid);
+		game2.addPlayer("cath",cid);
 		model.addGame(game2);
 	}
 
