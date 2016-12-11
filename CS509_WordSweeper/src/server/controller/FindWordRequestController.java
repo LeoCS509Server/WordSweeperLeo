@@ -26,26 +26,10 @@ public class FindWordRequestController {
 		String name = map.getNamedItem("name").getNodeValue();
 		String word = map.getNamedItem("word").getNodeValue();
 		Game game = model.getGame(ID);
+		model.selectGame(ID);
 
 		
-// 		NodeList list = findwordRequest.getChildNodes();
-// 		ArrayList<Cell> cells = new ArrayList<Cell>();
-// 		for (int i = 0; i < list.getLength(); i++) {
-// 			Node n = list.item(i);
-// 			String position = n.getAttributes().getNamedItem("position").getNodeValue();
-// 			Location l = new Location(position);
-// 			Cell c = new Cell(l);
-// 			cells.add(c);
-// 		}
-		
-//		NodeList list = findwordRequest.getChildNodes();
-//		ArrayList<Location> loc = new ArrayList<Location>();
-//		for (int i = 0; i < list.getLength(); i++) {
-//			Node n = list.item(i);
-//			String position = n.getAttributes().getNamedItem("position").getNodeValue();
-//			Location l = new Location(position);
-//			loc.add(l);
-//		}
+
 		ArrayList<Location> loc = new ArrayList<Location>();
 		Node pos = findwordRequest.getFirstChild();
 		while (pos != null){
@@ -55,7 +39,10 @@ public class FindWordRequestController {
 			loc.add(l);
 			pos = pos.getNextSibling();
 		}
+				
 		int sc = game.calculateScore(word,loc);
+		model.getGame(ID).getPlayer(name).addScore(sc);
+
 		if(sc!=0){
 			game.getBoard().removeWord(loc);
 			game.getBoard().refreshBoard();
@@ -64,17 +51,19 @@ public class FindWordRequestController {
 
 		// send this response back to the client which sent us the request.
 		String xmlString = Message.responseHeader(request.id()) +
-				"<findWordResponse gameId='"+ ID +"' name='"+ name +"' score='"+ score +"'>" +
+				"<findWordResponse gameId='"+ ID +"' name='"+ name +"' score='"+sc+"'>" +
 			  "</findWordResponse>" +
 			"</response>";
 		BoardResponseBuilder builder = new BoardResponseBuilder(model);
 		//construct xml response message
 		String xml = Message.responseHeader(request.id())+builder.build();
 		Message message = new Message(xml);
+		System.out.println(message);
 		for (String id : Server.ids()) {
-			if (!id.equals(client.id())) {
+			//if (!id.equals(client.id())) {
 				Server.getState(id).sendMessage(message);
-			}
+				System.out.println(message);
+			//}
 		}
 		return new Message (xmlString);
 		
