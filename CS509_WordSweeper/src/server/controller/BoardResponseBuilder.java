@@ -27,7 +27,7 @@ public class BoardResponseBuilder {
 		String managingUser = selectedGame.getManageUsername();
 		Board board = selectedGame.getBoard();
 		content = BoardContent(board);
-		Location bonusCell = board.getBonusCell().getPosition();
+		Location bonusCell = board.getBonusCell();
 		int bonusr = bonusCell.getRow();
 		int bonusc = bonusCell.getColumn();
 		String bonus = bonusc+","+bonusr;
