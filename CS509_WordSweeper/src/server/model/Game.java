@@ -161,9 +161,10 @@ public class Game {
 		return password;
 	}
 	
-	public int CellOverlapNum(Cell cell){
-		int column = cell.location.getColumn();
-		int row = cell.location.getRow();
+	public int CellOverlapNum(Location loc){
+		
+		int column = loc.getColumn();
+		int row = loc.getRow();
 		int OverlapNum = 0;
 		for(Player p : Players){
 			int deltaC = Math.abs(p.getPlayerLocation().getColumn()-column);
@@ -175,18 +176,19 @@ public class Game {
 		return OverlapNum;
 	}
 	
-	public int calculateScore(String text, ArrayList<Cell> cells){
+	public int calculateScore(String text, ArrayList<Location> loc){
 		int score = 0;
 		int cellsSum = 0;
 		int Bonus = 1;
-		if(WordTable.isWord(text)&&word.isConsistent(cells)){
-			for(int i = 0; i< cells.size(); i++){
-				if(cells.get(i).isSeleted()){
+		if(WordTable.isWord(text)&&word.isConsistent(loc)){
+			for(int i = 0; i< loc.size(); i++){
+				if(board.getBonusCell().equals(loc.get(i))){
 					Bonus = 10;
-				}	
-				cellsSum+= Letters.LetterScore.get(cells.get(i))*Math.pow(2, CellOverlapNum(cells.get(i)));				
+				}
+				String s = board.getCellContains(loc.get(i));
+				cellsSum+= Letters.LetterScore.get(s)*Math.pow(2, CellOverlapNum(loc.get(i)));				
 			}		
-			score = (int) Math.pow(2, cells.size())*10*cellsSum*Bonus;
+			score = (int) Math.pow(2, loc.size())*10*cellsSum*Bonus;
 		}	
 		return score;
 	}
