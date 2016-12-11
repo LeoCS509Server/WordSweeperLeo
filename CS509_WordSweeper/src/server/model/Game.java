@@ -45,7 +45,7 @@ public class Game {
 		Players.add(managingUser);
 		this.isLocked = false;
 		password = "";
-		//boolean isActived = true;
+		isActived = true;
 	}
 	
 	
