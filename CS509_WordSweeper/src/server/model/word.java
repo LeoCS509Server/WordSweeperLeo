@@ -7,16 +7,24 @@ import java.util.Set;
 import util.Location;
 
 
-
+/**
+ * Helper function for checking if a word sent by use is legal.
+ * 
+ * @author Tongge Zhu
+ */
 
 public class word {
+	
+	/** Text represent the content of the word. */
 	String text;
-	ArrayList<Cell> cells;
+	
+	/** Cells store the location of each letter of word */
+	ArrayList<Location> loc;
 	
 
 		
 	
-	//check if the cells of the word is consistent, yes return true, otherwise return false
+	/**This function check if the location of each letter of the word is consistent, yes return true, otherwise return false*/
 	public static boolean isConsistent(ArrayList<Location> location){
 		
 		Set<Location> set = new HashSet<Location>();
