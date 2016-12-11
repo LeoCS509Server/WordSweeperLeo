@@ -1,27 +1,27 @@
 package admin.admincontroller;
 
-import java.util.ArrayList;
 
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 import admin.adminmodel1.AdminModel;
+import admin.adminmodel1.Game;
 import admin.adminview.DrawSee;
 import xml.Message;
 
 
 public class ShowGameStateResponseController extends ControllerChain {
 
-	public DrawSee app;
+	//public DrawSee app;
 	public AdminModel model;
-	String content;
-	//ArrayList<String> playerContent;
+
+
 	/**
 	 *deal with the showGameStateResponse from server and upgrade the GUI 
 	 */
-	public ShowGameStateResponseController(DrawSee a, AdminModel m) {
+	public ShowGameStateResponseController(AdminModel m) {
 		super();
-		this.app = a;
+		//this.app = a;
 		this.model = m;
 	}
 	
@@ -31,20 +31,31 @@ public class ShowGameStateResponseController extends ControllerChain {
 			return next.process(response);
 		}
 		
-		//String content = "";
-		ArrayList<String> playerContent = new ArrayList<String>();
 	
 		Node showGameStateResponse = response.contents.getFirstChild();
 		NamedNodeMap showGame = showGameStateResponse.getAttributes();
-		content = showGame.getNamedItem("contents").getNodeValue();
+		String id = showGame.getNamedItem("gameId").getNodeValue();
+		int size = Integer.parseInt(showGame.getNamedItem("size").getNodeValue());
+		if(model.isExist(id)){
+			model.removeGame(id);
+		}
+		Game g = new Game(id,size);
+		model.addGame(g);	
+		String content = showGame.getNamedItem("contents").getNodeValue();
+		g.setBoard(content, size);
 		Node player = showGameStateResponse.getFirstChild();
 		while ( player != null){
 			NamedNodeMap playerMap = player.getAttributes();
-			String position = playerMap.getNamedItem("position").getNodeValue();
-			playerContent.add(position);
+			String[] position = playerMap.getNamedItem("position").getNodeValue().split(",");
+			int positionIntStyle = Integer.parseInt(position[0])+Integer.parseInt(position[1])*size;
+			g.setPlayerlocation(positionIntStyle);
+			String name = playerMap.getNamedItem("name").getNodeValue();
+			g.setPlayerid(name);
+			int score = Integer.parseInt(playerMap.getNamedItem("score").getNodeValue());
+			g.setScore(score);
 			player = player.getNextSibling();
 		}
-		
+
 	/**
 	 * call some GUI update functions here	
 	 */
