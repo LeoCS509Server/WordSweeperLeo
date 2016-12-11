@@ -8,6 +8,15 @@ import server.model.Game;
 import server.model.Model;
 import xml.Message;
 
+/**
+ * when server receive the lockGameRequest from client, the server will lock the game
+ * and send a lockGameResponse to the client.
+ * 
+ * 
+ * The {@link #process()} makes a boardResponse in XML format, lock the game and send it
+ * to the client.
+ */
+
 public class LockGameRequestController {
 
 	Model model;
@@ -15,6 +24,9 @@ public class LockGameRequestController {
 	public LockGameRequestController (Model model) {
 		this.model = model;
 	}
+	
+	/** Make a lockGameResponse in XML format, lock the game and send it to the client. */
+	
 	public Message process(ClientState client, Message request) {
 		Node lockGameRequest = request.contents.getFirstChild();
 		NamedNodeMap map = lockGameRequest.getAttributes();
