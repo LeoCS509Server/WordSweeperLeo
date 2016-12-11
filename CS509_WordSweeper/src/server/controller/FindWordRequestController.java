@@ -26,14 +26,23 @@ public class FindWordRequestController {
 		String word = map.getNamedItem("word").getNodeValue();
 		Game game = model.getGame(ID);
 		
+// 		NodeList list = findwordRequest.getChildNodes();
+// 		ArrayList<Cell> cells = new ArrayList<Cell>();
+// 		for (int i = 0; i < list.getLength(); i++) {
+// 			Node n = list.item(i);
+// 			String position = n.getAttributes().getNamedItem("position").getNodeValue();
+// 			Location l = new Location(position);
+// 			Cell c = new Cell(l);
+// 			cells.add(c);
+// 		}
+		
 		NodeList list = findwordRequest.getChildNodes();
-		ArrayList<Cell> cells = new ArrayList<Cell>();
+		ArrayList<Location> loc = new ArrayList<Location>();
 		for (int i = 0; i < list.getLength(); i++) {
 			Node n = list.item(i);
 			String position = n.getAttributes().getNamedItem("position").getNodeValue();
 			Location l = new Location(position);
-			Cell c = new Cell(l);
-			cells.add(c);
+			loc.add(l);
 		}
 		
 		
