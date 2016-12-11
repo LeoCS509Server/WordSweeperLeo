@@ -32,9 +32,17 @@ public class CreateGameRequestController implements IProtocolHandler {
 		String name = map.getNamedItem("name").getNodeValue();
 		String password = map.getNamedItem("password").getNodeValue();
 		Game game = new Game(name);
+		String ggid = game.getGameID();
 		model.addGame(game);
 		game.setPassword(password);
-		game.addPlayer(name);
+		model.selectGame(ggid);
+		
+//		BoardResponseBuilder builder = new BoardResponseBuilder(model);
+//		//construct xml response message
+//		String xmlString = Message.responseHeader(request.id())+builder.build();
+//		Message message = new Message(xmlString);
+//		return message;
+		
 		
 		String player = new String();
 		ArrayList<Player> Players = game.getPlayers();
@@ -43,9 +51,9 @@ public class CreateGameRequestController implements IProtocolHandler {
 		}
 		// Construct message reflecting state
 	    Location location = game.getPlayer(name).getPlayerLocation();
-		String xmlString = Message.responseHeader(request.id()) +
-				"<boardResponse  gameId='"+ game.getGameID() +"' managingUser = '"+ game.getManageUsername()+"' bonus = '" +location.getColumn() +","+ location.getRow() +"' >" +
-				player +
+	    String xmlString = Message.responseHeader(request.id()) +
+				"<boardResponse gameId='"+ game.getGameID() +"' managingUser = '"+ game.getManageUsername()+"' bonus = '" +game.getBoard().getBonusCell().getColumn()+","+ game.getBoard().getBonusCell().getRow() +"' >" +
+			  player +
 				"</boardResponse>" +
 			"</response>";
 		// send this response back to the client which sent us the request.
