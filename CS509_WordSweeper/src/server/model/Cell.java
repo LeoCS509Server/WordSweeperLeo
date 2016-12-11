@@ -6,9 +6,8 @@ import util.Location;
 
 /**
  * 
- * A cell is located at a specific (x,y) coordinate in board. It has letter inside. 
+ * A cell is located at a specific Location(x,y) coordinate in board. It has letter inside. 
  * 
- * This class defines the shared behavior for extensions.
  * 
  * @author Tongge Zhu
  */
