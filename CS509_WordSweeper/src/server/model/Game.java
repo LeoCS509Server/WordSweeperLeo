@@ -20,9 +20,7 @@ public class Game {
 	boolean isActived;
 
 	
-
-	
-	public  String setGameID(){
+	public String setGameID(){
 		Calendar c = Calendar.getInstance();
 		int hour = c.get(Calendar.HOUR_OF_DAY); 
 		int minute = c.get(Calendar.MINUTE); 
@@ -31,7 +29,7 @@ public class Game {
 		return s;
 	}
 	
-	public static Location randomLocation(int size){
+	public Location randomLocation(int size){
 		int x =(int) (Math.random()*(size-3)+1);
 		int y =(int) (Math.random()*(size-3)+1);
 		return new Location(x,y);
@@ -46,7 +44,7 @@ public class Game {
 		Players = new ArrayList<Player>();
 		Players.add(managingUser);
 		this.isLocked = false;
-		boolean isActived = true;
+		//boolean isActived = true;
 	}
 	
 	
@@ -103,7 +101,7 @@ public class Game {
 	public void removePlayer(String playerID){
 		int index = 0;
 		for(int i = 0; i<Players.size(); i++){
-			if(Players.get(i).getName().equals(playerID)){
+			if(Players.get(i).getName() ==playerID){
 				index = i;
 			}
 		}
@@ -142,7 +140,7 @@ public class Game {
 	public void setManagingUser(ArrayList<Player> Players){
 		//int i = (int)Math.random()*Players.size();
 		Random r =new Random();
-		int i = r.nextInt(Players.size())+1;
+		int i = r.nextInt(Players.size());
 		Players.get(i).setManagingUser();;
 	}
 	
@@ -193,7 +191,7 @@ public class Game {
 		return score;
 	}
 	
-	public Location rePosition(Player p, int c, int r){
+	public void rePosition(Player p, int c, int r){
 		int x = p.getPlayerLocation().getColumn() + c;
 		int y = p.getPlayerLocation().getRow() + r;
 		Boolean isOverColumn = x>board.getSize()-3 || x<1;
@@ -202,22 +200,18 @@ public class Game {
 			Location loc = new Location(x,y); 
 			p.setPlayerLocation(loc);
 			}
-		return p.getPlayerLocation();
+		//return p.getPlayerLocation();
 	}
 	
 	public Player getPlayer(String Playerid){
 		for(Player p: Players){
-			if(p.getName().equals(Playerid)){
+			if(p.getName() == Playerid){
 				return p;
 			}
 		}
 		return null;
 	}
 
-	/** return game id*/
-	public String getGameId(){
-		return GameID;
-	}
 	
 	/** return the number of players*/
 	public int getNumPlayers(){
@@ -232,9 +226,37 @@ public class Game {
 	public String getPlayerboard(Player p){
 		String s = new String();	
 		for(Location l : p.getCellsLocation()){
-			s += board.getCellContains(l)+",";
+			s += board.getCellContains(l);
 		}
 		return s;		
+	}
+	
+	public static void main(String[] args) {
+		
+//		Location l1 = new Location(2,3);
+//		Player p1 = new Player("Tom", l1);
+		Game g1 =new Game("Tom");
+		System.out.println(g1.getGameID());
+		
+		System.out.println(g1.getBoard().table.values());
+		System.out.println(g1.getManageUsername());
+		System.out.println(g1.getNumPlayers());
+		g1.addPlayer("Tim");
+		System.out.println(g1.getNumPlayers());
+		System.out.println(g1.getPlayer("Tom").getScore());
+		g1.getPlayer("Tom").addScore(100);
+		System.out.println(g1.getPlayer("Tom").getScore());
+		int i = g1.getPlayer("Tom").getCellsLocation().size();
+		System.out.println(i);
+		
+		System.out.println(g1.getPlayer("Tom").getCellsLocation().get(1).getRow());
+		g1.rePosition(g1.getPlayer("Tom"), 2, 2);
+		System.out.println(g1.getPlayer("Tom").getCellsLocation().get(1).getRow());
+		
+		Game g2 =new Game("Tom");
+		System.out.println(g2.getGameID());
+		
+		
 	}
 }
 	
