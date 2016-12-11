@@ -55,18 +55,16 @@ public class RespositionBoardRequestController {
 				"</boardResponse>" +
 			"</response>";
 		// send this response back to the client which sent us the request.
-		
 		Message message = new Message(xmlString);
 		for (Player p : game.getPlayers()) {
 			for (String id : Server.ids()) {
-				if (!id.equals(client.id()) && client.id().equals(p.getName())) {
-					if(!p.getName().equals(playername) ){
+				if (!id.equals(client.id()) && id.equals(p.getClientId())) {
+					
 						Server.getState(id).sendMessage(message);
-					}
+					
 				}
 			}
 		}
-		
 		return message;
 		
 	}

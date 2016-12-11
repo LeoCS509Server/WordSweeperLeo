@@ -131,10 +131,10 @@ public class JoinGameRequestController implements IProtocolHandler {
 		Game game=model.getGame(ID);
 		for (Player p : game.getPlayers()) {
 			for (String id : Server.ids()) {
-				if (!id.equals(client.id()) && client.id().equals(p.getName())) {
-					if(!p.getName().equals(name) ){
+				if (!id.equals(client.id()) && id.equals(p.getClientId())) {
+					
 						Server.getState(id).sendMessage(message);
-					}
+					
 				}
 			}
 		}
