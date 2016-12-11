@@ -51,11 +51,12 @@ public class BoardTest extends TestCase {
 	}	
 	
 	public void testRemoveWord(){
+		Location l = new Location(1,1);
 		Key key = new Key(1,1);
 		Cell c = board.table.get(key);
-		List<Cell> cells = new ArrayList<Cell>();
-		cells.add(c);
-		board.removeWord(cells);
+		ArrayList<Location> locations = new ArrayList<Location>();
+		locations.add(l);
+		board.removeWord(locations);
 		String letter = board.table.get(key).letter;
 		System.out.println(letter);
 		assertEquals(null,letter);		

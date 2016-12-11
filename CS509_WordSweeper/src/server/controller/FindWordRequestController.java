@@ -7,6 +7,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import server.ClientState;
+import server.Server;
 import server.model.Cell;
 import server.model.Game;
 import server.model.Model;
@@ -55,14 +56,29 @@ public class FindWordRequestController {
 			pos = pos.getNextSibling();
 		}
 		int sc = game.calculateScore(word,loc);
+		if(sc!=0){
+			game.getBoard().removeWord(loc);
+			game.getBoard().refreshBoard();
+		}
 		String score = Integer.toString(sc);
 
-		
+		// send this response back to the client which sent us the request.
 		String xmlString = Message.responseHeader(request.id()) +
 				"<findWordResponse gameId='"+ ID +"' name='"+ name +"' score='"+ score +"'>" +
 			  "</findWordResponse>" +
 			"</response>";
-		// send this response back to the client which sent us the request.
+		BoardResponseBuilder builder = new BoardResponseBuilder(model);
+		//construct xml response message
+		String xml = Message.responseHeader(request.id())+builder.build();
+		Message message = new Message(xml);
+		for (String id : Server.ids()) {
+			if (!id.equals(client.id())) {
+				Server.getState(id).sendMessage(message);
+			}
+		}
 		return new Message (xmlString);
+		
+		
+
 	}
 }
