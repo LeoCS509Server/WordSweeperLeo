@@ -6,6 +6,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 import server.ClientState;
+import server.Server;
 import server.model.Game;
 import server.model.Model;
 import server.model.Player;
@@ -54,7 +55,19 @@ public class RespositionBoardRequestController {
 				"</boardResponse>" +
 			"</response>";
 		// send this response back to the client which sent us the request.
-		return new Message (xmlString);
+		
+		Message message = new Message(xmlString);
+		for (Player p : game.getPlayers()) {
+			for (String id : Server.ids()) {
+				if (!id.equals(client.id()) && client.id().equals(p.getName())) {
+					if(!p.getName().equals(playername) ){
+						Server.getState(id).sendMessage(message);
+					}
+				}
+			}
+		}
+		
+		return message;
 		
 	}
 }

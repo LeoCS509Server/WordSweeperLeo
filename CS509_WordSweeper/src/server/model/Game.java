@@ -35,11 +35,11 @@ public class Game {
 		return new Location(x,y);
 	}
 	
-	public Game(String UserID) {
+	public Game(String UserID, String clientid) {
 		GameID = setGameID();
 		this.board = new Board();
 		Location loc = randomLocation(board.getSize());
-		Player managingUser = new Player(UserID, loc);
+		Player managingUser = new Player(UserID, loc, clientid);
 		managingUser.setManagingUser();
 		Players = new ArrayList<Player>();
 		Players.add(managingUser);
@@ -49,13 +49,13 @@ public class Game {
 	}
 	
 	
-	public void addPlayer(String id){
+	public void addPlayer(String id, String clientid){
 		
 		if(Players.size()>8){
 			int size = (int) Math.sqrt(16*(Players.size()+1)/3);
 			Board board = new Board(size);
 			Location loc = randomLocation(board.getSize());
-			Player p = new Player(id, loc); 
+			Player p = new Player(id, loc, clientid); 
 			Players.add(p);
 			for(int i = 0; i<Players.size()-1; i++){
 				Players.get(i).resetScore();
@@ -64,7 +64,7 @@ public class Game {
 			}			
 		}else{	
 			Location loc = randomLocation(board.getSize());
-			Player p = new Player(id, loc); 
+			Player p = new Player(id, loc, clientid); 
 			Players.add(p);
 		}
 	}

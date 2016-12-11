@@ -14,6 +14,7 @@ public class Player {
 	private int Score;
 	private Location location;
 	private boolean isManagingUser;
+	private String clientid;
 	
 	
 	public void setPlayerLocation(Location loc){
@@ -25,12 +26,18 @@ public class Player {
 		return this.location;
 	}
 	
-	public Player(String name, Location loc) {
+	public Player(String name, Location loc, String clientid) {
 		super();
-		Name = name;
+		this.Name = name;
 		this.Score = 0;
 		this.location = loc;
 		this.isManagingUser = false;
+		this.clientid = clientid;
+	}
+	
+	public String getClientId()
+	{
+		return this.clientid;
 	}
 
 	public String getName(){

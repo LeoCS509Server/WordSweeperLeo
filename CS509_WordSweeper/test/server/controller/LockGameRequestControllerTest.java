@@ -28,7 +28,7 @@ public class LockGameRequestControllerTest extends TestCase {
 		client = new MockClient();
 		Server.register("c1", client);
 		model = new Model();
-		game = new Game("player1");
+		game = new Game("player1",client.id());
 		model.addGame(game);
 		gameId = game.getGameID();
 	}

@@ -42,12 +42,12 @@ public class JoinGameRequestController implements IProtocolHandler {
 
 		// ArrayList<Game> games=model.getGames();
 		// if(model.getGamenames().contains(ID)){
-		// Game g=model.getGame(ID);
+		
 		for (Game g : model.getGames()) {
 			if (g.getGameID().equals(ID)) {
 				if (!g.checkisLocked()) {
 					if (model.isPasswordCorrect(ID, password)) {
-						g.addPlayer(name);
+						g.addPlayer(name,client.id());
 						String player = new String();
 						ArrayList<Player> Players = g.getPlayers();
 						for (Player p : Players) {
@@ -128,9 +128,14 @@ public class JoinGameRequestController implements IProtocolHandler {
 		// same response. Note this is inefficient and should be replaced by
 		// more elegant functioning
 		// hint: rely on your game to store player names...
-		for (String id : Server.ids()) {
-			if (!id.equals(client.id())) {
-				Server.getState(id).sendMessage(message);
+		Game game=model.getGame(ID);
+		for (Player p : game.getPlayers()) {
+			for (String id : Server.ids()) {
+				if (!id.equals(client.id()) && client.id().equals(p.getName())) {
+					if(!p.getName().equals(name) ){
+						Server.getState(id).sendMessage(message);
+					}
+				}
 			}
 		}
 
