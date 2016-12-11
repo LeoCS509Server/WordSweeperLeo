@@ -3,7 +3,6 @@ package server.controller;
 import java.util.ArrayList;
 
 import server.model.Board;
-
 import server.model.Game;
 import server.model.Model;
 import server.model.Player;
@@ -55,7 +54,7 @@ public class BoardResponseBuilder {
 		for (int r = 1; r <= b.getSize(); r++){
 			for (int c = 1; c <= b.getSize(); c++){
 				Location l = new Location(c,r);
-				boardcontent = boardcontent + b.getCellContains(l);
+				boardcontent = boardcontent + b.getCellContains(l)+",";
 				bcontent.add(b.getCellContains(l));
 			}
 		}
@@ -72,7 +71,7 @@ public class BoardResponseBuilder {
 		for(int i = 0; i<4;i++){
 			for(int j = 0; j<4; j++){
 				int s = startPoint+i*size;
-				board = board+bcontent.get(s+j);
+				board = board+bcontent.get(s+j)+",";
 			}
 		}
 		int score = p.getScore();
