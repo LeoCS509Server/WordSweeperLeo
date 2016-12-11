@@ -101,7 +101,7 @@ public class Game {
 	public void removePlayer(String playerID){
 		int index = 0;
 		for(int i = 0; i<Players.size(); i++){
-			if(Players.get(i).getName() ==playerID){
+			if(Players.get(i).getName().equals(playerID)){
 				index = i;
 			}
 		}
@@ -205,7 +205,7 @@ public class Game {
 	
 	public Player getPlayer(String Playerid){
 		for(Player p: Players){
-			if(p.getName() == Playerid){
+			if(p.getName().equals(Playerid)){
 				return p;
 			}
 		}
@@ -231,33 +231,6 @@ public class Game {
 		return s;		
 	}
 	
-	public static void main(String[] args) {
-		
-//		Location l1 = new Location(2,3);
-//		Player p1 = new Player("Tom", l1);
-		Game g1 =new Game("Tom");
-		System.out.println(g1.getGameID());
-		
-		System.out.println(g1.getBoard().table.values());
-		System.out.println(g1.getManageUsername());
-		System.out.println(g1.getNumPlayers());
-		g1.addPlayer("Tim");
-		System.out.println(g1.getNumPlayers());
-		System.out.println(g1.getPlayer("Tom").getScore());
-		g1.getPlayer("Tom").addScore(100);
-		System.out.println(g1.getPlayer("Tom").getScore());
-		int i = g1.getPlayer("Tom").getCellsLocation().size();
-		System.out.println(i);
-		
-		System.out.println(g1.getPlayer("Tom").getCellsLocation().get(1).getRow());
-		g1.rePosition(g1.getPlayer("Tom"), 2, 2);
-		System.out.println(g1.getPlayer("Tom").getCellsLocation().get(1).getRow());
-		
-		Game g2 =new Game("Tom");
-		System.out.println(g2.getGameID());
-		
-		
-	}
 }
 	
 	
