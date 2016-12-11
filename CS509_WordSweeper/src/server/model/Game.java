@@ -229,7 +229,7 @@ public class Game {
 	public String getPlayerboard(Player p){
 		String s = new String();	
 		for(Location l : p.getCellsLocation()){
-			s += board.getCellContains(l);
+			s += board.getCellContains(l)+",";
 		}
 		return s;		
 	}
