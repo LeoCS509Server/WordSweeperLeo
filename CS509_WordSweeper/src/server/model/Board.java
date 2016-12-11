@@ -5,7 +5,7 @@ import java.util.List;
 
 
 import util.Location;
-import util.hashtable.Key;
+import util.Key;
 
 public class Board {
 	

@@ -46,7 +46,7 @@ public class BoardTest extends TestCase {
 	}
 	public void testGetBonusCell() {
 		assertNotNull(board.getBonusCell());
-		Location l = board.getBonusCell().location;
+		Location l = board.getBonusCell();
 		System.out.println(l.getRow()+","+l.getColumn());
 	}	
 	
