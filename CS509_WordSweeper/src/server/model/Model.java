@@ -30,13 +30,11 @@ public class Model {
 	
 	public Game getGame(String gameid)
 	{
-		int i=0;
-		while(!gameid.equals(games.get(i).getGameID()))
-		{
-			i++;
-			
+		for(Game g : games){
+			if(g.getGameID().equals(gameid))
+				return g;
 		}
-		return games.get(i);
+		return null;
 	}
 	
 	/** return all the games*/
@@ -50,20 +48,21 @@ public class Model {
 	}
 	/**remove game from list*/
 	public void removeGame(String id){
-		int i=0;
-		while(!id.equals(games.get(i).getGameID()))
-		{
-			i++;
-			
-		}
-		games.remove(i);
-		
+		for(Game g : games){
+			if(g.getGameID().equals(id))
+				games.remove(g);
+			break;
+		}		
 	}
 	public boolean isPasswordCorrect(String GameID, String password){
 		boolean istrue = false;
 		for(Game g: games){
-			if(g.getGameID().equals(GameID) && (g.getPassword().equals(password) || password.isEmpty())){
+			boolean b1 = g.getGameID().equals(GameID);
+			boolean b2 = g.getPassword().equals(password);
+			boolean b3 = password.isEmpty();
+			if(( b2||b3) &&b1){
 				istrue = true;
+				break;
 			}
 		}
 		return istrue;

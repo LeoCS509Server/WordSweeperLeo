@@ -44,6 +44,7 @@ public class Game {
 		Players = new ArrayList<Player>();
 		Players.add(managingUser);
 		this.isLocked = false;
+		password = "";
 		//boolean isActived = true;
 	}
 	

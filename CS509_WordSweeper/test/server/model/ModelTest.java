@@ -27,8 +27,9 @@ public class ModelTest extends TestCase {
 	
 	public void testIsPasswordCorrect() {
 		game1.setPassword("123");
+		game2.setPassword("122");
 		String id1 = game1.getGameID();
-		assertFalse(model.isPasswordCorrect(id1, "345"));
+		assertFalse(model.isPasswordCorrect(id1, "344"));
 	}
 
 
