@@ -5,13 +5,13 @@ import java.util.List;
 
 
 import util.Location;
-import util.Key;
+import util.hashtable.Key;
 
 public class Board {
 	
 	int size;
 	Hashtable<Key, Cell> table; 
-	Cell Bonus;
+	Location Bonus;
 	
 	Board() {
 	
@@ -26,7 +26,7 @@ public class Board {
 				table.put(key, cell);	
 			}
 		}
-		BonusCell();
+		Bonus=BonusCell();
 	}
 	
 	public Board(int size) {
@@ -42,7 +42,7 @@ public class Board {
 				table.put(key, cell);
 			}
 		}
-		BonusCell();
+		Bonus=BonusCell();
 	}
 	
 	public int getSize(){
@@ -68,15 +68,24 @@ public class Board {
 		return table.get(key).letter;
 	}
 	
-	protected void BonusCell(){
-		int c = (int) (Math.random()*size)+1;
-		int r = (int) (Math.random()*size)+1;
-		Key key = new Key(r,c);
-		table.get(key).setSeleted();
-		Bonus = table.get(key);
+//	public void BonusCell(){
+//		int c = (int) (Math.random()*size)+1;
+//		int r = (int) (Math.random()*size)+1;
+//		Key key = new Key(r,c);
+//		table.get(key).setSeleted();
+//		Bonus = table.get(key);
+//	}
+	protected static Location BonusCell(){
+		int c = (int) (Math.random()*7)+1;
+		int r = (int) (Math.random()*7)+1;
+//		Key key = new Key(r,c);
+//		//table.get(key).setSeleted();
+//		Bonus = table.get(key);
+		return new Location(c,r);
 	}
 	
-	public Cell getBonusCell(){
+	
+	public Location getBonusCell(){
 		return Bonus;
 	}
 	
@@ -111,7 +120,6 @@ public class Board {
 	public void refreshBoard(){
 		for(int c=1; c<=size;c++){
 			for(int r=1; r<=size; r++){
-				Location l = new Location(c,r);
 				Key key = new Key(r,c);
 				if(!table.get(key).hasLetter()){
 					int count = 0;
