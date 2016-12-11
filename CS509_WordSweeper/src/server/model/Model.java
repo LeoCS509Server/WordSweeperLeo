@@ -60,13 +60,15 @@ public class Model {
 		
 	}
 	public boolean isPasswordCorrect(String GameID, String password){
+		boolean istrue = false;
 		for(Game g: games){
 			if(g.getGameID().equals(GameID) && (g.getPassword().equals(password) || password.isEmpty())){
-				return true;
+				istrue = true;
 			}
 		}
-		return false;
+		return istrue;
 	}
+	
 	
 	public void refreshGameList(){
 		ArrayList<Game> NewGameList = new ArrayList<>();

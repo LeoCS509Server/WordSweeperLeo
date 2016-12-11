@@ -24,6 +24,12 @@ public class ModelTest extends TestCase {
 		model.selectGame(id1);
 		assertEquals(game1,model.selectedGame);
 	}
+	
+	public void testIsPasswordCorrect() {
+		game1.setPassword("123");
+		String id1 = game1.getGameID();
+		assertFalse(model.isPasswordCorrect(id1, "345"));
+	}
 
 
 /**
@@ -40,10 +46,6 @@ public class ModelTest extends TestCase {
 	}
 
 	public void testRemoveGame() {
-		fail("Not yet implemented");
-	}
-
-	public void testIsPasswordCorrect() {
 		fail("Not yet implemented");
 	}
 
