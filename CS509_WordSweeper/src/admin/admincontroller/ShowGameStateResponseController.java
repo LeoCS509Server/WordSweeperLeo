@@ -4,24 +4,24 @@ package admin.admincontroller;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-import admin.adminmodel1.AdminModel;
-import admin.adminmodel1.Game;
+import admin.adminmodel.AdminModel;
+import admin.adminmodel.Game;
 import admin.adminview.DrawSee;
 import xml.Message;
 
 
 public class ShowGameStateResponseController extends ControllerChain {
 
-	//public DrawSee app;
+	public DrawSee app;
 	public AdminModel model;
 
 
 	/**
 	 *deal with the showGameStateResponse from server and upgrade the GUI 
 	 */
-	public ShowGameStateResponseController(AdminModel m) {
+	public ShowGameStateResponseController(DrawSee app,AdminModel m) {
 		super();
-		//this.app = a;
+		this.app = app;
 		this.model = m;
 	}
 	
@@ -55,7 +55,9 @@ public class ShowGameStateResponseController extends ControllerChain {
 			g.setScore(score);
 			player = player.getNextSibling();
 		}
-
+		app.paint(app.getGraphics());
+		app.paintComponents(app.getGraphics(),g); //draw board
+		
 	/**
 	 * call some GUI update functions here	
 	 */
