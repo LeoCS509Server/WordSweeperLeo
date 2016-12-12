@@ -1,22 +1,23 @@
-package admin.adminmodel1;
+package admin.adminmodel;
 
 import java.util.ArrayList;
 
 
 public class AdminModel {
 	public static ArrayList<Game> gamelist;
-	String idlist;
+	public static ArrayList<String> idlist;
+	
 	
 	
 	public AdminModel(){
 		AdminModel.gamelist = new ArrayList<Game>();
-		this.idlist = null;
+		AdminModel.idlist=new ArrayList<String>();
 	}
 	
-	public void getIdlist(String s){
-		idlist = s;
+	public void setIdlist(String s){
+		idlist.add(s) ;
 	}
-	public String obtainIdList(){
+	public ArrayList<String> obtainIdList(){
 		return idlist;
 	}
 	
