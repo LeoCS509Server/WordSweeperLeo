@@ -66,8 +66,8 @@ public class Player {
 	
 	public List<Location> getCellsLocation(){
 		List<Location> LocationList = new ArrayList<>();
-		for(int c = 0; c<4; c++){
-			for(int r=0; r<4; r++){
+		for(int r = 0; r<4; r++){
+			for(int c=0; c<4; c++){
 				LocationList.add(new Location(this.location.getColumn()+c,this.location.getRow()+r));
 			}
 		}
