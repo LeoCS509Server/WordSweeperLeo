@@ -14,7 +14,7 @@ public class ShowGameStateResponseController extends ControllerChain {
 
 	public DrawSee app;
 	public AdminModel model;
-
+	
 
 	/**
 	 *deal with the showGameStateResponse from server and upgrade the GUI 
@@ -47,17 +47,29 @@ public class ShowGameStateResponseController extends ControllerChain {
 		while ( player != null){
 			NamedNodeMap playerMap = player.getAttributes();
 			String[] position = playerMap.getNamedItem("position").getNodeValue().split(",");
-			int positionIntStyle = Integer.parseInt(position[0])+Integer.parseInt(position[1])*size;
+			int positionIntStyle = Integer.parseInt(position[0])*10+Integer.parseInt(position[1]);
 			g.setPlayerlocation(positionIntStyle);
-			String name = playerMap.getNamedItem("name").getNodeValue();
+			String name = playerMap.getNamedItem("name").getNodeValue()+"            "+playerMap.getNamedItem("score").getNodeValue();;
 			g.setPlayerid(name);
+		
+
 			int score = Integer.parseInt(playerMap.getNamedItem("score").getNodeValue());
 			g.setScore(score);
 			player = player.getNextSibling();
 		}
+		
+		for(String i:g.getPlayerid()){
+			app.getPlayerarea().append(i+"\n");
+		}
+//		for(Integer j:g.getScore()){
+//			app.getPlayerarea().append(j+"\n");
+//		}
+//		app.getPlayerarea().append(g.getPlayerid().get(0)+"\n");
+//		app.getPlayerarea().append(g.getPlayerid().get(1)+"\n");
 		app.paint(app.getGraphics());
 		app.paintComponents(app.getGraphics(),g); //draw board
 		
+
 	/**
 	 * call some GUI update functions here	
 	 */
