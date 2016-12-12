@@ -2,29 +2,26 @@ package server.model;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.List;
 
 
 import util.Location;
-import util.Key;
 
 public class Board {
 	
 	int size;
-	Hashtable<Key, Cell> table; 
+	Hashtable<Location, Cell> board;
 	Location Bonus;
 	
-	Board() {
 	
+	Board() {
+		
 		size = 7;
-		table = new Hashtable<Key, Cell>();
+		board = new Hashtable<Location, Cell>();
 		for(int c = 1; c<=size;c++){
 			for(int r =1; r<=size; r++){
                 Location loc = new Location(c,r);
-                Key key = new Key(r,c);
 				Cell cell = new Cell(loc);
-				//cell.getLetter();
-				table.put(key, cell);	
+				board.put(loc, cell);	
 			}
 		}
 		Bonus=BonusCell();
@@ -33,14 +30,12 @@ public class Board {
 	public Board(int size) {
 		super();
 		this.size = size;
-		table = new Hashtable<Key, Cell>();
+		board = new Hashtable<Location, Cell>();
 		for(int c = 1; c<=size;c++){
 			for(int r =1; r<=size; r++){
 				Location loc = new Location(c,r);
-				Key key = new Key(r,c);
                 Cell cell = new Cell(loc);
-				cell.getLetter();
-				table.put(key, cell);
+				board.put(loc, cell);
 			}
 		}
 		Bonus=BonusCell();
@@ -49,10 +44,7 @@ public class Board {
 	public int getSize(){
 		return this.size;
 	}
-	
-	
-	
-	
+		
 	public Board resetBoard(){
 		return new Board();	
 		
@@ -62,26 +54,24 @@ public class Board {
 		return new Board(size);	
 	}
 	
-	public String getCellContains(Location l){
-		int row = l.getRow();
-		int col = l.getColumn();
-		Key key = new Key(row,col);
-		return table.get(key).letter;
+	public String getCellContains(Location l){		
+		return board.get(l).letter;
 	}
 	
-//	public void BonusCell(){
-//		int c = (int) (Math.random()*size)+1;
-//		int r = (int) (Math.random()*size)+1;
-//		Key key = new Key(r,c);
-//		table.get(key).setSeleted();
-//		Bonus = table.get(key);
-//	}
+	public String getBoardContains(){
+		String s = new String();
+		for(int c = 1; c<=size;c++){
+			for(int r =1; r<=size; r++){
+                Location loc = new Location(c,r);
+                s += board.get(loc).getLetter();
+                }
+			}						
+		return s;
+	}
+	
 	protected static Location BonusCell(){
 		int c = (int) (Math.random()*7)+1;
 		int r = (int) (Math.random()*7)+1;
-//		Key key = new Key(r,c);
-//		//table.get(key).setSeleted();
-//		Bonus = table.get(key);
 		return new Location(c,r);
 	}
 	
@@ -92,70 +82,30 @@ public class Board {
 	
 
 	public void removeWord(ArrayList<Location> locations){
-		for(Location l : locations){
-			int col = l.getColumn();
-			int row = l.getRow();
-			Key key = new Key(row,col);
-			table.get(key).removeLetter();
+		for(Location l : locations){	
+			board.get(l).removeLetter();
 		}	
 	}
-	/**
+		
 	public void refreshBoard(){
 		for(int c = 1; c<=size;c++){
 			int count = 0;
+			ArrayList<String> arr = new ArrayList<>();
 			for(int r =1; r<=size; r++){
-				Location l = new Location(c,r);
-				Key key = new Key(r,c);
-				Key keyBelow = new Key(r+1,c);
-				if(!table.get(key).hasLetter()){
-					while (!table.get(keyBelow).hasLetter())
-					table.get(l).letter = table.get(new Location(c,r)).getLetter();
-					table.get(new Location(c,r)).removeLetter();
-					
-					count++;	
-				}			
-			}
-			for(int x =0; x<count; x++){
-				Location r = new Location(c, size-x);
-				table.get(r).setLetter();
-			}
-		}	
-	}*/
-	public void refreshBoard(){
-		for(int c=1; c<=size;c++){
-			for(int r=1; r<=size; r++){
-				Key key = new Key(r,c);
-				if(!table.get(key).hasLetter()){
-					int count = 0;
-					int row = r;
-					while(!table.get(key).hasLetter() && r+count < size){
-						row++;
-						key = new Key(row,c);
-						count++;
-					}
-					if((r+count)==size){
-						for(int i = 0; i<=count; i++){
-							Key k = new Key(r+i,c);
-							table.get(k).setLetter();
-							//break;
-						}
-					}
-					else{
-						for(int i =0; i<=size-r-count; i++){
-							Key k = new Key(r+i,c);
-							Key kbelow = new Key(r+count+i,c);
-							String tmp = table.get(kbelow).letter;
-							table.get(kbelow).setLetter();
-							table.get(k).letter=tmp;
-							//break;
-						}
-					}
+				Location l = new Location(c,r);				
+				if(board.get(l).hasLetter()){
+					arr.add(board.get(l).getLetter());
 				}
-				
+				count = arr.size();
 			}
-		}
-	}
-
-
-	 
+			for(int r =1; r<=count; r++){
+				Location l1 = new Location(c,r);
+				board.get(l1).setLetter(arr.get(r-1));
+			}
+			for(int x =count+1; x<=size; x++){
+				Location r = new Location(c, x);
+				board.get(r).setLetter();
+			}			
+		}						
+	}	
 }
