@@ -1,10 +1,11 @@
 package admin;
 
 import admin.admincontroller.AdminMessageHandler;
-
+import admin.admincontroller.ConnectResponseController;
+import admin.admincontroller.ListGamesController;
 import admin.admincontroller.ListGamesResponseController;
 import admin.admincontroller.ShowGameStateResponseController;
-import admin.adminmodel1.AdminModel;
+import admin.adminmodel.AdminModel;
 import admin.adminview.DrawSee;
 import client.ServerAccess;
 import xml.Message;
@@ -31,13 +32,14 @@ public class AdminLauncher {
 		}
 		
 		// Initialize the client application and its corresponding model
-		AdminModel model = new AdminModel();
-		DrawSee app = new DrawSee(model);
+		AdminModel admodel = new AdminModel();
+		DrawSee app = new DrawSee(admodel);
 				
 		// set up the chain of responsibility
 		AdminMessageHandler handler = new AdminMessageHandler(app);
-		handler.registerHandler(new ListGamesResponseController(app, model));
-		handler.registerHandler(new ShowGameStateResponseController(app, model));
+		handler.registerHandler(new ListGamesResponseController(app, admodel));
+		handler.registerHandler(new ShowGameStateResponseController(app, admodel));
+		handler.registerHandler(new ConnectResponseController(app,admodel));
 		
 		// try to connect to the server. Once connected, messages are going to be processed by 
 		// SampleClientMessageHandler. For now we just continue on with the initialization because
@@ -59,6 +61,10 @@ public class AdminLauncher {
 		String xmlString = Message.requestHeader() + "<connectRequest/></request>";
 		Message m = new Message (xmlString);
 		sa.sendRequest(m);
+		
+		String xmlString2 = Message.requestHeader() + "<listGamesRequest/></request>";
+		Message m2 = new Message (xmlString2);
+		sa.sendRequest(m2);
 		
 		// at this point, we need to make app visible, otherwise we would terminate application
 		app.setVisible(true);
