@@ -4,11 +4,9 @@ import java.util.ArrayList;
 
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import server.ClientState;
 import server.Server;
-import server.model.Cell;
 import server.model.Game;
 import server.model.Model;
 import server.model.Player;

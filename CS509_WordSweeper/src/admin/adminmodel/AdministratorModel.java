@@ -3,15 +3,15 @@ package admin.adminmodel;
 import java.util.ArrayList;
 
 
-public class AdminModel {
+public class AdministratorModel {
 	public static ArrayList<Game> gamelist;
 	public static ArrayList<String> idlist;
 	
 	
 	
-	public AdminModel(){
-		AdminModel.gamelist = new ArrayList<Game>();
-		AdminModel.idlist=new ArrayList<String>();
+	public AdministratorModel(){
+		AdministratorModel.gamelist = new ArrayList<Game>();
+		AdministratorModel.idlist=new ArrayList<String>();
 	}
 	
 	public void setIdlist(String s){

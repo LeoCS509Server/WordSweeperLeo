@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.AbstractListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -19,7 +18,7 @@ import javax.swing.JTextArea;
 
 import admin.admincontroller.ListGamesController;
 import admin.admincontroller.ShowGameStateController;
-import admin.adminmodel.AdminModel;
+import admin.adminmodel.AdministratorModel;
 import admin.adminmodel.Game;
 import client.ServerAccess; 
 
@@ -29,7 +28,7 @@ import client.ServerAccess;
   
 
 public class DrawSee extends JFrame {
-	 static AdminModel amodel;
+	static AdministratorModel amodel;
 	private static class DrawseeHolder{
 		private static final DrawSee gui=new DrawSee(amodel);
 	
@@ -64,10 +63,10 @@ public class DrawSee extends JFrame {
     private Color rectColor = new Color(0xf5f5f5);
 	private ServerAccess serverAccess;
     
-    public DrawSee(AdminModel model) {
+    public DrawSee(AdministratorModel model) {
     	
     	//super(name);
-    	this.amodel = model;
+    	amodel = model;
         Container p = getContentPane();
         setBounds(400, 100, 700, 500);
         setVisible(true);
@@ -112,7 +111,7 @@ public class DrawSee extends JFrame {
 		
 		 button2.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {     
-	        	 new ShowGameStateController(DrawSee.this, amodel).process(gameChoice.getItem(gameChoice.getSelectedIndex()));
+	        	 new ShowGameStateController(DrawSee.this,amodel).process(gameChoice.getItem(gameChoice.getSelectedIndex()));
 	         	
 	         	
 	         
@@ -133,7 +132,7 @@ public class DrawSee extends JFrame {
 
 	     		
 	         	
-	         	g =	AdminModel.getGame(gameChoice.getItem(gameChoice.getSelectedIndex()));   	
+	         	g =	AdministratorModel.getGame(gameChoice.getItem(gameChoice.getSelectedIndex()));   	
 	        	    paintComponents(jg,g);     ///
 	         }
 	      }); 
@@ -160,7 +159,7 @@ public class DrawSee extends JFrame {
     		 
     		gameChoice.removeAll();	   
     		amodel.obtainIdList().clear(); 
-			new ListGamesController(DrawSee.this, amodel).process();
+			new ListGamesController(DrawSee. this,amodel).process();
     	    //DrawSee drawsee =DrawSee.getGUI();///
     	    paint(jg);
     	    }
@@ -215,7 +214,7 @@ public class DrawSee extends JFrame {
     
    public void gameComponents(Choice gamechoice){
 	   this.gameChoice=gamechoice;
-   for(String i:AdminModel.idlist){
+   for(String i:AdministratorModel.idlist){
 		   gameChoice.add(i);	   
 	   }	        
    }

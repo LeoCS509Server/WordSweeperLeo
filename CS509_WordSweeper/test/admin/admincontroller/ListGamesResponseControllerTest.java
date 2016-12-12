@@ -1,18 +1,19 @@
 package admin.admincontroller;
 
+import admin.adminmodel.AdministratorModel;
 import admin.adminmodel1.AdminModel;
 import junit.framework.TestCase;
 import xml.Message;
 
 public class ListGamesResponseControllerTest extends TestCase {
 
-	AdminModel model;
+	AdministratorModel model;
 	protected void setUp() throws Exception {
 		super.setUp();
 		if (!Message.configure("wordsweeper.xsd")) {
 			fail ("unable to configure protocol");
 		}
-		model = new AdminModel();
+		model = new AdministratorModel();
 	}
 
 	protected void tearDown() throws Exception {

@@ -1,16 +1,18 @@
 package admin.adminmodel1;
 
 import junit.framework.TestCase;
-import admin.adminmodel1.AdminModel;
+import admin.adminmodel.AdministratorModel;
+import admin.adminmodel.Game;
+
 
 public class AdminModelTest extends TestCase {
-	AdminModel model;
+	AdministratorModel model;
 	Game game1;
 	Game game2;
 	Game game3;
 	protected void setUp() throws Exception {
 		super.setUp();
-		model = new AdminModel();
+		model = new AdministratorModel();
 		
 		game1 = new Game("test1",7);
 		game2 = new Game("test2",7);

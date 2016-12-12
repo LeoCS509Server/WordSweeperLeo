@@ -1,6 +1,6 @@
 package admin.admincontroller;
 
-import admin.adminmodel1.AdminModel;
+import admin.adminmodel.AdministratorModel;
 import admin.adminview.DrawSee;
 import xml.Message;
 /**
@@ -10,9 +10,9 @@ import xml.Message;
 public class ShowGameStateController {
 
 	DrawSee app;
-	AdminModel model;
+	AdministratorModel model;
 
-	public ShowGameStateController(DrawSee app, AdminModel model) {
+	public ShowGameStateController(DrawSee app, AdministratorModel model) {
 		this.app = app;
 		this.model = model;
 	}

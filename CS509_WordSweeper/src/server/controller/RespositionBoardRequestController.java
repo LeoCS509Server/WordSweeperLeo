@@ -10,7 +10,6 @@ import server.Server;
 import server.model.Game;
 import server.model.Model;
 import server.model.Player;
-import util.Location;
 import xml.Message;
 public class RespositionBoardRequestController {
 

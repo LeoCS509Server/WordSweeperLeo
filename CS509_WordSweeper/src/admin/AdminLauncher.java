@@ -4,7 +4,7 @@ import admin.admincontroller.AdminMessageHandler;
 import admin.admincontroller.ConnectResponseController;
 import admin.admincontroller.ListGamesResponseController;
 import admin.admincontroller.ShowGameStateResponseController;
-import admin.adminmodel.AdminModel;
+import admin.adminmodel.AdministratorModel;
 import admin.adminview.DrawSee;
 import client.ServerAccess;
 import xml.Message;
@@ -31,14 +31,14 @@ public class AdminLauncher {
 		}
 		
 		// Initialize the client application and its corresponding model
-		AdminModel admodel = new AdminModel();
+		AdministratorModel admodel = new AdministratorModel();
 		DrawSee app = new DrawSee(admodel);
 				
 		// set up the chain of responsibility
 		AdminMessageHandler handler = new AdminMessageHandler(app);
 		handler.registerHandler(new ListGamesResponseController(app, admodel));
 		handler.registerHandler(new ShowGameStateResponseController(app, admodel));
-		handler.registerHandler(new ConnectResponseController(app,admodel));
+		handler.registerHandler(new ConnectResponseController(app, admodel));
 		
 		// try to connect to the server. Once connected, messages are going to be processed by 
 		// SampleClientMessageHandler. For now we just continue on with the initialization because

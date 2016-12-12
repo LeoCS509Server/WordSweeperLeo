@@ -1,14 +1,14 @@
 package admin.admincontroller;
 
 import admin.admincontroller.ControllerChain;
-import admin.adminmodel.AdminModel;
+import admin.adminmodel.AdministratorModel;
 import admin.adminview.DrawSee;
 import xml.Message;
 public class ConnectResponseController extends ControllerChain {
 	public DrawSee app;
-	public AdminModel model;
+	public AdministratorModel model;
 
-	public ConnectResponseController(DrawSee a, AdminModel m) {
+	public ConnectResponseController(DrawSee a, AdministratorModel m) {
 		super();
 		this.app = a;
 		this.model = m;

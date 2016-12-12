@@ -7,7 +7,6 @@ import server.ClientState;
 import server.IProtocolHandler;
 import server.model.Model;
 import server.model.Player;
-import util.Location;
 import xml.Message;
 import server.model.Game;
 

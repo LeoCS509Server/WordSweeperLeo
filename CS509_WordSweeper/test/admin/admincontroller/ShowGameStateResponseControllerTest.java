@@ -1,8 +1,7 @@
 package admin.admincontroller;
 
 import admin.MockServerAccess;
-import admin.adminmodel1.AdminModel;
-import admin.adminmodel1.Game;
+import admin.adminmodel.AdministratorModel;
 import admin.adminview.DrawSee;
 import junit.framework.TestCase;
 import xml.Message;
@@ -14,7 +13,7 @@ public class ShowGameStateResponseControllerTest extends TestCase {
 	//DrawSee admin;
 	
 	// model being maintained by client.
-	AdminModel model;
+	AdministratorModel model;
 
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -24,7 +23,7 @@ public class ShowGameStateResponseControllerTest extends TestCase {
 		}
 		
 		// prepare client and connect to server.
-		model = new AdminModel();
+		model = new AdministratorModel();
 	}
 
 	protected void tearDown() throws Exception {
@@ -40,7 +39,7 @@ public class ShowGameStateResponseControllerTest extends TestCase {
 				+ "</boardResponse></response>";
 		Message response = new Message(xmlString);
 		new ShowGameStateResponseController(model).process(response);
-		Game gg = model.getGame("10534");
+		admin.adminmodel.Game gg = model.getGame("10534");
 		System.out.println(gg.getGlobalboard());
 		String b = "";
 		for(String[] s:gg.getGlobalboard()){

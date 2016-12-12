@@ -7,7 +7,7 @@ import admin.adminview.DrawSee;
 import java.util.ArrayList;
 
 import admin.MockServerAccess;
-import admin.adminmodel1.AdminModel;
+import admin.adminmodel.AdministratorModel;
 import junit.framework.TestCase;
 import xml.Message;
 
@@ -20,7 +20,7 @@ public class ListGamesControllerTest extends TestCase {
 	DrawSee admin;
 	
 	// model being maintained by admin.
-	AdminModel model;
+	AdministratorModel model;
 	protected void setUp() throws Exception {
 		super.setUp();
 		// FIRST thing to do is register the protocol being used.
@@ -28,7 +28,7 @@ public class ListGamesControllerTest extends TestCase {
 			fail ("unable to configure protocol");
 		}
 		// prepare client and connect to server.
-		model = new AdminModel();
+		model = new AdministratorModel();
 		admin = new DrawSee (model);
 		admin.setVisible(true);
 		// Create mockServer to simulate server, and install 'obvious' handler

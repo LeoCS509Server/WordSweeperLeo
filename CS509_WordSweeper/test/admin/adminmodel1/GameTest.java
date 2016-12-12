@@ -2,6 +2,7 @@ package admin.adminmodel1;
 
 import java.util.ArrayList;
 
+import admin.adminmodel.Game;
 import junit.framework.TestCase;
 
 public class GameTest extends TestCase {

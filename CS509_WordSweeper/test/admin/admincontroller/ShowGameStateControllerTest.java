@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 import admin.MockServerAccess;
 import admin.admincontroller.ShowGameStateController;
-import admin.adminmodel1.AdminModel;
+import admin.adminmodel.AdministratorModel;
+
 
 import admin.adminview.DrawSee;
 import junit.framework.TestCase;
@@ -19,7 +20,7 @@ public class ShowGameStateControllerTest extends TestCase {
 	DrawSee admin;
 	
 	// model being maintained by client.
-	AdminModel model;
+	AdministratorModel model;
 	
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -29,7 +30,7 @@ public class ShowGameStateControllerTest extends TestCase {
 		}
 		
 		// prepare client and connect to server.
-		model = new AdminModel();
+		model = new AdministratorModel();
 		admin = new DrawSee (model);
 		admin.setVisible(true);
 		

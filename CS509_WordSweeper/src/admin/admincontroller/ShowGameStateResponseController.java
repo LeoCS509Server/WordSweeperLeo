@@ -4,7 +4,7 @@ package admin.admincontroller;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-import admin.adminmodel.AdminModel;
+import admin.adminmodel.AdministratorModel;
 import admin.adminmodel.Game;
 import admin.adminview.DrawSee;
 import xml.Message;
@@ -13,13 +13,13 @@ import xml.Message;
 public class ShowGameStateResponseController extends ControllerChain {
 
 	public DrawSee app;
-	public AdminModel model;
+	public AdministratorModel model;
 	
 
 	/**
 	 *deal with the showGameStateResponse from server and upgrade the GUI 
 	 */
-	public ShowGameStateResponseController(DrawSee app,AdminModel m) {
+	public ShowGameStateResponseController(DrawSee app, AdministratorModel m) {
 		super();
 		this.app = app;
 		this.model = m;
