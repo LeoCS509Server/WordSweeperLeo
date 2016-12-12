@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 import admin.admincontroller.ListGamesController;
 import admin.admincontroller.ShowGameStateController;
@@ -33,7 +34,7 @@ public class DrawSee extends JFrame {
 		private static final DrawSee gui=new DrawSee(amodel);
 	
 	}
-		public DrawSee getGUI(){
+		public static DrawSee getGUI(){
 			return DrawseeHolder.gui;
 		}
 	
@@ -53,7 +54,8 @@ public class DrawSee extends JFrame {
 	JScrollPane scrollPane3;
 	JList<String> scorelist;
 	JList<String> playerlist;
-    
+    JTextArea playerarea;
+    JTextArea scorearea;
 	
     private Graphics jg;
     Game g ;
@@ -63,6 +65,7 @@ public class DrawSee extends JFrame {
 	private ServerAccess serverAccess;
     
     public DrawSee(AdminModel model) {
+    	
     	//super(name);
     	this.amodel = model;
         Container p = getContentPane();
@@ -90,13 +93,15 @@ public class DrawSee extends JFrame {
 		gameChoice.setBounds(45,55, 100, 30);
 		getContentPane().add(gameChoice);
 		
-		JScrollPane scrollPane2 = new JScrollPane();
- 		scrollPane2.setBounds(50, 100, 90, 350);
- 		getContentPane().add(scrollPane2);
-		
-		JScrollPane scrollPane3 = new JScrollPane();
- 		scrollPane3.setBounds(150, 100, 90, 350);
- 		getContentPane().add(scrollPane3);
+//		JScrollPane scrollPane2 = new JScrollPane();
+// 		scrollPane2.setBounds(50, 100, 90, 350);
+// 		getContentPane().add(scrollPane2);
+ 		
+ 	
+ 		
+// 		JScrollPane scrollPane3 = new JScrollPane();
+// 		scrollPane3.setBounds(150, 100, 90, 350);
+// 		getContentPane().add(scrollPane3);
  		
 		JButton button2 = new JButton("Select");
 		button2.setBounds(175, 56, 80, 25);
@@ -111,15 +116,22 @@ public class DrawSee extends JFrame {
 	         	
 	         	
 	         
-	     		
-	     		JList<String> playerlist = new JList<>(new MyListModel());
-	     		scrollPane2.setViewportView(playerlist);
-	     		
-	     	
-	     		
-	     		JList<String> scorelist = new JList<>(new MyListModel2());
-	     		scrollPane3.setViewportView(scorelist);        
+	     		//ArrayList<String> playercontents=new ArrayList<String>;
+	        	 
+	        		playerarea = new JTextArea("");
+	         		playerarea.setForeground(Color.BLACK);
+	         		playerarea.setColumns(20);
+	         		playerarea.setRows(10);
+	         		playerarea.setEditable(false);
+	         		playerarea.setLineWrap(true);
+	         		
+	        		scrollPane2 = new JScrollPane();
+	        		scrollPane2.setBounds(50, 100, 180, 350);
+	        		scrollPane2.setViewportView(playerarea);
+	        		add(scrollPane2);
+	        		
 
+	     		
 	         	
 	         	g =	AdminModel.getGame(gameChoice.getItem(gameChoice.getSelectedIndex()));   	
 	        	    paintComponents(jg,g);     ///
@@ -137,94 +149,72 @@ public class DrawSee extends JFrame {
         
     }
     
-//    class selectAction implements ActionListener{
-//    	@Override
-//   	 public void actionPerformed(ActionEvent e) {
-//    
-//    	new ShowGameStateController(DrawSee.this, amodel).process(gameChoice.getItem(gameChoice.getSelectedIndex()));
-//    	
-//    	
-//    	JScrollPane scrollPane2 = new JScrollPane();
-//		scrollPane2.setBounds(50, 100, 90, 350);
-//		getContentPane().add(scrollPane2);
-//		
-//		JList<String> playerlist = new JList<>(new MyListModel());
-//		scrollPane2.setViewportView(playerlist);
-//		
-//		JScrollPane scrollPane3 = new JScrollPane();
-//		scrollPane3.setBounds(150, 100, 90, 350);
-//		getContentPane().add(scrollPane3);
-//		
-//		JList<String> scorelist = new JList<>(new MyListModel2());
-//		scrollPane3.setViewportView(scorelist);        
-//
-//    	
-//    	g =	AdminModel.getGame(gameChoice.getItem(gameChoice.getSelectedIndex()));   	
-//   	    paintComponents(jg,g);     ///
-//   	    }
-//    }
     
     
 	class refreshAction implements ActionListener{
     	@Override
     	 public void actionPerformed(ActionEvent e) {
+    		playerarea.setText("");
+    		//playerarea.removeAll();
+    		g.getPlayerid().clear();
+    		 
+    		gameChoice.removeAll();	   
+    		amodel.obtainIdList().clear(); 
 			new ListGamesController(DrawSee.this, amodel).process();
     	    //DrawSee drawsee =DrawSee.getGUI();///
-    	    //DrawSee.getGUI();///
+    	    paint(jg);
     	    }
     }
 	
     
-    class MyListModel extends AbstractListModel<String>{
-    	
-    	private ArrayList<String> contents=g.getPlayerid();
-    	
-    	
-    		
-    	//private String[] contents={"dfs","dff"};
-    	 	
-    	@Override
-    	public String getElementAt(int x){
-    		
-    		if (x<contents.size())
-    			return (String) contents.get(x++);
-    		else
-    			return null;
-    	}
-    	@Override
-    	public int getSize(){
-    		return contents.size();
-    	}
-    }
-    
-    class MyListModel2 extends AbstractListModel<String>{
-    	
-    	private ArrayList<Integer> contents2=g.getScore();
-    	
-//    	public MyListModel2(Game g){//不确定是不是传game
-//    		contents2 =g.getScore();
-//    		}
-    		
-    	
-    	@Override
-    	public String getElementAt(int x){
-    		if (x<contents2.size())
-    			return contents2.get(x++).toString();
-    		else
-    			return null;
-    	}
-    	
-    	@Override
-    	public int getSize(){
-    		return contents2.size();
-    	}
-    }
+//    class MyListModel extends AbstractListModel<String>{
+//    	
+//    	private ArrayList<String> contents=g.getPlayerid();
+//    	
+//    	
+//    		
+//    	//private String[] contents={"dfs","dff"};
+//    	 	
+//    	@Override
+//    	public String getElementAt(int x){
+//    		
+//    		if (x<contents.size())
+//    			return (String) contents.get(x++);
+//    		else
+//    			return null;
+//    	}
+//    	@Override
+//    	public int getSize(){
+//    		return contents.size();
+//    	}
+//    }
+//    
+//    class MyListModel2 extends AbstractListModel<String>{
+//    	
+//    	private ArrayList<Integer> contents2=g.getScore();
+//    	
+////    	public MyListModel2(Game g){//不确定是不是传game
+////    		contents2 =g.getScore();
+////    		}
+//    		
+//    	
+//    	@Override
+//    	public String getElementAt(int x){
+//    		if (x<contents2.size())
+//    			return contents2.get(x++).toString();
+//    		else
+//    			return null;
+//    	}
+//    	
+//    	@Override
+//    	public int getSize(){
+//    		return contents2.size();
+//    	}
+//    }
     
     
    public void gameComponents(Choice gamechoice){
 	   this.gameChoice=gamechoice;
-	  // ArrayList<String> ss = AdminModel.idlist;
-	  // System.out.println(AdminModel.idlist.get(0));
    for(String i:AdminModel.idlist){
 		   gameChoice.add(i);	   
 	   }	        
@@ -233,6 +223,30 @@ public class DrawSee extends JFrame {
    public Choice getchoice(){
 	   return gameChoice;
    }
+   
+public JList<String> getPlayerlist(){
+	return playerlist;
+}
+
+public JScrollPane getScrollpane2(){
+	return scrollPane2;
+}
+
+public JTextArea getPlayerarea(){
+	return playerarea;
+}
+
+public JTextArea getScorearea(){
+	return scorearea;
+}
+
+public void setPlayerList(JList<String> pllist,ArrayList<String> playerid){
+	this.playerlist=pllist;
+	String[] arr= new String[playerid.size()] ;
+	arr=(String [])playerid.toArray();
+	playerlist.setListData(arr);;
+	
+}
     public void paintComponents(Graphics g,Game game) {
     	
         int size=game.getSize();
@@ -257,7 +271,7 @@ public class DrawSee extends JFrame {
         for(int i=0;i< playerlocation.size();i++){
         	Color Color = new Color(220+(int)(Math.random()*35),220+(int)(Math.random()*35),220+(int)(Math.random()*35));
 			g.setColor(Color);
-			g.fillRect((sx+((int)playerlocation.get(i)/10)*40),(sy+((int)playerlocation.get(i)%10)*40), 160, 160);
+			g.fillRect((sx-w+((int)playerlocation.get(i)/10)*40),(sy-w+((int)playerlocation.get(i)%10)*40), 160, 160);
         }
       
 
