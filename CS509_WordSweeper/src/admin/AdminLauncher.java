@@ -2,7 +2,6 @@ package admin;
 
 import admin.admincontroller.AdminMessageHandler;
 import admin.admincontroller.ConnectResponseController;
-import admin.admincontroller.ListGamesController;
 import admin.admincontroller.ListGamesResponseController;
 import admin.admincontroller.ShowGameStateResponseController;
 import admin.adminmodel.AdminModel;

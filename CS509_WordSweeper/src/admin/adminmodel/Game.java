@@ -2,11 +2,10 @@ package admin.adminmodel;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+
 import util.ContentsIterator;
 
-
 public class Game {
-
 	String gameid;
 	String[][] globalboard;
 	int size;
@@ -82,3 +81,5 @@ public class Game {
 		return gameid;
 	}
 }
+
+
