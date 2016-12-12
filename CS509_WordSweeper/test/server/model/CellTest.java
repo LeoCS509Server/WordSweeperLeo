@@ -21,12 +21,10 @@ public class CellTest extends TestCase {
 	public void testSetLetter1() {
 		Location loc2 = new Location(2,4);		
 		Cell c =new Cell(loc2);
+		String s = c.getLetter();
 		
-		Location loc3 = new Location(3,4);		
-		Cell c2 =new Cell(loc3);
-		
-		c.setLetter(c2);
-		assertEquals(c2.getLetter(), c.getLetter());
+		c.setLetter("L");
+		assertFalse(s == c.getLetter());
 		}
 
 	public void testSetLetterCell() {

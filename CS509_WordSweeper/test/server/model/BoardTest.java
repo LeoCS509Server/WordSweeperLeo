@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import junit.framework.TestCase;
 import util.Location;
 
-public class BoardTest2 extends TestCase {
+public class BoardTest extends TestCase {
 
 	Board board;
 	Board board1;
