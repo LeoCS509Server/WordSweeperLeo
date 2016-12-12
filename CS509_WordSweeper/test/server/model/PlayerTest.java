@@ -74,8 +74,8 @@ public class PlayerTest extends TestCase {
 		
 		Location l3 = new Location(2,3);
 		List<Location> LocationList2 = new ArrayList<>();
-		for(int c = 0; c<4; c++){
-			for(int r=0; r<4; r++){
+		for(int r = 0; r<4; r++){
+			for(int c=0; c<4; c++){
 				LocationList2.add(new Location(l3.getColumn()+c,l3.getRow()+r));
 			}
 		}

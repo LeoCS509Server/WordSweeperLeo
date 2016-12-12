@@ -14,7 +14,7 @@ public class BoardTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		board = new Board();
-		board1 = new Board(7);
+		board1 = new Board(9);
 	}
 
 
@@ -24,11 +24,11 @@ public class BoardTest extends TestCase {
 	}
 
 	public void testResetBoard() {
-		fail("Not yet implemented");
+		assertNotNull(board.resetBoard().getBoardContains());
 	}
 
 	public void testResetBoardInt() {
-		fail("Not yet implemented");
+		assertNotNull(board.resetBoard(9).getBoardContains());
 	}
 
 	public void testGetCellContains() {
@@ -43,12 +43,9 @@ public class BoardTest extends TestCase {
 			}
 	}
 
-	public void testBonusCell() {
-		fail("Not yet implemented");
-	}
 
 	public void testGetBonusCell() {
-		fail("Not yet implemented");
+		assertNotNull(board.getBonusCell());
 	}
 
 	public void testRemoveWord() {
