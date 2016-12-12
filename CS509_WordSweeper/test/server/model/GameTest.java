@@ -5,24 +5,49 @@ package server.model;
 import java.util.ArrayList;
 
 import junit.framework.TestCase;
+import server.MockClient;
+import server.Server;
 import util.Location;
 
 public class GameTest extends TestCase {
 	
 	Game g1;
 	Game g2;
-	
+	MockClient client1;
+	MockClient client2;
+	MockClient client3;
+	MockClient client4;
+	MockClient client5;
+	MockClient client6;
+	MockClient client7;
+	MockClient client8;
 
 	protected void setUp() throws Exception {
 		super.setUp();
 		
-	
-		g1 = new Game("Tom");
-		g2 = new Game("Sam");
+		client1 = new MockClient();
+		Server.register("c1", client1);
+		client2 = new MockClient();
+		Server.register("c2", client2);
+		client3 = new MockClient();
+		Server.register("c3", client3);
+		client4 = new MockClient();
+		Server.register("c4", client4);
+		client5 = new MockClient();
+		Server.register("c5", client5);
+		client6 = new MockClient();
+		Server.register("c6", client6);
+		client7 = new MockClient();
+		Server.register("c7", client7);
+		client8 = new MockClient();
+		Server.register("c8", client8);
 		
-		g1.addPlayer("Tim");
-		g1.addPlayer("Jim");
-		g2.addPlayer("Echo");
+		g1 = new Game("Tom",client1.id());
+		g2 = new Game("Sam",client2.id());
+		
+		g1.addPlayer("Tim",client3.id());
+		g1.addPlayer("Jim",client4.id());
+		g2.addPlayer("Echo",client5.id());
 		
 		g1.setPassword("12345");
 		
@@ -48,7 +73,7 @@ public class GameTest extends TestCase {
 
 
 	public void testAddPlayer() {
-		g1.addPlayer("Sam");
+		g1.addPlayer("Sam",client6.id());
 		assertEquals(4,g1.getNumPlayers());
 	}
 
@@ -82,8 +107,8 @@ public class GameTest extends TestCase {
 	}
 
 	public void testCheckBoardSize() {
-		g1.addPlayer("Red");
-		g1.addPlayer("Blue");	
+		g1.addPlayer("Red",client7.id());
+		g1.addPlayer("Blue",client8.id());	
 		assertEquals(9,g1.checkBoardSize());
 		
 	}
@@ -158,7 +183,7 @@ public class GameTest extends TestCase {
 	}
 
 	public void testGetPlayerboard() {
-		assertEquals(16, g1.getPlayerboard(g1.getPlayer("Tom")).length());
+		assertEquals(32, g1.getPlayerboard(g1.getPlayer("Tom")).length());
 	}
 
 }

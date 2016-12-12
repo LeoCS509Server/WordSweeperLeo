@@ -4,22 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 import junit.framework.TestCase;
+import server.MockClient;
+import server.Server;
 import util.Location;
 
 public class PlayerTest extends TestCase {
-
+	MockClient client1;
+	MockClient client2;
 	Player p1;
 	Player p2;
 
 	protected void setUp() throws Exception {
 		super.setUp();
+		client1 = new MockClient();
+		Server.register("c1", client1);
+		client2 = new MockClient();
+		Server.register("c2", client2);
 		String name = "Tom";
 		Location l = new Location(2,3);
-		p1 = new Player(name, l);
+		p1 = new Player(name, l,client1.id());
 		
 		String name2 = "Bob";
 		Location l2 = new Location(2,3);
-		p2 = new Player(name2, l2);
+		p2 = new Player(name2, l2,client2.id());
 		
 	}
 
