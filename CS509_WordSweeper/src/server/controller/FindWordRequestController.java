@@ -35,7 +35,8 @@ public class FindWordRequestController {
 		Node pos = findwordRequest.getFirstChild();
 		while (pos != null){
 			NamedNodeMap mappos = pos.getAttributes();
-			String position = mappos.getNamedItem("position").getNodeValue();	
+			String position = mappos.getNamedItem("position").getNodeValue();
+			
 			Location l = new Location(position);
 			loc.add(l);
 			pos = pos.getNextSibling();
@@ -54,11 +55,21 @@ public class FindWordRequestController {
 				"<findWordResponse gameId='"+ ID +"' name='"+ name +"' score='"+sc+"'>" +
 			  "</findWordResponse>" +
 			"</response>";
-		BoardResponseBuilder builder = new BoardResponseBuilder(model);
+	
 		//construct xml response message
-		String xml = Message.responseHeader(request.id())+builder.build();
-		Message message = new Message(xml);
-		System.out.println(message);
+		String player1 = new String();
+		ArrayList<Player> Players = game.getPlayers();
+		for (Player p : Players){
+			player1 = player1 + "<player name='" + p.getName() + "' position = '"+p.getPlayerLocation().getColumn()+","+ p.getPlayerLocation().getRow() +"' board = '"+ game.getPlayerboard(p) +"' score='" + p.getScore() +"'/>" ;
+		}
+		
+		String xmlString1 = Message.responseHeader(request.id()) +
+				"<boardResponse gameId='"+ game.getGameID() +"' managingUser = '"+ game.getManageUsername()+"' bonus ='" + game.getBoard().getBonusCell().getColumn()+","+ game.getBoard().getBonusCell().getRow()+"'>" +
+			  player1 +
+				"</boardResponse>" +
+			"</response>";
+		// send this response back to the client which sent us the request.
+		Message message = new Message(xmlString1);
 		for (Player p : game.getPlayers()) {
 			for (String id : Server.ids()) {
 				if (id.equals(p.getClientId())) {
