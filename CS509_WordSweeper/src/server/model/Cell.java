@@ -47,8 +47,12 @@ public class Cell {
 	/** Assign the letter of another cell to the cell.
 	 * @param Cell
 	 */
-	public void setLetter(Cell c){
-		this.letter = c.getLetter();		
+//	public void setLetter(Cell c){
+//		this.letter = c.getLetter();		
+//	}
+	
+	public void setLetter(String s){
+		this.letter = s;		
 	}
 	
 	/** Return the letter of the cell. */
