@@ -1,10 +1,13 @@
 package server.controller;
+import java.util.ArrayList;
+
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 import server.ClientState;
-
+import server.Server;
 import server.model.Model;
+import server.model.Player;
 import server.model.Game;
 import xml.Message;
 public class ExitGameRequestController {
@@ -26,6 +29,31 @@ public class ExitGameRequestController {
 			  "</exitGameResponse>" +
 			"</response>";
 		// send this response back to the client which sent us the request.
+		
+		String player = new String();
+		ArrayList<Player> Players = game.getPlayers();
+		for (Player p : Players){
+			player = player + "<player name='" + p.getName() + "' position = '"+p.getPlayerLocation().getColumn()+","+ p.getPlayerLocation().getRow() +"' board = '"+ game.getPlayerboard(p) +"' score='" + p.getScore() +"'/>" ;
+		}
+		
+		String xmlString1 = Message.responseHeader(request.id()) +
+				"<boardResponse gameId='"+ game.getGameID() +"' managingUser = '"+ game.getManageUsername()+"' bonus ='" + game.getBoard().getBonusCell().getColumn()+","+ game.getBoard().getBonusCell().getRow()+"'>" +
+			  player +
+				"</boardResponse>" +
+			"</response>";
+		// send this response back to the client which sent us the request.
+		Message message = new Message(xmlString1);
+		for (Player p : game.getPlayers()) {
+			for (String id : Server.ids()) {
+				if (id.equals(p.getClientId())) {
+					
+						Server.getState(id).sendMessage(message);
+					
+				}
+			}
+		}
+		
+		
 		return new Message (xmlString);
 	}
 }
