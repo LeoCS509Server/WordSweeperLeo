@@ -29,6 +29,7 @@ public class ListGamesResponseController extends ControllerChain {
 	}
 	
 	public boolean process(Message response) {
+		
 		String type = response.contents.getFirstChild().getLocalName();
 		if (!type.equals ("listGamesResponse")) {
 			return next.process(response);
@@ -37,12 +38,14 @@ public class ListGamesResponseController extends ControllerChain {
 		// this refers to the outer node of the Message DOM (in this case, updateResponse).
 		Node listGamesResponse = response.contents.getFirstChild();
 		Node gameBrief = listGamesResponse.getFirstChild();
-		String Info = "";
+	
+		
 		while (gameBrief != null){
 			NamedNodeMap map = gameBrief.getAttributes();
 			String ID = map.getNamedItem("gameId").getNodeValue();			
 			//int Num = Integer.parseInt(map.getNamedItem("players").getNodeValue());
 			//Info = Info+ ID ;
+			
 			model.setIdlist(ID);
 			gameBrief = gameBrief.getNextSibling();
 		}
@@ -50,6 +53,7 @@ public class ListGamesResponseController extends ControllerChain {
 		app.gameComponents(app.getchoice());
 	//System.out.println(model.obtainIdList().get(0));
 //		app.getGUI();
+		
 	/**
 	 * call some GUI update functions here	
 	 */
