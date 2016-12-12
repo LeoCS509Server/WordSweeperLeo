@@ -1,4 +1,4 @@
-package admin.adminmodel1;
+package admin.adminmodel;
 
 import java.util.ArrayList;
 import java.util.Iterator;
