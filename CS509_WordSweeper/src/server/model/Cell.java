@@ -8,7 +8,6 @@ import util.Location;
  * 
  * A cell is located at a specific Location(x,y) coordinate in board. It has letter inside. 
  * 
- * 
  * @author Tongge Zhu
  */
 
@@ -21,6 +20,7 @@ public class Cell {
 	/**The selected cell is the bonus cell. */
 	Boolean seleted;
 	
+	/**Cell constructor*/
 	public Cell(Location location) {
 		super();
 		this.location = location;
@@ -45,17 +45,15 @@ public class Cell {
 	}
 	
 	/** Assign the letter of another cell to the cell.
-	 * @param Cell
-	 */
-//	public void setLetter(Cell c){
-//		this.letter = c.getLetter();		
-//	}
-	
-	public void setLetter(String s){
-		this.letter = s;		
+	 * @param string
+	 */	
+	public void setLetter(String string){
+		this.letter = string;		
 	}
 	
-	/** Return the letter of the cell. */
+	/** Return the letter of the cell. 
+	 * @return
+	 */
 	public String getLetter(){
 		return this.letter;
 	}
@@ -65,7 +63,9 @@ public class Cell {
 		this.letter = null;	
 	}
 	
-	/** Check if the cell is the Bonus cell. */
+	/** Check if the cell is the Bonus cell. 
+	 * @return
+	 */
 	public boolean isSeleted(){
 		return this.seleted;
 	}
@@ -74,14 +74,5 @@ public class Cell {
 	public void setSeleted(){
 		this.seleted = true;
 	}
-	
-//	/** Assign the letter of another cell to the cell.
-//	 * @param Cell
-//	 */
-//	public void changeLocation(int c, int r){
-//		this.location.setColumn(c);
-//		this.location.setRow(r);
-//	}
-
 	
 }
