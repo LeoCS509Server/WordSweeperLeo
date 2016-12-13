@@ -2,19 +2,27 @@ package server.model;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-
-
 import util.Location;
+
+/**
+ * Board entity class, which contains all the info and functions about the board.  
+ * 
+ * @author Tongge Zhu
+ */
 
 public class Board {
 	
+	/** Size attribute of board, a board is size * size. */
 	int size;
+	
+	/** Cells being maintained. */
 	Hashtable<Location, Cell> board;
+	
+	/** Bonus cell being maintained. */
 	Location Bonus;
 	
-	
-	Board() {
-		
+	/**Board constructor*/
+	Board() {		
 		size = 7;
 		board = new Hashtable<Location, Cell>();
 		for(int c = 1; c<=size;c++){
@@ -27,6 +35,9 @@ public class Board {
 		Bonus=BonusCell();
 	}
 	
+	/**Board constructor, when size of players larger than 3
+	 *  @param size  int is calculated by game.checkBoardSize()
+	 */
 	public Board(int size) {
 		super();
 		this.size = size;
@@ -41,27 +52,49 @@ public class Board {
 		Bonus=BonusCell();
 	}
 	
+	/**return the size attribute of the board
+	 * @return 
+	 */
 	public int getSize(){
 		return this.size;
 	}
-		
+	
+	/** 
+	 * refresh board with a assigned size
+	 * 
+	 */
 	public Board resetBoard(){
 		return new Board();	
 		
 	}
 	
+	/** 
+	 * refresh board with a assigned size
+	 * 
+	 * @param size
+	 */
 	public Board resetBoard(int size){
 		return new Board(size);	
 	}
 	
-	public String getCellContains(Location l){		
-		return board.get(l).letter;
+	/**
+	 * Return Letter within the Cell of Location l.
+	 * 
+	 *@param location
+	 */
+	public String getCellContains(Location location){		
+		return board.get(location).letter;
 	}
 	
+	/**
+	 * Return Letters within the board line-by-line.
+	 * 
+	 *@return
+	 */
 	public String getBoardContains(){
 		String s = new String();
-		for(int c = 1; c<=size;c++){
-			for(int r =1; r<=size; r++){
+		for(int r = 1; r<=size;r++){
+			for(int c =1; c<=size; c++){
                 Location loc = new Location(c,r);
                 s += board.get(loc).getLetter();
                 }
@@ -69,24 +102,39 @@ public class Board {
 		return s;
 	}
 	
-	protected static Location BonusCell(){
+	/**
+	 * Set Location of the bonus cell 
+	 * 
+	 *@return
+	 */
+	public static Location BonusCell(){
 		int c = (int) (Math.random()*7)+1;
 		int r = (int) (Math.random()*7)+1;
 		return new Location(c,r);
 	}
 	
-	
+	/**
+	 * Return Location of the bonus cell 
+	 * 
+	 *@return
+	 */
 	public Location getBonusCell(){
 		return Bonus;
 	}
 	
-
+	/**
+	 * Clear the cell contain letter at a given locations list
+	 * 
+	 */
 	public void removeWord(ArrayList<Location> locations){
 		for(Location l : locations){	
 			board.get(l).removeLetter();
 		}	
 	}
-		
+	
+	/**
+	 * perform right after removeWord，refill the empty cell
+	 */
 	public void refreshBoard(){
 		for(int c = 1; c<=size;c++){
 			int count = 0;
