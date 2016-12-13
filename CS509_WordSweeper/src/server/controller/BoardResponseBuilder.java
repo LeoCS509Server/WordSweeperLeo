@@ -21,8 +21,8 @@ public class BoardResponseBuilder {
 
 	public String build(){
 		//get needed information
-		Game selectedGame = model.getSelected();
-		String gameId = selectedGame.getGameID();
+		Game selectedGame = model.getGame(ID);
+		String gameId = ID;
 		int size = selectedGame.checkBoardSize();
 		String managingUser = selectedGame.getManageUsername();
 		Board board = selectedGame.getBoard();
