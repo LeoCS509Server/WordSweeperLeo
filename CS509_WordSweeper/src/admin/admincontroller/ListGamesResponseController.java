@@ -8,6 +8,15 @@ import admin.adminmodel.AdministratorModel;
 import admin.adminview.DrawSee;
 import xml.Message;
 
+/**
+ * When the admin clicks "refresh" button, a listgameRequest will be sent to the
+ * server.
+ * <p>
+ * The {@link #process()} makes a listgameRequest in XML format, and send it to
+ * the server.
+ * 
+ * @author Weihao Li,Zetian Wang (Authors contribute equally)
+ */
 
 /**
  * deal with listGame response
@@ -39,20 +48,14 @@ public class ListGamesResponseController extends ControllerChain {
 		while (gameBrief != null){
 			NamedNodeMap map = gameBrief.getAttributes();
 			String ID = map.getNamedItem("gameId").getNodeValue();			
-			//int Num = Integer.parseInt(map.getNamedItem("players").getNodeValue());
-			//Info = Info+ ID ;
-			
-			model.setIdlist(ID);
+			model.setIdlist(ID);//update gamelist
 			gameBrief = gameBrief.getNextSibling();
 		}
-		
+		/**
+		 * call some GUI update functions here	
+		 */
 		app.gameComponents(app.getchoice());
-	//System.out.println(model.obtainIdList().get(0));
-//		app.getGUI();
-		
-	/**
-	 * call some GUI update functions here	
-	 */
+	
 	
 		return true;
 	}
