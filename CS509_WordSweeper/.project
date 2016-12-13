@@ -3,7 +3,7 @@
 	<name>CS509_WordSweeper</name>
 	<comment></comment>
 	<projects>
-		<project>ServerClient</project>
+		<project>ClientServer</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
