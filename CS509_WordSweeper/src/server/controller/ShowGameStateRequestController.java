@@ -33,11 +33,11 @@ public class ShowGameStateRequestController {
 		Node showGameStateRequest = request.contents.getFirstChild();
 		NamedNodeMap showGame = showGameStateRequest.getAttributes();
 		String id = showGame.getNamedItem("gameId").getNodeValue();
-		model.selectGame(id);
+
 		
 		BoardResponseBuilder builder = new BoardResponseBuilder(model);
 		//construct xml response message
-		String xmlString = Message.responseHeader(request.id())+builder.build();
+		String xmlString = Message.responseHeader(request.id())+builder.build(id);
 		Message message = new Message(xmlString);
 		return message;
 	}
