@@ -13,6 +13,11 @@ import xml.Message;
 /**
  * deal with the showgamestate request in server side 
  */
+/**
+ * 
+ * @author Zetian
+ *
+ */
 public class ShowGameStateRequestController {
 
 	Model model;
