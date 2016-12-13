@@ -44,13 +44,9 @@ public class RespositionBoardRequestController {
 		int rowchange = Integer.valueOf(rc).intValue();
 		int colchange = Integer.valueOf(cc).intValue();
 		game.rePosition(pl, colchange, rowchange);
-		//game.getPlayer(name).setPlayerLocation(location);////////////
-//		BoardResponseBuilder builder = new BoardResponseBuilder(model);
-//		//construct xml response message
-//		String xmlString = Message.responseHeader(request.id())+builder.build();
-//		Message message = new Message(xmlString);
-//		return message;
-//	
+		
+
+
 		//construct xml response message
 		
 		

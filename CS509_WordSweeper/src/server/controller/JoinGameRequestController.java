@@ -83,47 +83,7 @@ public class JoinGameRequestController implements IProtocolHandler {
 		}
 		
 
-		// String player = new String();
-		// ArrayList<Player> Players = game.getPlayers();
-		// for (Player p : Players){
-		// player = player + "<player name='" + p.getName() + "' position =
-		// '"+p.getPlayerLocation().getColumn()+","+
-		// p.getPlayerLocation().getRow() +"' board = '"+ game.getPlayerboard(p)
-		// +"' score='" + p.getScore() +"'/>" ;
-		// }
-		// Construct message reflecting state
-		// Location location = game.getPlayer(name).getPlayerLocation();
-		// if(!game.getGameID().equals(ID)){
-		// xmlString = Message.responseHeader(request.id(),"game is not exist")
-		// +"<joinGameResponse gameId='"+ game.getGameID() +"'>" +
-		// "</joinGameResponse>" +
-		// "</response>";
-		// }
-		// else if(game.checkisLocked())
-		// {
-		// xmlString = Message.responseHeader(request.id(),"game is locked")
-		// +"<joinGameResponse gameId='"+ game.getGameID() +"'>" +
-		// "</joinGameResponse>" +
-		// "</response>";
-		// }
-		// else if(!model.isPasswordCorrect(ID, password)){
-		// xmlString = Message.responseHeader(request.id(),"password is
-		// incorrect") +"<joinGameResponse gameId='"+ game.getGameID() +"'>" +
-		// "</joinGameResponse>" +
-		// "</response>";
-		//
-		// }
-		// else{
-		//
-		// xmlString = Message.responseHeader(request.id()) +
-		// "<boardResponse gameId='"+ game.getGameID() +"' managingUser = '"+
-		// game.getManageUsername()+"' bonus = '"
-		// +game.getBoard().getBonusCell().getColumn()+","+
-		// game.getBoard().getBonusCell().getRow()+"' >" +
-		// player+
-		// "</boardResponse>" +
-		// "</response>";
-		// }
+		
 		Message message = new Message(xmlString);
 		// all other players on game (excepting this particular client) need to
 		// be told of this

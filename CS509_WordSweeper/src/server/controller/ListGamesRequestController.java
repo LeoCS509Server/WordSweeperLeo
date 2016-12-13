@@ -20,13 +20,7 @@ public class ListGamesRequestController {
 	
 	public Message process(ClientState client, Message request){
 		
-//		String gameBrief = new String("");
-//		ArrayList<Game> games = model.getGames();
-//		for (Game g : games){
-//			String gameID = g.getGameID();
-//			int players = g.getNumPlayers();
-//			gameBrief = gameBrief + "<gameBrief gameId='" + gameID + "' players='" + players +"'/>" ;
-//		}
+
 		String gameBrief = new String("");
 		model.refreshGameList();
 		ArrayList<Game> games = model.getGames();
