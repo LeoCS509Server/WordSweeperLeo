@@ -19,11 +19,11 @@ public class BoardResponseBuilder {
 		//this.bcontent = new ArrayList<String>();
 	}
 
-	public String build(){
+	public String build(String ID){
 		//get needed information
 		Game selectedGame = model.getGame(ID);
 		String gameId = ID;
-		int size = selectedGame.checkBoardSize();
+		int size = selectedGame.getBoard().getSize();
 		String managingUser = selectedGame.getManageUsername();
 		Board board = selectedGame.getBoard();
 		content = BoardContent(board);

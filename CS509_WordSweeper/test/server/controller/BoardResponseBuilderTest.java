@@ -25,6 +25,7 @@ public class BoardResponseBuilderTest extends TestCase {
 		game = new Game("manager",cid);
 		game.addPlayer("ali",cid);
 		game.addPlayer("bird",cid);
+		game.addPlayer("dog", cid);
 		model.addGame(game);
 		model.selectGame(game.getGameID());
 	}
@@ -34,8 +35,9 @@ public class BoardResponseBuilderTest extends TestCase {
 	}
 
 	public void testBuild() {
+		String id = game.getGameID();
 		BoardResponseBuilder builder = new BoardResponseBuilder(model);
-		String xml = builder.build();
+		String xml = builder.build(id);
 		String ct = builder.BoardContent(game.getBoard());
 		assertEquals(ct,builder.content);
 		System.out.println(xml);
