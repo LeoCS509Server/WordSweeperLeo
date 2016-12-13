@@ -11,7 +11,7 @@ import xml.Message;
 
 /**
  *An showgamestate response information should be received once admin is trying to refresh the admin interface.
- * This handles the exit game response information
+ * This handles the showgame response information
  * 
  * The {@link #process(Message)}} updates the game information in entity classes, and returns the boundary  to the admin GUI.
  * 
