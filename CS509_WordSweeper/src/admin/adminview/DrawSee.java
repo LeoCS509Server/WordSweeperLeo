@@ -106,25 +106,24 @@ public class DrawSee extends JFrame {
 		button2.setBounds(175, 56, 80, 25);
 		getContentPane().add(button2);
 		//button2.addActionListener(new selectAction());
-   	 
-   		playerarea = new JTextArea("");
-    		playerarea.setForeground(Color.BLACK);
-    		playerarea.setColumns(20);
-    		playerarea.setRows(10);
-    		playerarea.setEditable(false);
-    		playerarea.setLineWrap(true);
 		
 		 jg =  this.getGraphics();
 		
 		 button2.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {     
-	        	 
+	        	 new ShowGameStateController(DrawSee.this,amodel).process(gameChoice.getItem(gameChoice.getSelectedIndex()));
 	         	
 	         	
 	         
 	     		//ArrayList<String> playercontents=new ArrayList<String>;
-
-	         		new ShowGameStateController(DrawSee.this,amodel).process(gameChoice.getItem(gameChoice.getSelectedIndex()));
+	        	 
+	        		playerarea = new JTextArea("");
+	         		playerarea.setForeground(Color.BLACK);
+	         		playerarea.setColumns(20);
+	         		playerarea.setRows(10);
+	         		playerarea.setEditable(false);
+	         		playerarea.setLineWrap(true);
+	         		
 	        		scrollPane2 = new JScrollPane();
 	        		scrollPane2.setBounds(50, 100, 180, 350);
 	        		scrollPane2.setViewportView(playerarea);
@@ -160,7 +159,7 @@ public class DrawSee extends JFrame {
     		 
     		gameChoice.removeAll();	   
     		amodel.obtainIdList().clear(); 
-			new ListGamesController(DrawSee. this,amodel).process();
+			new ListGamesController(DrawSee.this,amodel).process();
     	    //DrawSee drawsee =DrawSee.getGUI();///
     	    paint(jg);
     	    }
@@ -193,7 +192,7 @@ public class DrawSee extends JFrame {
 //    	
 //    	private ArrayList<Integer> contents2=g.getScore();
 //    	
-////    	public MyListModel2(Game g){//game
+////    	public MyListModel2(Game g){//不确定是不是传game
 ////    		contents2 =g.getScore();
 ////    		}
 //    		
@@ -247,7 +246,7 @@ public void setPlayerList(JList<String> pllist,ArrayList<String> playerid){
 	playerlist.setListData(arr);;
 	
 }
-    public void paintComponents(Graphics g,Game game) {
+public void paintComponents(Graphics g,Game game) {
     	
         int size=game.getSize();
         rw=size*40;
@@ -275,7 +274,7 @@ public void setPlayerList(JList<String> pllist,ArrayList<String> playerid){
         }
       
 
-        for(int i = 0; i <size; i ++){
+        for(int i = 0; i <=size; i ++){
             for(int j = 0; j < size; j ++) {
                 drawString(g, j, i, game);                    
             }
