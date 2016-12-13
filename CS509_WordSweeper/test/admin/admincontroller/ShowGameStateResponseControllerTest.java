@@ -2,6 +2,7 @@ package admin.admincontroller;
 
 import admin.MockServerAccess;
 import admin.adminmodel.AdministratorModel;
+import admin.adminmodel.Game;
 import admin.adminview.DrawSee;
 import junit.framework.TestCase;
 import xml.Message;
@@ -41,7 +42,7 @@ public class ShowGameStateResponseControllerTest extends TestCase {
 				+ "</boardResponse></response>";
 		Message response = new Message(xmlString);
 		new ShowGameStateResponseController(app,model).process(response);
-		admin.adminmodel.Game gg = model.getGame("10534");
+		Game gg = AdministratorModel.getGame("10534");
 		System.out.println(gg.getGlobalboard());
 		String b = "";
 		for(String[] s:gg.getGlobalboard()){

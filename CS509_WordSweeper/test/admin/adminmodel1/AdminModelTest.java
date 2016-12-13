@@ -30,8 +30,8 @@ public class AdminModelTest extends TestCase {
 
 	public void testRemoveGame() {
 		model.removeGame("test2");
-		assertEquals(2,model.gamelist.size());
-		assertEquals(game3,model.gamelist.get(1));
+		assertEquals(2,AdministratorModel.gamelist.size());
+		assertEquals(game3,AdministratorModel.gamelist.get(1));
 	}
 
 	public void testIsExist() {
@@ -39,7 +39,7 @@ public class AdminModelTest extends TestCase {
 	}
 
 	public void testGetGame() {
-		Game gg = model.getGame("test1");
+		Game gg = AdministratorModel.getGame("test1");
 		assertEquals(game1,gg);
 	}
 
