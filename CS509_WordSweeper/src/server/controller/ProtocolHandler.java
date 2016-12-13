@@ -47,7 +47,7 @@ public class ProtocolHandler implements IShutdownHandler {
 			return new FindWordRequestController(model).process(st, request);
 		} else if (type.equals("resetGameRequest")) {
 			return new ResetGameRequestController(model).process(st, request);
-		} else if (type.equals("listGameRequest")) {
+		} else if (type.equals("listGamesRequest")) {
 			return new ListGamesRequestController(model).process(st, request);
 		} else if (type.equals("showGameStateRequest")) {
 			return new ShowGameStateRequestController(model).process(st, request);
