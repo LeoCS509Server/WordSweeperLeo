@@ -35,6 +35,7 @@ import client.ServerAccess;
 public class DrawSee extends JFrame {
 	/** implement singleton design pattern  */
 	static AdministratorModel amodel;
+	private static final long serialVersionUID = 1L;
 	private static class DrawseeHolder{
 	private static final DrawSee gui=new DrawSee(amodel);
 	
