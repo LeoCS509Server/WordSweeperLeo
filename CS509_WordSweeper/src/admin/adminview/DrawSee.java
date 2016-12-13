@@ -138,13 +138,13 @@ public class DrawSee extends JFrame {
 	class refreshAction implements ActionListener{
     	@Override
     	 public void actionPerformed(ActionEvent e) {
+		paint(jg);
     		playerarea.setText("");
     		g.getPlayerid().clear();
     		 
     		gameChoice.removeAll();	   
     		amodel.obtainIdList().clear(); 
 		new ListGamesController(DrawSee.this,amodel).process();
-    	        paint(jg);
     	    }
     }
 	
