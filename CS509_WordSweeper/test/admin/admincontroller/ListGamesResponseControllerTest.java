@@ -1,19 +1,23 @@
 package admin.admincontroller;
 
+import java.util.ArrayList;
+
 import admin.adminmodel.AdministratorModel;
-import admin.adminmodel1.AdminModel;
+import admin.adminview.DrawSee;
 import junit.framework.TestCase;
 import xml.Message;
 
 public class ListGamesResponseControllerTest extends TestCase {
 
 	AdministratorModel model;
+	DrawSee app;
 	protected void setUp() throws Exception {
 		super.setUp();
 		if (!Message.configure("wordsweeper.xsd")) {
 			fail ("unable to configure protocol");
 		}
 		model = new AdministratorModel();
+		app = new DrawSee(model);
 	}
 
 	protected void tearDown() throws Exception {
@@ -27,9 +31,9 @@ public class ListGamesResponseControllerTest extends TestCase {
 				+ "<gameBrief gameId='181000' players='2'/>"
 				+ "</listGamesResponse></response>";
 		Message response = new Message(xmlString);
-		new ListGamesResponseController(model).process(response);
-		String idlist = model.obtainIdList();
-		assertEquals(idlist,"181949,3,181000,2,");
+		new ListGamesResponseController(app,model).process(response);
+		ArrayList<String> idlist = model.obtainIdList();
+		assertEquals(idlist.get(0),"181949");
 		
 	}
 

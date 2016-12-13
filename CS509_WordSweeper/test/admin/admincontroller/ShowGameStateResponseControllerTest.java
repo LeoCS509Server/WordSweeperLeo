@@ -14,6 +14,7 @@ public class ShowGameStateResponseControllerTest extends TestCase {
 	
 	// model being maintained by client.
 	AdministratorModel model;
+	DrawSee app;
 
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -24,6 +25,7 @@ public class ShowGameStateResponseControllerTest extends TestCase {
 		
 		// prepare client and connect to server.
 		model = new AdministratorModel();
+		app = new DrawSee(model);
 	}
 
 	protected void tearDown() throws Exception {
@@ -38,7 +40,7 @@ public class ShowGameStateResponseControllerTest extends TestCase {
 				+ "<player name='ali' position='3,1' board='O,Y,O,N,E,R,I,A,S,U,T,I,O,G,G,O,' score='0'/>"
 				+ "</boardResponse></response>";
 		Message response = new Message(xmlString);
-		new ShowGameStateResponseController(model).process(response);
+		new ShowGameStateResponseController(app,model).process(response);
 		admin.adminmodel.Game gg = model.getGame("10534");
 		System.out.println(gg.getGlobalboard());
 		String b = "";
@@ -49,9 +51,9 @@ public class ShowGameStateResponseControllerTest extends TestCase {
 		}
 		assertEquals(b,"OSOYONLEEERIAOEOSUTISACOGGOPDCCYOOLENUERNAYECFUHA");
 		int l1 = gg.getPlayerlocation().get(0);
-		assertEquals(8,l1);
+		assertEquals(11,l1);
 		int l2 = gg.getPlayerlocation().get(1);
-		assertEquals(10,l2);
+		assertEquals(31,l2);
 
 		
 	}

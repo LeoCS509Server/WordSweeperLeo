@@ -20,7 +20,7 @@ public class AdminModelTest extends TestCase {
 		model.addGame(game1);
 		model.addGame(game2);
 		model.addGame(game3);
-		model.getIdlist("test1,3,test2,2,test3,2,");
+		model.setIdlist("test1,3,test2,2,test3,2,");
 	}
 
 	protected void tearDown() throws Exception {
