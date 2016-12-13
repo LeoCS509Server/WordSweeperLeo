@@ -9,17 +9,30 @@ import util.Letters;
 import util.Location;
 import util.WordTable;
 
-
+/**
+ * Game entity class, which contains all the info and functions about the game.  
+ * 
+ * @author Tongge Zhu
+ *
+ */
 public class Game {
 	
-	String GameID;
+	/** The ID of the game. */
+	String GameID;	
+	/** Players in the game being maintained. */
 	ArrayList<Player> Players;
+	/** board of the game being maintained. */
 	Board board;
+	/** if the game is locked */
 	boolean isLocked;
+	/** password of the game being maintained. */
 	String password;
+	/** if the game is activate */
 	boolean isActived;
 
-	
+	/** generate the gameID
+	 * @return 
+	 */
 	public String setGameID(){
 		Calendar c = Calendar.getInstance();
 		int hour = c.get(Calendar.HOUR_OF_DAY); 
@@ -29,12 +42,19 @@ public class Game {
 		return s;
 	}
 	
+	/** generate random location on the board
+	 * @return
+	 */
 	public Location randomLocation(int size){
 		int x =(int) (Math.random()*(size-3)+1);
 		int y =(int) (Math.random()*(size-3)+1);
 		return new Location(x,y);
 	}
 	
+	/**Game constructor
+	 * @param User ID
+	 * @param clientID
+	 */
 	public Game(String UserID, String clientid) {
 		GameID = setGameID();
 		this.board = new Board();
@@ -48,11 +68,14 @@ public class Game {
 		isActived = true;
 	}
 	
-	
+	/**Add a new player into the game
+	 * @param playerid
+	 * @param clientid
+	 */
 	public void addPlayer(String id, String clientid){
 		
 		if(Players.size()>3){
-			int size = (int) Math.sqrt(16*(Players.size()+1)/3);
+			int size = this.checkBoardSize();
 			Board board = new Board(size);
 			Location loc = randomLocation(board.getSize());
 			Player p = new Player(id, loc, clientid); 
@@ -69,11 +92,16 @@ public class Game {
 		}
 	}
 	
-	
+	/**return the GameID
+	 * @return 
+	 */
 	public String getGameID(){
 		return GameID;
 	}
 	
+	/**return managing user ID
+	 * @return 
+	 */
 	public String getManageUsername(){
 		String Username = "";
 		for(Player p : Players){
@@ -83,30 +111,16 @@ public class Game {
 		return Username;
 	}
 	
-	
-
-	
-	
-	public void removePlayer(Player player){
-		if(this.Players.size()>1&&(!player.isManagingUser())){
-			this.Players.remove(player);
-		}else if(this.Players.size()>1 &&(player.isManagingUser())){
-			this.Players.remove(player);
-			this.setManagingUser(this.Players);
-		}else{
-			this.Players.remove(player); 
-			this.isActived = false;
-		}
-	}
-	
+	/**remover player from game 
+	 * @param playerID
+	 */
 	public void removePlayer(String playerID){
 		int index = 0;
 		for(int i = 0; i<Players.size(); i++){
 			if(Players.get(i).getName().equals(playerID)){
 				index = i;
 			}
-		}
-		
+		}	
 		if(this.Players.size()>1&&(!Players.get(index).isManagingUser())){
 			this.Players.remove(index);
 		}else if(this.Players.size()>1 &&(Players.get(index).isManagingUser())){
@@ -118,10 +132,17 @@ public class Game {
 		}
 	}
 	
+	/**return the board of the game
+	 * @return 
+	 */
 	public Board getBoard(){
 		return this.board;
 	}
 	
+	/**reset the board of the game
+	 * reset players' score to zero
+	 * @return 
+	 */
 	public void resetBoard(){
 		this.board = new Board();
 		for(Player player: Players){
@@ -129,7 +150,10 @@ public class Game {
 		}
 	}
 	
-	
+	/**reset the board of the game
+	 * reset players' score to zero
+	 * @return 
+	 */
 	public int checkBoardSize(){
 		int i = 7;
 		if(Players.size() >3){
@@ -138,6 +162,9 @@ public class Game {
 		return i;	
 	}
 	
+	/**set the managinguser of the game
+	 * @return 
+	 */
 	public void setManagingUser(ArrayList<Player> Players){
 		//int i = (int)Math.random()*Players.size();
 		Random r =new Random();
@@ -145,23 +172,34 @@ public class Game {
 		Players.get(i).setManagingUser();;
 	}
 	
-	
+	/** check if the game is locked
+	 *@return
+	 * */
 	public boolean checkisLocked(){
 		return isLocked; 
 	}
 	
+	/** lock the game*/
 	public void setLocked(){
 		this.isLocked = true;
 	}
 	
+	/** set the password of the game*/
 	public void setPassword(String pw){
 		this.password = pw;
 	}
 	
+	/** return the password of the game
+	 * @return
+	 */
 	public String getPassword(){
 		return password;
 	}
 	
+	/** return the overlap time of cell
+	 * @param loc
+	 * @return
+	 */
 	public int CellOverlapNum(Location loc){
 		
 		int column = loc.getColumn();
@@ -177,6 +215,10 @@ public class Game {
 		return OverlapNum;
 	}
 	
+	/** return score of found word
+	 * @param text
+	 * @param loc
+	 */
 	public int calculateScore(String text, ArrayList<Location> loc){
 		int score = 0;
 		int cellsSum = 0;
@@ -194,6 +236,10 @@ public class Game {
 		return score;
 	}
 	
+	/** reset player's position
+	 * @param c
+	 * @param r
+	 */
 	public void rePosition(Player p, int c, int r){
 		int x = p.getPlayerLocation().getColumn() + c;
 		int y = p.getPlayerLocation().getRow() + r;
@@ -203,9 +249,11 @@ public class Game {
 			Location loc = new Location(x,y); 
 			p.setPlayerLocation(loc);
 			}
-		//return p.getPlayerLocation();
 	}
 	
+	/** return player with given id
+	 * @param Playerid
+	 */
 	public Player getPlayer(String Playerid){
 		for(Player p: Players){
 			if(p.getName().equals(Playerid)){
@@ -226,6 +274,7 @@ public class Game {
 		return Players;
 	}
 	
+	/**return the player's board in a game line by lien*/
 	public String getPlayerboard(Player p){
 		String s = new String();	
 		for(Location l : p.getCellsLocation()){
