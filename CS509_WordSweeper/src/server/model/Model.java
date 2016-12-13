@@ -18,7 +18,6 @@ public class Model {
 		for(Game g : games){
 			if(g.getGameID().equals(id))
 				selectedGame = g;
-			break;
 		}
 	}
 	
@@ -54,6 +53,7 @@ public class Model {
 			break;
 		}		
 	}
+	
 	public boolean isPasswordCorrect(String GameID, String password){
 		boolean istrue = false;
 		for(Game g: games){
