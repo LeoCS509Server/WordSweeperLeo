@@ -9,6 +9,12 @@ import admin.adminview.DrawSee;
 import client.ServerAccess;
 import xml.Message;
 
+/**
+ *  Adminlauncher and send connectrequest and listgamerequest 
+ * 
+ * @author Weihao Li, Zetian Wang (Authors contribute equally)
+ *
+ */
 public class AdminLauncher {
 	// If requested by AdminLauncher (pass in '-server' as argument).
 	public static final String serverHost = "72.249.186.243";
