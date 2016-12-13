@@ -45,6 +45,10 @@ public class Game {
 	/** generate random location on the board
 	 * @return
 	 */
+	public boolean isactived(){
+		return isActived;
+	}
+	
 	public Location randomLocation(int size){
 		int x =(int) (Math.random()*(size-3)+1);
 		int y =(int) (Math.random()*(size-3)+1);

@@ -46,7 +46,7 @@ public class JoinGameRequestController implements IProtocolHandler {
 		// if(model.getGamenames().contains(ID)){
 		
 		for (Game g : model.getGames()) {
-			if (g.getGameID().equals(ID)) {
+			if (g.getGameID().equals(ID) && g.isactived()) {
 				if (!g.checkisLocked()) {
 					if (model.isPasswordCorrect(ID, password)) {
 						g.addPlayer(name,client.id());
