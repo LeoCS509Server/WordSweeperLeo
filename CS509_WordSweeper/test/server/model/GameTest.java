@@ -85,10 +85,7 @@ public class GameTest extends TestCase {
 		assertEquals("Tom",g1.getManageUsername());
 	}
 
-	public void testRemovePlayerPlayer() {	
-		g1.removePlayer(g1.getPlayer("Tim"));
-		assertEquals(2,g1.getNumPlayers());
-	}
+
 
 	public void testRemovePlayerString() {
 		g1.removePlayer("Tim");
