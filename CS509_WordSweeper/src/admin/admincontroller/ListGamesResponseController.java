@@ -9,11 +9,11 @@ import admin.adminview.DrawSee;
 import xml.Message;
 
 /**
- * When the admin clicks "refresh" button, a listgameRequest will be sent to the
- * server.
- * <p>
- * The {@link #process()} makes a listgameRequest in XML format, and send it to
- * the server.
+ *An listgame response information should be received once admin is trying to select a gameid to know its information.
+ * This handles the list game response information
+ * 
+ * The {@link #process(Message)}} updates the gameid information in entity classes, and returns the boundary  to the admin GUI.
+ * 
  * 
  * @author Weihao Li,Zetian Wang (Authors contribute equally)
  */
@@ -54,9 +54,7 @@ public class ListGamesResponseController extends ControllerChain {
 		/**
 		 * call some GUI update functions here	
 		 */
-		app.gameComponents(app.getchoice());
-	
-	
+		app.gameComponents(app.getchoice());	
 		return true;
 	}
 
