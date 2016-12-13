@@ -9,7 +9,15 @@ import admin.adminmodel.Game;
 import admin.adminview.DrawSee;
 import xml.Message;
 
-
+/**
+ *An showgamestate response information should be received once admin is trying to refresh the admin interface.
+ * This handles the exit game response information
+ * 
+ * The {@link #process(Message)}} updates the game information in entity classes, and returns the boundary  to the admin GUI.
+ * 
+ * 
+ * @author Weihao Li,Zetian Wang (Authors contribute equally)
+ */
 public class ShowGameStateResponseController extends ControllerChain {
 
 	public DrawSee app;
@@ -58,22 +66,14 @@ public class ShowGameStateResponseController extends ControllerChain {
 			player = player.getNextSibling();
 		}
 		
+		/**
+	 	* call some GUI update functions here	
+	 	*/
 		for(String i:g.getPlayerid()){
 			app.getPlayerarea().append(i+"\n");
 		}
-//		for(Integer j:g.getScore()){
-//			app.getPlayerarea().append(j+"\n");
-//		}
-//		app.getPlayerarea().append(g.getPlayerid().get(0)+"\n");
-//		app.getPlayerarea().append(g.getPlayerid().get(1)+"\n");
 		app.paint(app.getGraphics());
-		app.paintComponents(app.getGraphics(),g); //draw board
-		
-
-	/**
-	 * call some GUI update functions here	
-	 */
-	
+		app.paintComponents(app.getGraphics(),g); //draw board	
 		return true;
 	}
 
