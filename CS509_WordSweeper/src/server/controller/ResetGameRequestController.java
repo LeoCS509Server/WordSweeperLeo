@@ -12,6 +12,18 @@ import server.model.Model;
 import server.model.Player;
 import xml.Message;
 
+/**
+ * when server receives the resetGameRequest from client, then the server will reset the game 
+ * and send the boardResponse to the client.
+ * 
+ * 
+ * The {@link #process()} makes a boardResponse and a exitGameResponse in XML format, 
+ * sends the boardResponse to all clients which in the game and sends exitGameResponse
+ * to the client which sends the resetGameRequest.
+ * 
+ * @author Zhenyu Hu
+ */
+
 public class ResetGameRequestController {
 
 	Model model;

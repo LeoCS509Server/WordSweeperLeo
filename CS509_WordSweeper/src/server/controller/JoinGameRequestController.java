@@ -14,13 +14,16 @@ import server.model.Player;
 import xml.Message;
 
 /**
- * when server receive the joinGameRequest from client, then the server will determine whether the game is exit,
+ * when server receives the joinGameRequest from client, then the server will determine whether the game is exit,
  * the game is locked and the password is correct.
  * If all of it are correct the server will add the client to the game player and sent the boardResponse to all client 
  * else the server will send the joinGameresponse to the client and tell it why fail.
  * 
  * 
  * The {@link #process()} makes a boardResponse or a joinGameResponse in XML format.
+ * 
+ * @author Zhenyu Hu
+ * 
  */
 public class JoinGameRequestController implements IProtocolHandler {
 

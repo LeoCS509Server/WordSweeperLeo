@@ -1,6 +1,19 @@
 package server.controller;
 import java.util.ArrayList;
 
+/**
+ * when server receives the exitGameRequest from client, then the server will remove this client 
+ * from game and send the exitGameResponse to the client and tell all client in the game that 
+ * the client exit the game.
+ * 
+ * 
+ * The {@link #process()} makes a boardResponse and a exitGameResponse in XML format, 
+ * sends the boardResponse to all clients which in the game and sends exitGameResponse
+ * to the client.
+ * 
+ * @author Zhenyu Hu
+ */
+
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 

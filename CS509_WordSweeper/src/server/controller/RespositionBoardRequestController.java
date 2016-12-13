@@ -11,6 +11,18 @@ import server.model.Game;
 import server.model.Model;
 import server.model.Player;
 import xml.Message;
+
+/**
+ * when server receives the repositionBoardRequest from client, the server will change the position
+ * of player and send a boardResponse to all clients in the game.
+ * 
+ * 
+ * The {@link #process()} makes a boardResponse in XML format, move the plyer's position and sends it
+ * to the client.
+ * 
+ *  @author Zhenyu Hu
+ */
+
 public class RespositionBoardRequestController {
 
 	Model model;

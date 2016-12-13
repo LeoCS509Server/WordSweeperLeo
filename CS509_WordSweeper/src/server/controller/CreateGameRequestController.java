@@ -13,12 +13,14 @@ import server.model.Game;
 import java.util.ArrayList;
 
 /**
- * when server receive the createGameRequest from client, then the server will create a game 
+ * when server receives the createGameRequest from client, then the server will create a game 
  * and send the boardResponse to the client.
  * 
  * 
- * The {@link #process()} makes a boardResponse in XML format, create a game and send it
+ * The {@link #process()} makes a boardResponse in XML format, creates a game and sends it
  * to the client.
+ * 
+ * @author Zhenyu Hu
  */
 public class CreateGameRequestController implements IProtocolHandler {
 	Model model;

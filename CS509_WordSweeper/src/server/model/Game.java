@@ -51,7 +51,7 @@ public class Game {
 	
 	public void addPlayer(String id, String clientid){
 		
-		if(Players.size()>8){
+		if(Players.size()>3){
 			int size = (int) Math.sqrt(16*(Players.size()+1)/3);
 			Board board = new Board(size);
 			Location loc = randomLocation(board.getSize());

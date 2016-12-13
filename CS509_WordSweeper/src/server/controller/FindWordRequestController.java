@@ -13,6 +13,24 @@ import server.model.Player;
 import util.Location;
 import xml.Message;
 
+
+/**
+ * when server receives the findwordRequest from client, then the server will judge whether
+ * the word is correct and calculate the score of word, next the server will remove
+ * the cell of these letters and generate new letters in the board and refresh the board.
+ * finally send the findWordResponse to the client and send the boardResponse to all clients
+ * in the game.
+ * 
+ * 
+ * The {@link #process()} makes a boardResponse and a findWordResponse in XML format, 
+ * judge the correctness of word, calculate the score of word, remove the letters, 
+ * generate new letters and refresh the board.
+ * send the findWordResponse to the client and send the boardResponse to all clients
+ * in the game.
+ * 
+ * @author Zhenyu Hu
+ */
+
 public class FindWordRequestController {
 	Model model;
 	public FindWordRequestController (Model model) {

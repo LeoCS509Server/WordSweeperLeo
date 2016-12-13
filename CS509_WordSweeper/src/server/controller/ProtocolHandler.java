@@ -8,16 +8,10 @@ import server.model.Game;
 import xml.*;
 
 /**
- * Sample implementation of a protocol handler to respond to messages received from clients.
- * You should follow this template when designing YOUR protocol handler.
- * <p>
- * To avoid issues with multiple clients submitting requests concurrently,
- * notice that the {@link #process(ClientState, Message)} method is synchronized.
- * This will ensure that no more than one server thread executes this method
- * at a time.
- * <p>
- * Also extended to support detection of client disconnects so these can release the lock
- * if indeed the client was the one locking the model.
+ * 
+ * The {@link #process()} determine which servercontroller to response the request from client.
+ * 
+ * @author Zhenyu Hu
  */
 public class ProtocolHandler implements IShutdownHandler {
 	

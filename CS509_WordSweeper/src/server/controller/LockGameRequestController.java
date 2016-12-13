@@ -9,12 +9,14 @@ import server.model.Model;
 import xml.Message;
 
 /**
- * when server receive the lockGameRequest from client, the server will lock the game
+ * when server receives the lockGameRequest from client, the server will lock the game
  * and send a lockGameResponse to the client.
  * 
  * 
- * The {@link #process()} makes a boardResponse in XML format, lock the game and send it
+ * The {@link #process()} makes a lockGameResponse in XML format, locks the game and sends it
  * to the client.
+ * 
+ *  @author Zhenyu Hu
  */
 
 public class LockGameRequestController {
