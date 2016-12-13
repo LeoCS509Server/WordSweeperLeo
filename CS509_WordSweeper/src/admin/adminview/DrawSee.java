@@ -114,7 +114,12 @@ public class DrawSee extends JFrame {
 	        public void actionPerformed(ActionEvent e) {     
 	        	 new ShowGameStateController(DrawSee.this,amodel).process(gameChoice.getItem(gameChoice.getSelectedIndex()));
 	         
-	        	 
+	        	 playerarea = new JTextArea("");
+	        	 playerarea.setForeground(Color.BLACK);
+	        	 playerarea.setColumns(20);
+	        	 playerarea.setRows(10);
+	        	 playerarea.setEditable(false);
+	        	 playerarea.setLineWrap(true);
 
 	         		
 	        	scrollPane2 = new JScrollPane();
