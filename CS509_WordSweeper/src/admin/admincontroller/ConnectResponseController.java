@@ -4,6 +4,17 @@ import admin.admincontroller.ControllerChain;
 import admin.adminmodel.AdministratorModel;
 import admin.adminview.DrawSee;
 import xml.Message;
+
+/**
+ * When the launch admin interface, a connectRequest will be sent to the
+ * server.
+ * <p>
+ * The {@link #process()} makes a connectRequest in XML format, and send it to
+ * the server.
+ * 
+ * @author Weihao Li,Zetian Wang (Authors contribute equally)
+ *
+ */
 public class ConnectResponseController extends ControllerChain {
 	public DrawSee app;
 	public AdministratorModel model;
@@ -20,8 +31,6 @@ public class ConnectResponseController extends ControllerChain {
 		if (!type.equals("connectResponse")) {
 			return next.process(response);
 		}
-
-		// app.getResponseArea().append(response.toString() + "\n");
 		return true;
 	}
 
