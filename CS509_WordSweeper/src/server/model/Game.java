@@ -74,9 +74,9 @@ public class Game {
 	 */
 	public void addPlayer(String id, String clientid){
 		
-		if(Players.size()>3){
+		if(Players.size()>=3){
 			int size = this.checkBoardSize();
-			Board board = new Board(size);
+			board = new Board(size);
 			Location loc = randomLocation(board.getSize());
 			Player p = new Player(id, loc, clientid); 
 			Players.add(p);
@@ -156,7 +156,7 @@ public class Game {
 	 */
 	public int checkBoardSize(){
 		int i = 7;
-		if(Players.size() >3){
+		if(Players.size() >= 3){
 			i = (int)Math.sqrt(16*Players.size())+1;
 		}
 		return i;	
