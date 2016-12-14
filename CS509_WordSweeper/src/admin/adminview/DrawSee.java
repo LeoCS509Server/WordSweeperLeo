@@ -74,7 +74,7 @@ public class DrawSee extends JFrame {
     	amodel = model;
         Container p = getContentPane();
         setBounds(400, 100, 700, 500);
-        setVisible(true);
+        
         p.setBackground(rectColor);
         setLayout(null);   
         setResizable(false);
@@ -108,7 +108,8 @@ public class DrawSee extends JFrame {
  	playerarea.setLineWrap(true);
 		
 	jg =  this.getGraphics();
-	
+	setVisible(true);
+	    
 	/** monitor selection button*/
 	button2.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {     
