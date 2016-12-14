@@ -102,8 +102,8 @@ public class DrawSee extends JFrame {
         p.add(button);
         button.addActionListener(new refreshAction());
 		
-		jg =  this.getGraphics();
-		setVisible(true);
+	this.getGraphics();
+	setVisible(true);
 	    
 	/** monitor selection button*/
 	button2.addActionListener(new ActionListener() {
@@ -135,13 +135,15 @@ public class DrawSee extends JFrame {
 	class refreshAction implements ActionListener{
     	@Override
     	 public void actionPerformed(ActionEvent e) {
-		repaint();
-    		playerarea.setText("");
-		g =AdministratorModel.getGame(gameChoice.getItem(gameChoice.getSelectedIndex()));   	
+		if(amodel.obtainIdList().size()!=0){
+    		repaint();
+        	playerarea.setText("");
+    		g =AdministratorModel.getGame(gameChoice.getItem(gameChoice.getSelectedIndex()));
     		g.getPlayerid().clear();
-    		 
+    		
     		gameChoice.removeAll();	   
-    		amodel.obtainIdList().clear(); 
+    		amodel.obtainIdList().clear();
+    		}  
 		new ListGamesController(DrawSee.this,amodel).process();
     	    }
     }
