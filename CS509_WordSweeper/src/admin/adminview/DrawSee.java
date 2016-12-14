@@ -51,6 +51,7 @@ public class DrawSee extends JFrame {
     private static final int w = 40;//the lengths of edge of square 
     int rw;
     
+    Container p;
     JScrollPane scrollPane;
     JPanel panel;
     JButton button;
@@ -72,7 +73,7 @@ public class DrawSee extends JFrame {
     public DrawSee(AdministratorModel model) {
     	
     	amodel = model;
-        Container p = getContentPane();
+        p = getContentPane();
         setBounds(400, 100, 700, 500);
         
         p.setBackground(rectColor);
@@ -82,33 +83,27 @@ public class DrawSee extends JFrame {
         
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBounds(275, 100, 350, 350);
-	getContentPane().add(scrollPane);
+        getContentPane().add(scrollPane);
 		
-	JPanel panel = new JPanel();
-	scrollPane.add(panel);
-	setVisible(true);
+        JPanel panel = new JPanel();
+        scrollPane.add(panel);
+        setVisible(true);
 		
-	JButton button = new JButton("Refresh");
-	button.setBounds(270, 56, 80, 25);
-	getContentPane().add(button);
-	button.addActionListener(new refreshAction());
-		
-	Choice gameChoice = new Choice();
-	gameChoice.setBounds(45,55, 100, 30);
-	getContentPane().add(gameChoice);
+        Choice gameChoice = new Choice();
+        gameChoice.setBounds(45,55, 100, 30);
+        getContentPane().add(gameChoice);
  		
-	JButton button2 = new JButton("Select");
-	button2.setBounds(175, 56, 80, 25);
-	getContentPane().add(button2);
-	playerarea = new JTextArea("");
- 	playerarea.setForeground(Color.BLACK);
- 	playerarea.setColumns(20);
- 	playerarea.setRows(10);
- 	playerarea.setEditable(false);
- 	playerarea.setLineWrap(true);
+        JButton button2 = new JButton("Select");
+        button2.setBounds(175, 56, 80, 25);
+        getContentPane().add(button2);
+	
+        button = new JButton("Refresh");
+        button.setBounds(270, 56, 80, 25);
+        p.add(button);
+        button.addActionListener(new refreshAction());
 		
-	jg =  this.getGraphics();
-	setVisible(true);
+		jg =  this.getGraphics();
+		setVisible(true);
 	    
 	/** monitor selection button*/
 	button2.addActionListener(new ActionListener() {
