@@ -135,7 +135,7 @@ public class DrawSee extends JFrame {
 	class refreshAction implements ActionListener{
     	@Override
     	 public void actionPerformed(ActionEvent e) {
-		paint(jg);
+		repaint();
     		playerarea.setText("");
 		g =AdministratorModel.getGame(gameChoice.getItem(gameChoice.getSelectedIndex()));   	
     		g.getPlayerid().clear();
