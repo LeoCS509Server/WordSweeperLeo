@@ -122,12 +122,7 @@ public class DrawSee extends JFrame {
 	        	scrollPane2.setBounds(50, 100, 180, 350);
 	        	scrollPane2.setViewportView(playerarea);
 	        	add(scrollPane2);
-	        		
-
-	     		
-	         	
-	         	g =AdministratorModel.getGame(gameChoice.getItem(gameChoice.getSelectedIndex()));   	
-	        	paintComponents(jg,g);     ///
+	        
 	         }
 	      }); 
       
@@ -142,6 +137,7 @@ public class DrawSee extends JFrame {
     	 public void actionPerformed(ActionEvent e) {
 		paint(jg);
     		playerarea.setText("");
+		g =AdministratorModel.getGame(gameChoice.getItem(gameChoice.getSelectedIndex()));   	
     		g.getPlayerid().clear();
     		 
     		gameChoice.removeAll();	   
