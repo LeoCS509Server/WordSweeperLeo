@@ -3,7 +3,11 @@ package admin.admincontroller;
 
 
 import xml.Message;
-
+/**
+ * Interface of responsibility chain
+ * @author Zetian
+ *
+ */
 public interface IAdminClientController {
 	
 	/**

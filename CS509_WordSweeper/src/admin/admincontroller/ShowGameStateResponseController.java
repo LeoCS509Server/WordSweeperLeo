@@ -13,7 +13,7 @@ import xml.Message;
  *An showgamestate response information should be received once admin is trying to refresh the admin interface.
  * This handles the showgame response information
  * 
- * The {@link #process(Message)}} updates the game information in entity classes, and returns the boundary  to the admin GUI.
+ * The {@link #process(Message)}} updates the game information in entity classes, and returns the boundary to the admin GUI.
  * 
  * 
  * @author Weihao Li,Zetian Wang (Authors contribute equally)
@@ -23,9 +23,10 @@ public class ShowGameStateResponseController extends ControllerChain {
 	public DrawSee app;
 	public AdministratorModel model;
 	
-
 	/**
-	 *deal with the showGameStateResponse from server and upgrade the GUI 
+	 * Constructor function
+	 * @param app
+	 * @param m
 	 */
 	public ShowGameStateResponseController(DrawSee app, AdministratorModel m) {
 		super();
@@ -37,9 +38,7 @@ public class ShowGameStateResponseController extends ControllerChain {
 		String type = response.contents.getFirstChild().getLocalName();
 		if (!type.equals ("boardResponse")) {
 			return next.process(response);
-		}
-		
-	
+		}	
 		Node showGameStateResponse = response.contents.getFirstChild();
 		NamedNodeMap showGame = showGameStateResponse.getAttributes();
 		String id = showGame.getNamedItem("gameId").getNodeValue();
@@ -59,16 +58,12 @@ public class ShowGameStateResponseController extends ControllerChain {
 			g.setPlayerlocation(positionIntStyle);
 			String name = playerMap.getNamedItem("name").getNodeValue()+"            "+playerMap.getNamedItem("score").getNodeValue();;
 			g.setPlayerid(name);
-		
-
 			int score = Integer.parseInt(playerMap.getNamedItem("score").getNodeValue());
 			g.setScore(score);
 			player = player.getNextSibling();
 		}
 		
-		/**
-	 	* call some GUI update functions here	
-	 	*/
+		//update GUI
 		for(String i:g.getPlayerid()){
 			app.getPlayerarea().append(i+"\n");
 		}

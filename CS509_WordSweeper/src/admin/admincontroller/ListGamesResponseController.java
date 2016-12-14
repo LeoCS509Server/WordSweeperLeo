@@ -18,15 +18,15 @@ import xml.Message;
  * @author Weihao Li,Zetian Wang (Authors contribute equally)
  */
 
-/**
- * deal with listGame response
- * Tell admin client the active games, show game list in GUI
- */
 public class ListGamesResponseController extends ControllerChain {
 
 	public DrawSee app;
 	public AdministratorModel model;
-	
+	/**
+	 * Constructor
+	 * @param app
+	 * @param m
+	 */
 	public ListGamesResponseController(DrawSee app,AdministratorModel m) {
 		super();
 		this.app = app;
@@ -40,20 +40,14 @@ public class ListGamesResponseController extends ControllerChain {
 			return next.process(response);
 		}
 		System.out.println(response);
-		// this refers to the outer node of the Message DOM (in this case, updateResponse).
 		Node listGamesResponse = response.contents.getFirstChild();
-		Node gameBrief = listGamesResponse.getFirstChild();
-	
-		
+		Node gameBrief = listGamesResponse.getFirstChild();		
 		while (gameBrief != null){
 			NamedNodeMap map = gameBrief.getAttributes();
 			String ID = map.getNamedItem("gameId").getNodeValue();			
 			model.setIdlist(ID);//update gamelist
 			gameBrief = gameBrief.getNextSibling();
 		}
-		/**
-		 * call some GUI update functions here	
-		 */
 		app.gameComponents(app.getchoice());	
 		return true;
 	}

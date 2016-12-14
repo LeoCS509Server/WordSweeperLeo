@@ -8,19 +8,29 @@ import server.model.Game;
 import server.model.Model;
 import server.model.Player;
 import util.Location;
-
+/**
+ * Since many request need 'boardResponse', separate the xml message builder.
+ * This class may not be used.  
+ * @author Zetian
+ *
+ */
 public class BoardResponseBuilder {
 	Model model;
 	String content;
-	//ArrayList<String> bcontent;
-	
+	/**
+	 * Constructor
+	 * @param m
+	 */
 	public BoardResponseBuilder(Model m){
 		this.model = m;
-		//this.bcontent = new ArrayList<String>();
 	}
-
+	/**
+	 * Obtain information from entity classed and construct xmlString,
+	 * which is the content of a message except the header.  
+	 * @param ID
+	 * @return xmlString
+	 */
 	public String build(String ID){
-		//get needed information
 		Game selectedGame = model.getGame(ID);
 		String gameId = ID;
 		int size = selectedGame.getBoard().getSize();
@@ -35,10 +45,7 @@ public class BoardResponseBuilder {
 		String playerInfo = "";
 		for (Player p : players){
 			playerInfo = playerInfo + playerContent(p, content, size);
-		}
-		
-		
-		
+		}	
 		
 		//construct xml response message
 		String xmlString =
@@ -49,19 +56,28 @@ public class BoardResponseBuilder {
 				"</response>";
 		return xmlString;
 	}
-	/**construct the content of name="content"*/
+	/**
+	 * This function is an internal function to make up the 'contents' node of 'boardResponse'
+	 * @param b
+	 * @return boardcontent
+	 */
 		String BoardContent(Board b){
 		String boardcontent = "";
 		for (int r = 1; r <= b.getSize(); r++){
 			for (int c = 1; c <= b.getSize(); c++){
 				Location l = new Location(c,r);
 				boardcontent = boardcontent + b.getCellContains(l)+",";
-				//bcontent.add(b.getCellContains(l));
 			}
 		}
 		return boardcontent;
 	}
-	/**construct the content of ref="player"*/
+		/**
+		 * This function is a internal function to make up 'player' nodes of 'boardResponse'
+		 * @param p
+		 * @param bContent
+		 * @param size
+		 * @return playercontent
+		 */
 		String playerContent(Player p, String bContent, int size){
 			String[] bcontents = bContent.split(",");
 			int row = p.getPlayerLocation().getRow();

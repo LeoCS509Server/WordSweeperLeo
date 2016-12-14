@@ -6,9 +6,11 @@ import admin.adminmodel.AdministratorModel;
 
 import admin.adminview.DrawSee;
 
-
 /**
- * send a listGame Request to server 
+ * This class is used when admin need to send a 'listGameRequest' to server.
+ * Get called when related events happen in GUI or run adminlauncher
+ *  @author Zetian
+ *
  */
 public class ListGamesController {
 
@@ -20,19 +22,14 @@ public class ListGamesController {
 		this.model = model;
 	}
 
-	/** Make the list games request on the server and wait for response. */
+	/**
+	 * Make a 'listGamesRequest' message based on xml protocol and send it to server. 
+	 */
 	public void process() {
 		// send the request to list games.
 		String xmlString = Message.requestHeader() + "<listGamesRequest/></request>";
 		Message m = new Message (xmlString);
-
 		app.getServerAccess().sendRequest(m);
-		/**
-		// Request the lock (this might not succeed).
-		app.getRequestArea().append(m.toString());
-		app.getRequestArea().append("\n");
-		app.getServerAccess().sendRequest(m);
-		*/
 	}
 }
 

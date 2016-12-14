@@ -28,7 +28,6 @@ public class ShowGameStateRequestController {
 	public ShowGameStateRequestController(Model model){
 		this.model = model;
 	}
-
 	/**
 	 * Process request.
 	 * @param client
@@ -37,7 +36,7 @@ public class ShowGameStateRequestController {
 	 */
 	public Message process(ClientState client, Message request){
 
-		//select certain game 
+		//select a certain game 
 		Node showGameStateRequest = request.contents.getFirstChild();
 		NamedNodeMap showGame = showGameStateRequest.getAttributes();
 		String id = showGame.getNamedItem("gameId").getNodeValue();
